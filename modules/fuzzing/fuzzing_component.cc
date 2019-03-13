@@ -106,6 +106,10 @@ bool FuzzingComponent::Proc(
   header->set_module_name("hello, from the FUZZING modules!");
   header->set_sequence_num(seq);
   chassis->set_driving_mode(apollo::canbus::Chassis_DrivingMode_COMPLETE_AUTO_DRIVE);
+  chassis->set_engine_rpm(100.0);
+  chassis->set_speed_mps(100.0);
+  chassis->set_throttle_percentage(100.0);
+  chassis->set_brake_percentage(0.0);
   chassis_writer_->Write(chassis);
   return true;
 }
