@@ -7,13 +7,14 @@
 namespace apollo {
 namespace fuzzing {
 
-bool FuzzingComponent::Init() {
-  fuzzer_node_ = apollo::cyber::CreateNode("fuzzer");
-
+void FuzzingComponent::InitReaders() {
   chassis_reader_ = fuzzer_node_->CreateReader<Chassis>(
       FLAGS_chassis_topic, [this](const std::shared_ptr<Chassis>& chassis) {
         AINFO << "Received chassis data:\n" << chassis->DebugString();
       });
+  control_command_reader_ =
+      node_->CreateReader<ControlCommand>(FLAGS_control_command_topic);
+  gps_reader_ = node_->CreateReader<Gps>(FLAGS_gps_topic);
   localization_reader_ = fuzzer_node_->CreateReader<LocalizationEstimate>(
       FLAGS_localization_topic,
       [this](const std::shared_ptr<LocalizationEstimate>& localization) {
@@ -25,6 +26,8 @@ bool FuzzingComponent::Init() {
         AINFO << "Received localization_msf data:\n"
               << localization_msf->DebugString();
       });
+  navigation_reader_ =
+      node_->CreateReader<NavigationInfo>(FLAGS_navigation_topic);
   perception_obstacles_reader_ =
       fuzzer_node_->CreateReader<PerceptionObstacles>(
           FLAGS_perception_obstacle_topic,
@@ -33,13 +36,9 @@ bool FuzzingComponent::Init() {
             AINFO << "Received perception_obstacles data:\n"
                   << perception_obstacles->DebugString();
           });
-  traffic_light_reader_ = fuzzer_node_->CreateReader<TrafficLightDetection>(
-      FLAGS_traffic_light_detection_topic,
-      [this](const std::shared_ptr<TrafficLightDetection>& traffic_light) {
-        AINFO << "Received traffic_light data:\n"
-              << traffic_light->DebugString();
-      });
-  planning_trajectory_reader_ = fuzzer_node_->CreateReader<ADCTrajectory>(
+  perception_traffic_light_reader_ = node_->CreateReader<TrafficLightDetection>(
+      FLAGS_traffic_light_detection_topic);
+  planning_reader_ = fuzzer_node_->CreateReader<ADCTrajectory>(
       FLAGS_planning_trajectory_topic,
       [this](const std::shared_ptr<ADCTrajectory>& planning_trajectory) {
         AINFO << "Received planning_trajectory data:\n"
@@ -70,7 +69,12 @@ bool FuzzingComponent::Init() {
         AINFO << "Received routing_response data:\n"
               << routing_response->DebugString();
       });
+}
 
+bool FuzzingComponent::Init() {
+  fuzzer_node_ = apollo::cyber::CreateNode("fuzzer");
+
+  InitReaders();
   chassis_writer_ = fuzzer_node_->CreateWriter<Chassis>(FLAGS_chassis_topic);
   localization_writer_ = fuzzer_node_->CreateWriter<LocalizationEstimate>(
       FLAGS_localization_topic);
@@ -105,7 +109,8 @@ bool FuzzingComponent::Proc(
   header->set_timestamp_sec(Clock::NowInSeconds());
   header->set_module_name("hello, from the FUZZING modules!");
   header->set_sequence_num(seq);
-  chassis->set_driving_mode(apollo::canbus::Chassis_DrivingMode_COMPLETE_AUTO_DRIVE);
+  chassis->set_driving_mode(
+      apollo::canbus::Chassis_DrivingMode_COMPLETE_AUTO_DRIVE);
   chassis->set_engine_rpm(100.0);
   chassis->set_speed_mps(100.0);
   chassis->set_throttle_percentage(100.0);

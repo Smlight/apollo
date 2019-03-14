@@ -46,6 +46,7 @@ cc_library(
         "//modules/control/common",
         "//modules/control/controller",
         "//modules/control/proto:control_proto",
+        "//modules/localization/proto:gps_proto",
         "//modules/localization/proto:localization_proto",
         "//modules/map/hdmap:hdmap_util",
         "//modules/map/relative_map/proto:navigation_proto",

@@ -22,6 +22,8 @@
 #include "modules/planning/common/planning_context.h"
 
 #include "modules/canbus/proto/chassis.pb.h"
+#include "modules/control/proto/control_cmd.pb.h"
+#include "modules/localization/proto/gps.pb.h"
 #include "modules/localization/proto/localization.pb.h"
 #include "modules/perception/proto/perception_obstacle.pb.h"
 #include "modules/perception/proto/traffic_light_detection.pb.h"
@@ -31,14 +33,20 @@
 
 using apollo::canbus::Chassis;
 using apollo::common::time::Clock;
-using apollo::hdmap::HDMapUtil;
+using apollo::control::ControlCommand;
+using apollo::hdmap::Curve;
+using apollo::hdmap::Map;
+using apollo::hdmap::Path;
+using apollo::localization::Gps;
 using apollo::localization::LocalizationEstimate;
 using apollo::localization::LocalizationStatus;
 using apollo::perception::PerceptionObstacles;
 using apollo::perception::TrafficLightDetection;
 using apollo::planning::ADCTrajectory;
+using apollo::planning::DecisionResult;
 using apollo::prediction::PredictionObstacles;
 using apollo::relative_map::MapMsg;
+using apollo::relative_map::NavigationInfo;
 using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
 
@@ -56,6 +64,7 @@ class FuzzingComponent final
                 localization_estimate) override;
 
  private:
+  void InitReaders();
   void CheckRerouting();
   bool CheckInput();
 
@@ -64,11 +73,14 @@ class FuzzingComponent final
 
   // Readers
   std::shared_ptr<cyber::Reader<Chassis>> chassis_reader_;
+  std::shared_ptr<cyber::Reader<ControlCommand>> control_command_reader_;
+  std::shared_ptr<cyber::Reader<Gps>> gps_reader_;
   std::shared_ptr<cyber::Reader<LocalizationEstimate>> localization_reader_;
   std::shared_ptr<cyber::Reader<LocalizationStatus>> localization_msf_reader_;
+  std::shared_ptr<cyber::Reader<NavigationInfo>> navigation_reader_;
   std::shared_ptr<cyber::Reader<PerceptionObstacles>> perception_obstacles_reader_;
-  std::shared_ptr<cyber::Reader<TrafficLightDetection>> traffic_light_reader_;
-  std::shared_ptr<cyber::Reader<ADCTrajectory>> planning_trajectory_reader_;
+  std::shared_ptr<cyber::Reader<TrafficLightDetection>> perception_traffic_light_reader_;
+  std::shared_ptr<cyber::Reader<ADCTrajectory>> planning_reader_;
   std::shared_ptr<cyber::Reader<PredictionObstacles>> prediction_obstacles_reader_;
   std::shared_ptr<cyber::Reader<MapMsg>> relative_map_reader_;
   std::shared_ptr<cyber::Reader<RoutingRequest>> routing_request_reader_;
