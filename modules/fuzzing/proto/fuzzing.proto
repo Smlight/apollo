@@ -1,0 +1,7 @@
+syntax = "proto2";
+
+package apollo.fuzzing;
+
+message FuzzMessage {
+    optional string msg = 1;
+}

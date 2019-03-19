@@ -2,7 +2,12 @@
  * Created by Smlight
  *****************************************************************************/
 
+#include <memory>
+#include <string>
+
 #include "modules/fuzzing/fuzzing_component.h"
+
+using apollo::fuzzing::FuzzMessage;
 
 namespace apollo {
 namespace fuzzing {
@@ -102,20 +107,9 @@ bool FuzzingComponent::Init() {
 bool FuzzingComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
-  static uint32_t seq = 0;
-  ++seq;
-  auto chassis = std::make_shared<Chassis>();
-  auto* header = chassis->mutable_header();
-  header->set_timestamp_sec(Clock::NowInSeconds());
-  header->set_module_name("hello, from the FUZZING modules!");
-  header->set_sequence_num(seq);
-  chassis->set_driving_mode(
-      apollo::canbus::Chassis_DrivingMode_COMPLETE_AUTO_DRIVE);
-  chassis->set_engine_rpm(100.0);
-  chassis->set_speed_mps(100.0);
-  chassis->set_throttle_percentage(100.0);
-  chassis->set_brake_percentage(0.0);
-  chassis_writer_->Write(chassis);
+  FuzzMessage* fuzz_message_p = new FuzzMessage();
+  fuzz_message_p->set_msg(std::string(1024,'e'));
+  chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_message_p)));
   return true;
 }
 
