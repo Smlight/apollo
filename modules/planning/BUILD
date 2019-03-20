@@ -3,6 +3,19 @@ load("//tools:cpplint.bzl", "cpplint")
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
+    name = "planning_main",
+    srcs = [
+        "planning_main.cc",
+    ],
+    linkstatic = False,
+    deps = [
+        "//cyber",
+        "//cyber:cyber_core",
+        "//cyber/proto:dag_conf_cc_proto",
+    ],
+)
+
+cc_library(
     name = "planning_component_lib",
     srcs = [
         "planning_component.cc",
