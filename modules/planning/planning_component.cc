@@ -50,8 +50,8 @@ bool PlanningComponent::Init() {
   routing_reader_ = node_->CreateReader<RoutingResponse>(
       FLAGS_routing_response_topic,
       [this](const std::shared_ptr<RoutingResponse>& routing) {
-        AINFO << "Received routing data: run routing callback."
-              << routing->header().DebugString();
+        AINFO << "Received routing data: run routing callback.\n"
+              << routing->DebugString();
         std::lock_guard<std::mutex> lock(mutex_);
         routing_.CopyFrom(*routing);
       });
@@ -95,6 +95,8 @@ bool PlanningComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
   CHECK(prediction_obstacles != nullptr);
+
+  AINFO << "This is in proc... \n";
 
   if (FLAGS_use_sim_time) {
     Clock::SetNowInSeconds(localization_estimate->header().timestamp_sec());

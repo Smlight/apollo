@@ -2,16 +2,28 @@ load("//tools:cpplint.bzl", "cpplint")
 
 package(default_visibility = ["//visibility:public"])
 
-cc_library(
+cc_binary(
     name = "planning_main",
     srcs = [
         "planning_main.cc",
+        "mainboard/module_argument.h",
+        "mainboard/module_argument.cc",
+        "mainboard/module_controller.h",
+        "mainboard/module_controller.cc",
     ],
     linkstatic = False,
     deps = [
+        ":planning_lib",
         "//cyber",
         "//cyber:cyber_core",
         "//cyber/proto:dag_conf_cc_proto",
+        "//modules/common/adapters:adapter_gflags",
+        "//modules/common/util:message_util",
+        "//modules/localization/proto:localization_proto",
+        "//modules/map/relative_map/proto:navigation_proto",
+        "//modules/perception/proto:perception_proto",
+        "//modules/planning/proto:planning_proto",
+        "//modules/prediction/proto:prediction_proto",
     ],
 )
 

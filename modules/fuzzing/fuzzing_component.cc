@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <string>
+#include <cstdlib>
 
 #include "modules/fuzzing/fuzzing_component.h"
 
@@ -107,9 +108,9 @@ bool FuzzingComponent::Init() {
 bool FuzzingComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
-  FuzzMessage* fuzz_message_p = new FuzzMessage();
-  fuzz_message_p->set_msg(std::string(1024,'e'));
-  chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_message_p)));
+  FuzzChassis* fuzz_chassis_p = new FuzzChassis();
+  fuzz_chassis_p->engine_started(true);
+  chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_chassis_p)));
   return true;
 }
 
