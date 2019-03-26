@@ -8,7 +8,7 @@
 
 #include "modules/fuzzing/fuzzing_component.h"
 
-using apollo::fuzzing::FuzzMessage;
+using apollo::fuzzing::FuzzChassis;
 
 namespace apollo {
 namespace fuzzing {
@@ -109,7 +109,7 @@ bool FuzzingComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
   FuzzChassis* fuzz_chassis_p = new FuzzChassis();
-  fuzz_chassis_p->engine_started(true);
+  fuzz_chassis_p->set_engine_started(true);
   chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_chassis_p)));
   return true;
 }

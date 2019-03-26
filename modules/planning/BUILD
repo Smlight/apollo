@@ -24,6 +24,7 @@ cc_binary(
         "//modules/perception/proto:perception_proto",
         "//modules/planning/proto:planning_proto",
         "//modules/prediction/proto:prediction_proto",
+        "//modules/fuzzing/proto:fuzzing_proto",
     ],
 )
 

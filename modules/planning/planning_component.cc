@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
+
+#include <iostream>
+
 #include "modules/planning/planning_component.h"
 
 #include "modules/common/adapters/adapter_gflags.h"
@@ -85,6 +88,7 @@ bool PlanningComponent::Init() {
   rerouting_writer_ =
       node_->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
+  AINFO << "Init End!" << std::endl;
   return true;
 }
 
@@ -96,7 +100,7 @@ bool PlanningComponent::Proc(
         localization_estimate) {
   CHECK(prediction_obstacles != nullptr);
 
-  AINFO << "This is in proc... \n";
+  AINFO << "This is in proc..." << std::endl;
 
   if (FLAGS_use_sim_time) {
     Clock::SetNowInSeconds(localization_estimate->header().timestamp_sec());

@@ -38,9 +38,6 @@ class ModuleController {
   bool Init();
   bool LoadAll();
   void Clear();
-  inline std::vector<std::shared_ptr<apollo::cyber::ComponentBase>> GetComponentList() {
-    return component_list_;
-  }
 
  private:
   bool LoadModule(const std::string& path);
