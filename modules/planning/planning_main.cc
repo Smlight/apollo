@@ -3,6 +3,7 @@
  *****************************************************************************/
 
 #include <iostream>
+#include <random>
 
 #include "gflags/gflags.h"
 
@@ -19,6 +20,7 @@
 #include "modules/common/adapters/adapter_gflags.h"
 #include "modules/fuzzing/proto/fuzzing.pb.h"
 #include "modules/localization/proto/localization.pb.h"
+#include "modules/perception/proto/perception_obstacle.pb.h"
 #include "modules/planning/mainboard/module_argument.h"
 #include "modules/planning/mainboard/module_controller.h"
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
@@ -27,7 +29,10 @@
 using apollo::canbus::Chassis;
 using apollo::cyber::Rate;
 using apollo::cyber::common::GetProtoFromASCIIFile;
+using apollo::cyber::common::GetProtoFromBinaryFile;
+using apollo::cyber::common::SetProtoToASCIIFile;
 using apollo::localization::LocalizationEstimate;
+using apollo::perception::PerceptionObstacles;
 using apollo::planning::ModuleArgument;
 using apollo::planning::ModuleController;
 using apollo::prediction::PredictionObstacles;
@@ -63,17 +68,39 @@ int main(int argc, char** argv) {
   Chassis chassis;
   PredictionObstacles prediction_obstacles;
   LocalizationEstimate localization_estimate;
+  PerceptionObstacles perception_obstacles;
+
+  GetProtoFromBinaryFile("test", &perception_obstacles);
+  AINFO << "After Get!" << std::endl;
+  SetProtoToASCIIFile(perception_obstacles,"modules/planning/perception.ascii");
+  AINFO << "After Set!" << std::endl;
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<double> engine_rpm(0, 300);
+  std::uniform_real_distribution<double> speed_mps(0, 100);
+  std::uniform_real_distribution<double> throttle_percentage(0, 100);
+  std::uniform_real_distribution<double> brake_percentage(0, 100);
 
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
-    GetProtoFromASCIIFile("./routing.ascii", &routing_response);
-    GetProtoFromASCIIFile("./chassis.ascii", &chassis);
-    GetProtoFromASCIIFile("./prediction.ascii", &prediction_obstacles);
-    GetProtoFromASCIIFile("./localization.ascii", &localization_estimate);
+    GetProtoFromASCIIFile("modules/planning/routing.ascii", &routing_response);
+    GetProtoFromASCIIFile("modules/planning/chassis.ascii", &chassis);
+    GetProtoFromASCIIFile("modules/planning/prediction.ascii", &prediction_obstacles);
+    GetProtoFromASCIIFile("modules/planning/localization.ascii", &localization_estimate);
+
     routing_response_writer->Write(routing_response);
+
+    chassis.set_engine_rpm((float)engine_rpm(gen));
+    chassis.set_speed_mps((float)speed_mps(gen));
+    chassis.set_throttle_percentage((float)throttle_percentage(gen));
+    chassis.set_brake_percentage((float)brake_percentage(gen));
     chassis_writer->Write(chassis);
+
     prediction_obstacles_writer->Write(prediction_obstacles);
+
     localization_writer->Write(localization_estimate);
+
     rate.Sleep();
   }
 

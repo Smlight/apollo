@@ -54,7 +54,7 @@ bool PlanningComponent::Init() {
       FLAGS_routing_response_topic,
       [this](const std::shared_ptr<RoutingResponse>& routing) {
         AINFO << "Received routing data: run routing callback.\n"
-              << routing->DebugString();
+              << routing->header().DebugString();
         std::lock_guard<std::mutex> lock(mutex_);
         routing_.CopyFrom(*routing);
       });
@@ -100,7 +100,7 @@ bool PlanningComponent::Proc(
         localization_estimate) {
   CHECK(prediction_obstacles != nullptr);
 
-  AINFO << "This is in proc..." << std::endl;
+  AINFO << "Proc Start!" << std::endl;
 
   if (FLAGS_use_sim_time) {
     Clock::SetNowInSeconds(localization_estimate->header().timestamp_sec());
