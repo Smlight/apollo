@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://peachfuzzer.com/2012/Peach /peach/peach.xsd">
+
+	<!-- TODO: Create data model -->
+	<DataModel name="NewLine">
+		<String value="\n" token="true" />
+	</DataModel>
+
+	<DataModel name="FloatText">
+		<String />
+		<String value="." token="true" />
+		<String />
+	</DataModel>
+
+	<DataModel name="Header">
+		<String value="header {" token="true" />
+		<Block ref="NewLine" />
+		
+		<String value="timestamp_sec: " token="true" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		
+		<String value="module_name: " token="true" />
+		<String value="SimControl" />
+		<Block ref="NewLine" />
+		
+		<String value="sequence_num: " token="true" />
+		<String value="8730" />
+		<Block ref="NewLine" />
+		
+		<String value="}" token="true" />
+	</DataModel>
+
+	<DataModel name="Switch">
+		<Choice>
+			<String value="true" />
+			<String value="false" />
+		</Choice>
+	</DataModel>
+
+	<DataModel name="DrivingMode">
+		<Choice>
+			<String value="COMPLETE_MANUAL" />
+			<String value="COMPLETE_AUTO_DRIVE" />
+			<String value="AUTO_STEER_ONLY" />
+			<String value="AUTO_SPEED_ONLY" />
+			<String value="EMERGENCY_MODE" />
+		</Choice>
+	</DataModel>
+
+	<DataModel name="GearPosition">
+		<Choice>
+			<String value="GEAR_NEUTRAL" />
+			<String value="GEAR_DRIVE" />
+			<String value="GEAR_REVERSE" />
+			<String value="GEAR_PARKING" />
+			<String value="GEAR_LOW" />
+			<String value="GEAR_INVALID" />
+			<String value="GEAR_NONE" />
+		</Choice>
+	</DataModel>
+
+	<DataModel name="Chassis">
+		<String value="engine_started: " token="true" name="a" />
+		<Block ref="Switch" name="b" />
+		<Block ref="NewLine" name="c" />
+
+		<!-- <Choice><Block>
+			<String value="engine_rpm: " token="true" />
+			<Block ref="FloatText" />
+			<Block ref="NewLine" />
+		</Block></Choice> -->
+
+		<String value="speed_mps: " token="true" name="d" />
+		<Block ref="FloatText" name="e" />
+		<Block ref="NewLine" name="f" />
+
+		<String value="throttle_percentage: " token="true" name="g" />
+		<Block ref="FloatText" name="h" />
+		<Block ref="NewLine" name="i" />
+
+		<String value="brake_percentage: " token="true" name="j" />
+		<Block ref="FloatText" name="k" />
+		<Block ref="NewLine" name="l" />
+
+		<String value="driving_mode: " token="true" name="m" />
+		<Block ref="DrivingMode" name="n" />
+		<Block ref="NewLine" name="o" />
+
+		<String value="gear_location: " token="true" name="p" />
+		<Block ref="GearPosition" name="q" />
+		<Block ref="NewLine" name="r" />
+
+		<Block ref="Header" name="s" />
+		<Block ref="NewLine" name="t" />
+
+	</DataModel>
+
+
+
+	<!-- TODO: Create state model -->
+	<StateModel name="TheState" initialState="Initial">
+		<State name="Initial">
+		
+			<Action type="output">
+				<DataModel ref="Chassis"/>
+				<Data fileName="modules/planning/chassis.ascii" />
+			</Action>
+			<!-- <Action type="output">
+				<DataModel ref="Chassis"/>
+				<Data fileName="modules/planning/localization.ascii" />
+			</Action> -->
+
+			<Action type="close"/>
+
+			<Action type="call" method="StartPlanning" publisher="Peach.Agent"/>
+		</State>
+
+	</StateModel>
+
+	<Agent name="LinAgent">
+		<!-- Register for core file notifications. -->
+		<Monitor class="LinuxDebugger">
+
+			<!-- This is the program we're going to run inside of the debugger -->
+			<Param name="Executable" value="bazel-bin/modules/planning/planning_main" />
+
+			<Param name="CpuKill" value="true"/>
+
+		</Monitor>
+
+	</Agent>
+
+	<Test name="Default">
+		<Agent ref="LinAgent"/>
+		<StateModel ref="TheState"/>
+
+		<!-- TODO: Configure a publisher -->
+		<Publisher class="File">
+			<Param name="FileName" value="modules/planning/chassis.ascii" />
+		</Publisher>
+
+		<!-- OPTIONAL: Configure a strategy -->
+		<Strategy class="Random"/>
+		
+		<Logger class="File">
+			<Param name="Path" value="logs"/>
+		</Logger>
+	</Test>
+
+</Peach>
+<!-- end -->

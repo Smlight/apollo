@@ -91,10 +91,10 @@ int main(int argc, char** argv) {
 
     routing_response_writer->Write(routing_response);
 
-    chassis.set_engine_rpm((float)engine_rpm(gen));
-    chassis.set_speed_mps((float)speed_mps(gen));
-    chassis.set_throttle_percentage((float)throttle_percentage(gen));
-    chassis.set_brake_percentage((float)brake_percentage(gen));
+    // chassis.set_engine_rpm((float)engine_rpm(gen));
+    // chassis.set_speed_mps((float)speed_mps(gen));
+    // chassis.set_throttle_percentage((float)throttle_percentage(gen));
+    // chassis.set_brake_percentage((float)brake_percentage(gen));
     chassis_writer->Write(chassis);
 
     prediction_obstacles_writer->Write(prediction_obstacles);
