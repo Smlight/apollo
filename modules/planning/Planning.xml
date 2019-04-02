@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Peach xmlns="http://peachfuzzer.com/2012/Peach" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://peachfuzzer.com/2012/Peach /peach/peach.xsd">
+	xsi:schemaLocation="http://peachfuzzer.com/2012/Peach peach.xsd">
 
 	<!-- TODO: Create data model -->
 	<DataModel name="NewLine">
@@ -14,9 +14,6 @@
 	</DataModel>
 
 	<DataModel name="Header">
-		<String value="header {" token="true" />
-		<Block ref="NewLine" />
-		
 		<String value="timestamp_sec: " token="true" />
 		<Block ref="FloatText" />
 		<Block ref="NewLine" />
@@ -28,8 +25,6 @@
 		<String value="sequence_num: " token="true" />
 		<String value="8730" />
 		<Block ref="NewLine" />
-		
-		<String value="}" token="true" />
 	</DataModel>
 
 	<DataModel name="Switch">
@@ -66,11 +61,11 @@
 		<Block ref="Switch" name="b" />
 		<Block ref="NewLine" name="c" />
 
-		<!-- <Choice><Block>
+		<Choice minOccurs="0" maxOccurs="1"><Block>
 			<String value="engine_rpm: " token="true" />
 			<Block ref="FloatText" />
 			<Block ref="NewLine" />
-		</Block></Choice> -->
+		</Block></Choice>
 
 		<String value="speed_mps: " token="true" name="d" />
 		<Block ref="FloatText" name="e" />
@@ -92,12 +87,104 @@
 		<Block ref="GearPosition" name="q" />
 		<Block ref="NewLine" name="r" />
 
+		<String value="header {" token="true" />
+		<Block ref="NewLine" />
 		<Block ref="Header" name="s" />
+		<String value="}" token="true" />
 		<Block ref="NewLine" name="t" />
 
 	</DataModel>
 
+	<DataModel name="Point3D">
+		<String value="x: " length="3" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="y: " length="3" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="z: " length="3" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+	</DataModel>
 
+	<DataModel name="Quaternion">
+		<String value="qx: " token="true" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="qy: " token="true" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="qz: " token="true" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="qw: " token="true" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="LocalizationPose">
+		<String value="position {" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Point3D" name="c" />
+		<String value="}" name="d" />
+		<Block ref="NewLine" name="e" />
+		
+		<String value="orientation {" name="f" />
+		<Block ref="NewLine" name="g" />
+		<Block ref="Quaternion" name="h" />
+		<String value="}" name="i" />
+		<Block ref="NewLine" name="j" />
+
+		<String value="linear_velocity {" name="k" />
+		<Block ref="NewLine" name="l" />
+		<Block ref="Point3D" name="m" />
+		<String value="}" name="n" />
+		<Block ref="NewLine" name="o" />
+
+		<String value="linear_acceleration {" name="p" />
+		<Block ref="NewLine" name="q" />
+		<Block ref="Point3D" name="r" />
+		<String value="}" name="s" />
+		<Block ref="NewLine" name="t" />
+
+		<String value="angular_velocity {" name="u" />
+		<Block ref="NewLine" name="v" />
+		<Block ref="Point3D" name="w" />
+		<String value="}" name="x" />
+		<Block ref="NewLine" name="y" />
+
+		<String value="heading: " name="z" length="9" />
+		<Block ref="FloatText" name="aa"></Block>
+		<Block ref="NewLine" name="ab"/>
+
+		<String value="linear_acceleration_vrf {" name="ac" />
+		<Block ref="NewLine" name="ad" />
+		<Block ref="Point3D" name="ae" />
+		<String value="}" name="af" />
+		<Block ref="NewLine" name="ag" />
+
+		<String value="angular_velocity_vrf {" name="ah" />
+		<Block ref="NewLine" name="ai" />
+		<Block ref="Point3D" name="aj" />
+		<String value="}" name="ak" />
+		<Block ref="NewLine" name="al" />
+
+	</DataModel>
+
+	<DataModel name="LocalizationEstimate">
+		<String value="header {" token="true" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Header" name="c" />
+		<String value="}" token="true" name="e" />
+		<Block ref="NewLine" name="d" />
+
+		<String value="pose {" token="true" name="f" />
+		<Block ref="NewLine" name="g" />
+		<Block ref="LocalizationPose" name="h" />
+		<String value="}" token="true" name="j" />
+		<Block ref="NewLine" name="i" />
+
+	</DataModel>
 
 	<!-- TODO: Create state model -->
 	<StateModel name="TheState" initialState="Initial">
@@ -107,10 +194,10 @@
 				<DataModel ref="Chassis"/>
 				<Data fileName="modules/planning/chassis.ascii" />
 			</Action>
-			<!-- <Action type="output">
-				<DataModel ref="Chassis"/>
+			<Action type="output">
+				<DataModel ref="LocalizationEstimate"/>
 				<Data fileName="modules/planning/localization.ascii" />
-			</Action> -->
+			</Action>
 
 			<Action type="close"/>
 

@@ -1,44 +1,44 @@
 header {
-  timestamp_sec: 1552462113.7452645
-  module_name: "SimControl"
-  sequence_num: 8730
+timestamp_sec: 1552462113.7452645
+module_name: "SimControl"
+sequence_num: 8730.0
 }
 pose {
-  position {
-    x: 587309.74467252451
-    y: 4141506.5671483381
-    z: 0
-  }
-  orientation {
-    qx: 0
-    qy: 0
-    qz: -0.7565677359425127
-    qw: 0.65391533162239
-  }
-  linear_velocity {
-    x: 13.952145804475077
-    y: -2.0416377001013637
-    z: 0
-  }
-  linear_acceleration {
-    x: -1.1251204988913592
-    y: 0.16464051192445786
-    z: 0
-  }
-  angular_velocity {
-    x: 0
-    y: 0
-    z: 0.048951667141537696
-  }
-  heading: -0.1453002053263095
-  linear_acceleration_vrf {
-    x: -1.3877787807814457e-16
-    y: -1.1371027373075351
-    z: 0
-  }
-  angular_velocity_vrf {
-    x: 0
-    y: 0
-    z: 0.048951667141537696
-  }
+position {
+x: 587309.74467252451
+y: 4141506.5671483381
+z: 0.0
+}
+orientation {
+qx: 0.0
+qy: 0.0
+qz: -0.7565677359425127
+qw: 0.65391533162239
+}
+linear_velocity {
+x: 13.952145804475077
+y: -2.0416377001013637
+z: 0.0
+}
+linear_acceleration {
+x: -1.1251204988913592
+y: 0.16464051192445786
+z: 0.0
+}
+angular_velocity {
+x: 0.0
+y: 0.0
+z: 0.048951667141537696
+}
+heading: -0.1453002053263095
+linear_acceleration_vrf {
+x: -1.3877787807814457
+y: -1.1371027373075351
+z: 0.0
+}
+angular_velocity_vrf {
+x: 0.0
+y: 0.0
+z: 0.048951667141537696
+}
 }
