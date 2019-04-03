@@ -61,7 +61,7 @@
 		<Block ref="Switch" name="b" />
 		<Block ref="NewLine" name="c" />
 
-		<Choice minOccurs="0" maxOccurs="1"><Block>
+		<Choice minOccurs="0"><Block>
 			<String value="engine_rpm: " token="true" />
 			<Block ref="FloatText" />
 			<Block ref="NewLine" />
@@ -78,6 +78,12 @@
 		<String value="brake_percentage: " token="true" name="j" />
 		<Block ref="FloatText" name="k" />
 		<Block ref="NewLine" name="l" />
+
+		<Choice minOccurs="0"><Block>
+			<String value="steering_percentage: " token="true" />
+			<Block ref="FloatText" />
+			<Block ref="NewLine" />
+		</Block></Choice>
 
 		<String value="driving_mode: " token="true" name="m" />
 		<Block ref="DrivingMode" name="n" />
@@ -108,16 +114,16 @@
 	</DataModel>
 
 	<DataModel name="Quaternion">
-		<String value="qx: " token="true" />
+		<String value="qx: " length="4" />
 		<Block ref="FloatText" />
 		<Block ref="NewLine" />
-		<String value="qy: " token="true" />
+		<String value="qy: " length="4" />
 		<Block ref="FloatText" />
 		<Block ref="NewLine" />
-		<String value="qz: " token="true" />
+		<String value="qz: " length="4" />
 		<Block ref="FloatText" />
 		<Block ref="NewLine" />
-		<String value="qw: " token="true" />
+		<String value="qw: " length="4" />
 		<Block ref="FloatText" />
 		<Block ref="NewLine" />
 	</DataModel>
@@ -168,7 +174,38 @@
 		<Block ref="Point3D" name="aj" />
 		<String value="}" name="ak" />
 		<Block ref="NewLine" name="al" />
+	</DataModel>
 
+	<DataModel name="Uncertainty">
+		<String value="position_std_dev {" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Point3D" name="c" />
+		<String value="}" name="d" />
+		<Block ref="NewLine" name="e" />
+
+		<String value="orientation_std_dev {" name="k" />
+		<Block ref="NewLine" name="l" />
+		<Block ref="Point3D" name="m" />
+		<String value="}" name="n" />
+		<Block ref="NewLine" name="o" />
+
+		<String value="linear_velocity_std_dev {" name="p" />
+		<Block ref="NewLine" name="q" />
+		<Block ref="Point3D" name="r" />
+		<String value="}" name="s" />
+		<Block ref="NewLine" name="t" />
+
+		<String value="linear_acceleration_std_dev {" name="u" />
+		<Block ref="NewLine" name="v" />
+		<Block ref="Point3D" name="w" />
+		<String value="}" name="x" />
+		<Block ref="NewLine" name="y" />
+
+		<String value="angular_velocity_std_dev {" name="ac" />
+		<Block ref="NewLine" name="ad" />
+		<Block ref="Point3D" name="ae" />
+		<String value="}" name="af" />
+		<Block ref="NewLine" name="ag" />
 	</DataModel>
 
 	<DataModel name="LocalizationEstimate">
@@ -184,6 +221,255 @@
 		<String value="}" token="true" name="j" />
 		<Block ref="NewLine" name="i" />
 
+		<Choice minOccurs="0"><Block>
+			<String value="uncertainty {" token="true" name="k" />
+			<Block ref="NewLine" name="l" />
+			<Block ref="Uncertainty" name="m" />
+			<String value="}" token="true" name="n" />
+			<Block ref="NewLine" name="o" />
+		</Block></Choice>
+		
+	</DataModel>
+
+	<DataModel name="PerceptionObstacle">
+		<String value="id: " />
+		<String ></String>
+		<Block ref="NewLine"></Block>
+		
+		<String value="position {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="Point3D" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="theta: " />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="velocity {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="Point3D" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="length: " length="8" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="width: " length="7" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="height: " length="8" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="polygon_point {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="Point3D" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="tracking_time: " length="15" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="PathPoint">
+		<String value="x: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="y: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="z: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="theta: " length="7" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="kappa: " length="7" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="s: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="dkappa: " length="8" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="ddkappa: " length="9" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="lane_id: "></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+		
+		<String value="x_derivative: " length="14" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="y_derivative: " length="14" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="TrajectoryPoint">
+		<String value="path_point {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="PathPoint" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="v: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="a: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="relative_time: " length="15" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="da: " length="4" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="steer: " length="7" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="Trajectory">
+		<String value="probability: " length="13" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="trajectory_point {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="TrajectoryPoint" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="ObstacleIntent">
+		<String value="type: " ></String>
+		<Choice>
+			<String value="UNKNOWN"></String>
+			<String value="STOP"></String>
+			<String value="STATIONARY"></String>
+			<String value="MOVING"></String>
+			<String value="CHANGE_LANE"></String>
+			<String value="LOW_ACCELERATION"></String>
+			<String value="HIGH_ACCELERATION"></String>
+			<String value="LOW_DECELERATION"></String>
+			<String value="HIGH_DECELERATION"></String>
+		</Choice>
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="ObstaclePriority">
+		<String value="priority: " ></String>
+		<Choice>
+			<String value="CAUTION"></String>
+			<String value="NORMAL"></String>
+			<String value="IGNORE"></String>
+		</Choice>
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="PredictionObstacle">
+		<String value="perception_obstacle {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="PerceptionObstacle" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+		
+		<String value="timestamp: " length="11" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="predicted_period: " length="18" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="trajectory {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="Trajectory" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="intent {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="ObstacleIntent" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="priority {" ></String>
+		<Block ref="NewLine" />
+		<Block ref="ObstaclePriority" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="is_static: " ></String>
+		<Block ref="Switch"></Block>
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="Intent">
+		<String value="type: " ></String>
+		<Choice>
+			<String value="UNKNOWN"></String>
+			<String value="STOP"></String>
+			<String value="CRUISE"></String>
+			<String value="CHANGE_LANE"></String>
+		</Choice>
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="PredictionObstacles">
+		<String value="header {" token="true" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Header" name="c" />
+		<String value="}" token="true" name="e" />
+		<Block ref="NewLine" name="d" />
+
+		<Choice minOccurs="0"><Block>
+			<String value="prediction_obstacle {" ></String>
+			<Block ref="NewLine" />
+			<Block ref="PredictionObstacle" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
+
+		<Choice minOccurs="0"><Block>
+			<String value="start_timestamp: " length="17" />
+			<Block ref="FloatText"></Block>
+			<Block ref="NewLine"></Block>
+		</Block></Choice>
+
+		<Choice minOccurs="0"><Block>
+			<String value="end_timestamp: " length="15" />
+			<Block ref="FloatText"></Block>
+			<Block ref="NewLine"></Block>
+		</Block></Choice>
+
+		<Choice minOccurs="0"><Block>
+			<String value="intent {" ></String>
+			<Block ref="NewLine" />
+			<Block ref="Intent" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
 	</DataModel>
 
 	<!-- TODO: Create state model -->
@@ -197,6 +483,10 @@
 			<Action type="output">
 				<DataModel ref="LocalizationEstimate"/>
 				<Data fileName="modules/planning/localization.ascii" />
+			</Action>
+			<Action type="output">
+				<DataModel ref="PredictionObstacles"/>
+				<Data fileName="modules/planning/prediction.ascii" />
 			</Action>
 
 			<Action type="close"/>
