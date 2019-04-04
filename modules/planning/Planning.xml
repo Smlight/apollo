@@ -101,6 +101,15 @@
 
 	</DataModel>
 
+	<DataModel name="Point2D">
+		<String value="x: " length="3" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+		<String value="y: " length="3" />
+		<Block ref="FloatText" />
+		<Block ref="NewLine" />
+	</DataModel>
+
 	<DataModel name="Point3D">
 		<String value="x: " length="3" />
 		<Block ref="FloatText" />
@@ -308,7 +317,7 @@
 		<Block ref="FloatText"></Block>
 		<Block ref="NewLine"></Block>
 		
-		<String value="lane_id: "></String>
+		<String value="lane_id: " length="9"></String>
 		<String></String>
 		<Block ref="NewLine"></Block>
 		
@@ -420,7 +429,7 @@
 		<String value="}" token="true" />
 		<Block ref="NewLine" />
 
-		<String value="is_static: " ></String>
+		<String value="is_static: " length="11"></String>
 		<Block ref="Switch"></Block>
 		<Block ref="NewLine" />
 	</DataModel>
@@ -472,6 +481,210 @@
 		</Block></Choice>
 	</DataModel>
 
+	<DataModel name="LaneSegment">
+		<String value="id: " length="4"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+		
+		<String value="start_s: " length="9" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+		
+		<String value="end_s: " length="7" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="Passage">
+		<Choice minOccurs="1"><Block>
+			<String value="segment {" token="true" />
+			<Block ref="NewLine" />
+			<Block ref="LaneSegment" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
+
+		<String value="can_exit: " length="10"></String>
+		<Block ref="Switch"></Block>
+		<Block ref="NewLine" />
+
+		<String value="change_lane_type: " length="18"></String>
+		<Choice>
+			<String value="FORWARD"></String>
+			<String value="LEFT"></String>
+			<String value="RIGHT"></String>
+		</Choice>
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="RoadSegment">
+		<String value="id: " length="4"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+
+		<Choice minOccurs="1"><Block>
+			<String value="passage {" token="true" name="a" />
+			<Block ref="NewLine" name="b" />
+			<Block ref="Passage" name="c" />
+			<String value="}" token="true" name="d" />
+			<Block ref="NewLine" name="e" />
+		</Block></Choice>
+	</DataModel>
+
+	<DataModel name="Measurement">
+		<String value="distance: " length="10"></String>
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="LaneWaypoint">
+		<String value="id: " length="4"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+		
+		<String value="s: " length="3" />
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+
+		<String value="pose {" token="true" />
+		<Block ref="NewLine" />
+		<Block ref="Point2D" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+	</DataModel>
+
+	<DataModel name="ID">
+		<String value="id: " length="4"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="Polygon">
+		<Choice><Block>
+			<String value="point {" token="true" />
+			<Block ref="NewLine" />
+			<Block ref="Point3D" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
+	</DataModel>
+
+	<DataModel name="ParkingSpace">
+		<String value="id {" token="true" />
+		<Block ref="NewLine" />
+		<Block ref="ID" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="polygon {" token="true" />
+		<Block ref="NewLine" />
+		<Block ref="Polygon" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="overlap_id {" token="true" />
+		<Block ref="NewLine" />
+		<Block ref="ID" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+
+		<String value="heading: " length="9"></String>
+		<Block ref="FloatText"></Block>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="RoutingRequest">
+		<String value="header {" token="true" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Header" name="c" />
+		<String value="}" token="true" name="e" />
+		<Block ref="NewLine" name="d" />
+
+		<Choice minOccurs="1" name="f"><Block>
+			<String value="waypoint {" token="true" />
+			<Block ref="NewLine" />
+			<Block ref="LaneWaypoint" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
+
+		<!-- <Choice minOccurs="0" name="g"><Block>
+			<String value="blacklisted_lane {" token="true" />
+			<Block ref="NewLine" /> 
+			<Block ref="LaneSegment" />
+			<String value="}" token="true" />
+			<Block ref="NewLine" />
+		</Block></Choice>
+
+		<Choice minOccurs="0" name="h"><Block>
+			<String value="blacklisted_road: " length="18"></String>
+			<String></String>
+			<Block ref="NewLine"></Block>
+		</Block></Choice>
+
+		<Choice minOccurs="0" name="i"><Block>
+			<String value="broadcast: " length="11"></String>
+			<Block ref="Switch"></Block>
+			<Block ref="NewLine" />
+		</Block></Choice>
+
+		<Choice minOccurs="0" name="j"><Block>
+			<String value="parking_space {" token="true" name="o" />
+			<Block ref="NewLine" name="p" />
+			<Block ref="ParkingSpace" name="q" />
+			<String value="}" token="true" name="r" />
+			<Block ref="NewLine" name="s" />
+		</Block></Choice> -->
+	</DataModel>
+
+	<DataModel name="StatusPb">
+		<String value="error_code: " length="12"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+
+		<String value="msg: " length="5"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+	</DataModel>
+
+	<DataModel name="RoutingResponse">
+		<String value="header {" token="true" name="a" />
+		<Block ref="NewLine" name="b" />
+		<Block ref="Header" name="c" />
+		<String value="}" token="true" name="e" />
+		<Block ref="NewLine" name="d" />
+
+		<Choice name="k" minOccurs="1"><Block name="a">
+			<String value="road {" token="true" name="k" />
+			<Block ref="NewLine" name="l" />
+			<Block ref="RoadSegment" name="m" />
+			<String value="}" token="true" name="n" />
+			<Block ref="NewLine" name="o" />
+		</Block></Choice>
+
+		<String value="measurement {" token="true" name="p" />
+		<Block ref="NewLine" name="q" />
+		<Block ref="Measurement" name="r" />
+		<String value="}" token="true" name="s" />
+		<Block ref="NewLine" name="t" />
+
+		<String value="routing_request {" token="true" name="f" />
+		<Block ref="NewLine" name="g" />
+		<Block ref="RoutingRequest" name="h" />
+		<String value="}" token="true" name="i" />
+		<Block ref="NewLine" name="j" />
+
+		<String value="map_version: " length="13"></String>
+		<String></String>
+		<Block ref="NewLine"></Block>
+
+		<String value="status {" token="true" />
+		<Block ref="NewLine" />
+		<Block ref="StatusPb" />
+		<String value="}" token="true" />
+		<Block ref="NewLine" />
+	</DataModel>
+
 	<!-- TODO: Create state model -->
 	<StateModel name="TheState" initialState="Initial">
 		<State name="Initial">
@@ -487,6 +700,10 @@
 			<Action type="output">
 				<DataModel ref="PredictionObstacles"/>
 				<Data fileName="modules/planning/prediction.ascii" />
+			</Action>
+			<Action type="output">
+				<DataModel ref="RoutingResponse"/>
+				<Data fileName="modules/planning/routing.ascii" />
 			</Action>
 
 			<Action type="close"/>
