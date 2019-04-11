@@ -82,12 +82,15 @@ int main(int argc, char** argv) {
   std::uniform_real_distribution<double> throttle_percentage(0, 100);
   std::uniform_real_distribution<double> brake_percentage(0, 100);
 
+  GetProtoFromASCIIFile("modules/planning/routing.ascii", &routing_response);
+  GetProtoFromASCIIFile("modules/planning/chassis.ascii", &chassis);
+  GetProtoFromASCIIFile("modules/planning/prediction.ascii", &prediction_obstacles);
+  GetProtoFromASCIIFile("modules/planning/localization.ascii", &localization_estimate);
+
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
-    GetProtoFromASCIIFile("modules/planning/routing.ascii", &routing_response);
-    GetProtoFromASCIIFile("modules/planning/chassis.ascii", &chassis);
-    GetProtoFromASCIIFile("modules/planning/prediction.ascii", &prediction_obstacles);
-    GetProtoFromASCIIFile("modules/planning/localization.ascii", &localization_estimate);
+
+    
 
     routing_response_writer->Write(routing_response);
 
@@ -95,6 +98,12 @@ int main(int argc, char** argv) {
     // chassis.set_speed_mps((float)speed_mps(gen));
     // chassis.set_throttle_percentage((float)throttle_percentage(gen));
     // chassis.set_brake_percentage((float)brake_percentage(gen));
+    float p = chassis.throttle_percentage();
+    AINFO << "This is throttle_percentage: " << p << ".\n";
+    auto h = chassis.header();
+    AINFO << "This is timestamp_sec: " << h.timestamp_sec() << ".\n";
+    AINFO << "This is module_name: " << h.module_name() << ".\n";
+    AINFO << "This is sequence_num: " << h.sequence_num() << ".\n";
     chassis_writer->Write(chassis);
 
     prediction_obstacles_writer->Write(prediction_obstacles);
