@@ -1,0 +1,69 @@
+syntax = "proto2";
+
+package apollo.fuzzing;
+
+import "modules/common/proto/error_code.proto";
+import "modules/common/proto/header.proto";
+import "modules/common/proto/pnc_point.proto";
+import "modules/prediction/proto/scenario.proto";
+import "modules/perception/proto/perception_obstacle.proto";
+import "modules/prediction/proto/feature.proto";
+
+message Trajectory {
+  optional double probability = 1;
+  repeated apollo.common.TrajectoryPoint trajectory_point = 2;
+}
+
+message ObstacleIntent {
+  enum Type {
+    UNKNOWN = 0;
+    STOP = 1;
+    STATIONARY = 2;
+    MOVING = 3;
+    CHANGE_LANE = 4;
+    LOW_ACCELERATION = 5;
+    HIGH_ACCELERATION = 6;
+    LOW_DECELERATION = 7;
+    HIGH_DECELERATION = 8;
+  }
+  optional Type type = 1 [default = UNKNOWN];
+}
+
+message Intent {
+  enum Type {
+    UNKNOWN = 0;
+    STOP = 1;
+    CRUISE = 2;
+    CHANGE_LANE = 3;
+  }
+  optional Type type = 1 [default = UNKNOWN];
+}
+
+message PredictionObstacle {
+  optional apollo.perception.PerceptionObstacle perception_obstacle = 1;
+  optional double timestamp = 2;
+  optional double predicted_period = 3;
+  repeated Trajectory trajectory = 4;
+
+  optional ObstacleIntent intent = 5;
+
+  optional ObstaclePriority priority = 6;
+
+  optional bool is_static = 7 [default = false];
+}
+
+message PredictionObstacles {
+  optional apollo.common.Header header = 1;
+
+  repeated PredictionObstacle prediction_obstacle = 2;
+
+  optional apollo.common.ErrorCode perception_error_code = 3;
+
+  optional double start_timestamp = 4;
+
+  optional double end_timestamp = 5;
+
+  optional Intent intent = 6;
+
+  optional Scenario scenario = 7;
+}
