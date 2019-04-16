@@ -70,11 +70,6 @@ int main(int argc, char** argv) {
   LocalizationEstimate localization_estimate;
   PerceptionObstacles perception_obstacles;
 
-  GetProtoFromBinaryFile("test", &perception_obstacles);
-  AINFO << "After Get!" << std::endl;
-  SetProtoToASCIIFile(perception_obstacles,"modules/planning/perception.ascii");
-  AINFO << "After Set!" << std::endl;
-
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<double> engine_rpm(0, 300);
@@ -87,31 +82,17 @@ int main(int argc, char** argv) {
   GetProtoFromASCIIFile("modules/planning/prediction.ascii", &prediction_obstacles);
   GetProtoFromASCIIFile("modules/planning/localization.ascii", &localization_estimate);
 
-  Rate rate(1.0);
-  while (apollo::cyber::OK()) {
-
-    
-
     routing_response_writer->Write(routing_response);
 
-    // chassis.set_engine_rpm((float)engine_rpm(gen));
-    // chassis.set_speed_mps((float)speed_mps(gen));
-    // chassis.set_throttle_percentage((float)throttle_percentage(gen));
-    // chassis.set_brake_percentage((float)brake_percentage(gen));
-    float p = chassis.throttle_percentage();
-    AINFO << "This is throttle_percentage: " << p << ".\n";
-    auto h = chassis.header();
-    AINFO << "This is timestamp_sec: " << h.timestamp_sec() << ".\n";
-    AINFO << "This is module_name: " << h.module_name() << ".\n";
-    AINFO << "This is sequence_num: " << h.sequence_num() << ".\n";
+    chassis.set_engine_rpm((float)engine_rpm(gen));
+    chassis.set_speed_mps((float)speed_mps(gen));
+    chassis.set_throttle_percentage((float)throttle_percentage(gen));
+    chassis.set_brake_percentage((float)brake_percentage(gen));
     chassis_writer->Write(chassis);
 
     prediction_obstacles_writer->Write(prediction_obstacles);
 
     localization_writer->Write(localization_estimate);
-
-    rate.Sleep();
-  }
 
   apollo::cyber::WaitForShutdown();
   controller.Clear();
