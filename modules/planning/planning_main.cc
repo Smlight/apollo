@@ -70,12 +70,12 @@ int main(int argc, char** argv) {
   LocalizationEstimate localization_estimate;
   PerceptionObstacles perception_obstacles;
 
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_real_distribution<double> engine_rpm(0, 300);
-  std::uniform_real_distribution<double> speed_mps(0, 100);
-  std::uniform_real_distribution<double> throttle_percentage(0, 100);
-  std::uniform_real_distribution<double> brake_percentage(0, 100);
+  // std::random_device rd;
+  // std::mt19937 gen(rd());
+  // std::uniform_real_distribution<double> engine_rpm(0, 300);
+  // std::uniform_real_distribution<double> speed_mps(0, 100);
+  // std::uniform_real_distribution<double> throttle_percentage(0, 100);
+  // std::uniform_real_distribution<double> brake_percentage(0, 100);
 
   GetProtoFromASCIIFile("modules/planning/routing.ascii", &routing_response);
   GetProtoFromASCIIFile("modules/planning/chassis.ascii", &chassis);
@@ -84,10 +84,10 @@ int main(int argc, char** argv) {
 
     routing_response_writer->Write(routing_response);
 
-    chassis.set_engine_rpm((float)engine_rpm(gen));
-    chassis.set_speed_mps((float)speed_mps(gen));
-    chassis.set_throttle_percentage((float)throttle_percentage(gen));
-    chassis.set_brake_percentage((float)brake_percentage(gen));
+    // chassis.set_engine_rpm((float)engine_rpm(gen));
+    // chassis.set_speed_mps((float)speed_mps(gen));
+    // chassis.set_throttle_percentage((float)throttle_percentage(gen));
+    // chassis.set_brake_percentage((float)brake_percentage(gen));
     chassis_writer->Write(chassis);
 
     prediction_obstacles_writer->Write(prediction_obstacles);

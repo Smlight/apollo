@@ -734,6 +734,15 @@
 		<Publisher class="File">
 			<Param name="FileName" value="modules/planning/chassis.ascii" />
 		</Publisher>
+		<Publisher class="File">
+			<Param name="FileName" value="modules/planning/localization.ascii" />
+		</Publisher>
+		<Publisher class="File">
+			<Param name="FileName" value="modules/planning/prediction.ascii" />
+		</Publisher>
+		<Publisher class="File">
+			<Param name="FileName" value="modules/planning/routing.ascii" />
+		</Publisher>
 
 		<!-- OPTIONAL: Configure a strategy -->
 		<Strategy class="Random"/>
