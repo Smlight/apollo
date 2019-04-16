@@ -689,19 +689,19 @@
 	<StateModel name="TheState" initialState="Initial">
 		<State name="Initial">
 		
-			<Action type="output">
+			<Action type="output" publisher="OChassis">
 				<DataModel ref="Chassis"/>
 				<Data fileName="modules/planning/chassis.ascii" />
 			</Action>
-			<Action type="output">
+			<Action type="output" publisher="OLocalization">
 				<DataModel ref="LocalizationEstimate"/>
 				<Data fileName="modules/planning/localization.ascii" />
 			</Action>
-			<Action type="output">
+			<Action type="output" publisher="OPrediction">
 				<DataModel ref="PredictionObstacles"/>
 				<Data fileName="modules/planning/prediction.ascii" />
 			</Action>
-			<Action type="output">
+			<Action type="output" publisher="ORouting">
 				<DataModel ref="RoutingResponse"/>
 				<Data fileName="modules/planning/routing.ascii" />
 			</Action>
@@ -731,16 +731,16 @@
 		<StateModel ref="TheState"/>
 
 		<!-- TODO: Configure a publisher -->
-		<Publisher class="File">
+		<Publisher class="File" name="OChassis">
 			<Param name="FileName" value="modules/planning/chassis.ascii" />
 		</Publisher>
-		<Publisher class="File">
+		<Publisher class="File" name="OLocalization">
 			<Param name="FileName" value="modules/planning/localization.ascii" />
 		</Publisher>
-		<Publisher class="File">
+		<Publisher class="File" name="OPrediction">
 			<Param name="FileName" value="modules/planning/prediction.ascii" />
 		</Publisher>
-		<Publisher class="File">
+		<Publisher class="File" name="ORouting">
 			<Param name="FileName" value="modules/planning/routing.ascii" />
 		</Publisher>
 
