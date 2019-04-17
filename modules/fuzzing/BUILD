@@ -34,7 +34,18 @@ cc_binary(
     name = "libfuzzing_component.so",
     linkshared = True,
     linkstatic = False,
-    deps = [":fuzzing_component_lib"],
+    deps = [
+        ":fuzzing_component_lib"
+    ],
+)
+
+cc_binary(
+    name = "fuzzing_stage1",
+    srcs = [
+        "fuzzing_stage1.cc",
+    ],
+    deps = [
+    ],
 )
 
 cc_library(
