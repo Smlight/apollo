@@ -10,6 +10,7 @@
 #include <locale>
 #include <map>
 #include <sstream>
+#include <stack>
 #include <string>
 #include <vector>
 
@@ -17,6 +18,7 @@ using std::ifstream;
 using std::map;
 using std::ofstream;
 using std::pair;
+using std::stack;
 using std::string;
 using std::stringstream;
 using std::vector;
@@ -63,16 +65,16 @@ int is_basict(const std::string &s) {
 
 int main(int argc, char **argv) {
   srand((unsigned)time(NULL));
+  string relative("modules/fuzzing/proto/");
   for (auto &w : FILE_LIST) {
-    string file_path = "proto/" + w + ".proto";
+    string file_path = relative + w + ".proto";
     ifstream input(file_path);
     // map<string, vector<pair<string, string>>> mp;
     map<string, pair<int, int>> range;
     string line;
     vector<vector<string>> all;  // all lines separated into 3 parts
-    int line_num = 0, nest_lev = 0;
-    int start_pos = 0;
-    string now_in_range("");
+    int line_num = 0;
+    stack<pair<string, int>> st;
     while (getline(input, line)) {
       trim(line);
       ++line_num;
@@ -80,30 +82,29 @@ int main(int argc, char **argv) {
       string a, b, c;
       ss >> a >> b;
       getline(ss, c);
-      if (a == "message") {
-        if (!start_pos) start_pos = line_num;
-        range[b] = {line_num, -1};
-        now_in_range = b;
+      if (a == "message" || a == "enum") {
+        st.push(std::make_pair(b, line_num));
       } else {
         // nothing to do rightnow
       }
       for (auto c : line) {
-        if (c == '{') {
-          ++nest_lev;
-        } else if (c == '}') {
-          --nest_lev;
+        /* A local class definition has finished */
+        if (c == '}') {
+          auto p = st.top();
+          st.pop();
+          range[p.first] = {p.second, line_num};
         }
       }
-      /* A local class definition finished */
-      if (nest_lev == 0 && now_in_range != "") {
-        range[now_in_range].second = line_num;
-        now_in_range = "";
-      }
       ltrim(c);
-      /* Remove default value for convenience */
-      auto pos = c.find("default");
-      if (pos != string::npos) {
-        c.replace(c.begin() + pos - 1, c.end() - 1, "");
+      /* Remove default and packed hint for convenience */
+      vector<string> elim({"default", "packed"});
+      for (auto &w : elim) {
+        auto pos = c.find(w);
+        if (pos != string::npos) {
+          --pos;
+          while (std::isspace(*(c.begin() + pos - 1))) --pos;
+          c.replace(c.begin() + pos, c.end() - 1, "");
+        }
       }
 
       all.push_back({a, b, c});
@@ -117,36 +118,39 @@ int main(int argc, char **argv) {
       for (int j = 1; j <= line_num; ++j) {
         auto &line = all[j - 1];
         string &a = line[0];
-        string &b = line[1];
+        string b = line[1];
         string &c = line[2];
         string new_line;
         int type = -1;
-        if (a == "message") {
+        if (a == "message" || a == "enum") {
           new_line = a + " " + b + i_leading0 + " " + c;
         } else if ((type = is_basict(b)) != -1) {
           type += rand() % (9 - type);
           new_line = a + " " + BASIC_TYPES[type] + " " + c;
         } else {
-          auto pos = b.find('.');
-          string t0, t1;
-          if (pos != string::npos) {
-            t0 = string(b.begin(), b.begin() + pos);
-            t1 = string(b.begin() + pos, b.end());
-          } else {
-            t0 = b;
-            t1 = "";
+          long unsigned int prepos = 0;
+          auto pos = b.find('.', prepos);
+          while (pos != string::npos) {
+            string t(b.begin() + prepos, b.begin() + pos);
+            if (range.count(t)) {
+              b.replace(b.begin() + prepos, b.begin() + pos, t + i_leading0);
+            } else {
+              break;
+            }
+            prepos = pos + 3 + 1;
+            pos = b.find('.', prepos);
           }
-          if (range.count(t0)) {
-            new_line = a + " " + t0 + i_leading0 + t1 + " " + c;
-          } else {
-            new_line = a + " " + b + " " + c;
-            trim(new_line);
+          string t(b.begin() + prepos, b.end());
+          if (range.count(t)) {
+            b.replace(b.begin() + prepos, b.end(), t + i_leading0);
           }
+          new_line = a + " " + b + " " + c;
+          trim(new_line);
         }
         new_all += new_line;
         new_all += "\n";
       }
-      ofstream output("proto/" + w + i_leading0 + ".proto");
+      ofstream output(relative + w + i_leading0 + ".proto");
       output << new_all;
       output.close();
     }

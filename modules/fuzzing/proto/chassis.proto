@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package apollo.fuzzing;
+package apollo.chassis;
 
 import "modules/common/proto/header.proto";
 import "modules/common/proto/vehicle_signal.proto";
@@ -107,13 +107,12 @@ message ChassisGPS {
   optional GpsQuality quality = 18;
   optional int32 num_satellites = 19;
   optional double gps_speed = 20;
-}
-
-enum GpsQuality {
-  FIX_NO = 0;
-  FIX_2D = 1;
-  FIX_3D = 2;
-  FIX_INVALID = 3;
+  enum GpsQuality {
+    FIX_NO = 0;
+    FIX_2D = 1;
+    FIX_3D = 2;
+    FIX_INVALID = 3;
+  }
 }
 
 message WheelSpeed {
