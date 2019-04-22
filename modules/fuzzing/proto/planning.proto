@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package apollo.fuzzing;
+package apollo.planning;
 
 import "modules/canbus/proto/chassis.proto";
 import "modules/common/proto/drive_state.proto";
