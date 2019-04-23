@@ -608,7 +608,7 @@
 			<Block ref="NewLine" />
 		</Block></Choice>
 
-		<!-- <Choice minOccurs="0" name="g"><Block>
+		<Choice minOccurs="0" name="g"><Block>
 			<String value="blacklisted_lane {" token="true" />
 			<Block ref="NewLine" /> 
 			<Block ref="LaneSegment" />
@@ -634,7 +634,7 @@
 			<Block ref="ParkingSpace" name="q" />
 			<String value="}" token="true" name="r" />
 			<Block ref="NewLine" name="s" />
-		</Block></Choice> -->
+		</Block></Choice>
 	</DataModel>
 
 	<DataModel name="StatusPb">
