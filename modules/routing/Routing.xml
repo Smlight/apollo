@@ -690,25 +690,13 @@
 		<State name="Initial">
 		
 			<Action type="output">
-				<DataModel ref="Chassis"/>
-				<Data fileName="modules/planning/chassis.ascii" />
-			</Action>
-			<Action type="output">
-				<DataModel ref="LocalizationEstimate"/>
-				<Data fileName="modules/planning/localization.ascii" />
-			</Action>
-			<Action type="output">
-				<DataModel ref="PredictionObstacles"/>
-				<Data fileName="modules/planning/prediction.ascii" />
-			</Action>
-			<Action type="output">
-				<DataModel ref="RoutingResponse"/>
-				<Data fileName="modules/planning/routing.ascii" />
+				<DataModel ref="RoutingRequest"/>
+				<Data fileName="modules/routing/routing.ascii" />
 			</Action>
 
 			<Action type="close"/>
 
-			<Action type="call" method="StartPlanning" publisher="Peach.Agent"/>
+			<Action type="call" method="StartRouting" publisher="Peach.Agent"/>
 		</State>
 
 	</StateModel>
@@ -718,7 +706,7 @@
 		<Monitor class="LinuxDebugger">
 
 			<!-- This is the program we're going to run inside of the debugger -->
-			<Param name="Executable" value="bazel-bin/modules/planning/planning_main" />
+			<Param name="Executable" value="bazel-bin/modules/routing/routing_main" />
 
 			<Param name="CpuKill" value="true"/>
 
@@ -732,7 +720,7 @@
 
 		<!-- TODO: Configure a publisher -->
 		<Publisher class="File">
-			<Param name="FileName" value="modules/planning/chassis.ascii" />
+			<Param name="FileName" value="modules/routing/routing.ascii" />
 		</Publisher>
 
 		<!-- OPTIONAL: Configure a strategy -->
