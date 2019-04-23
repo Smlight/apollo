@@ -1,0 +1,174 @@
+syntax = "proto2";
+
+package apollo.chassis;
+
+import "modules/common/proto/header.proto";
+import "modules/common/proto/vehicle_signal.proto";
+import "modules/common/proto/drive_state.proto";
+import "modules/common/proto/geometry.proto";
+
+message Chassis003 {
+enum DrivingMode003 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode003 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition003 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional double engine_started = 3;
+optional float engine_rpm = 4;
+optional double speed_mps = 5;
+optional double odometer_m = 6;
+optional uint64 fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional string steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional float low_beam_signal = 15 [deprecated = true];
+optional bytes left_turn_signal = 16 [deprecated = true];
+optional string right_turn_signal = 17 [deprecated = true];
+optional double horn = 18 [deprecated = true];
+
+optional double wiper = 19;
+optional bytes disengage_status = 20 [deprecated = true];
+optional DrivingMode003 driving_mode = 21;
+optional ErrorCode003 error_code = 22;
+optional GearPosition003 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS003 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed003 wheel_speed = 30;
+
+optional Surround003 surround = 31;
+
+optional License003 license = 32;
+}
+
+message ChassisGPS003 {
+optional string latitude = 1;
+optional bytes longitude = 2;
+optional float gps_valid = 3;
+
+optional int64 year = 4;
+optional int64 month = 5;
+optional float day = 6;
+optional int32 hours = 7;
+optional uint64 minutes = 8;
+optional bytes seconds = 9;
+optional bytes compass_direction = 10;
+optional double pdop = 11;
+optional bytes is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional double altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional string vdop = 17;
+optional GpsQuality003 quality = 18;
+optional bytes num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality003 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed003 {
+enum WheelSpeedType003 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType003 wheel_direction_rr = 2;
+optional string wheel_spd_rr = 3;
+optional bytes is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType003 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional double is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType003 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional int32 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType003 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar003 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround003 {
+optional int32 cross_traffic_alert_left = 1;
+optional bool cross_traffic_alert_left_enabled = 2;
+optional uint32 blind_spot_left_alert = 3;
+optional bool blind_spot_left_alert_enabled = 4;
+optional double cross_traffic_alert_right = 5;
+optional string cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional bytes blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional bytes sonar01 = 10;
+optional double sonar02 = 11;
+optional bytes sonar03 = 12;
+optional bytes sonar04 = 13;
+optional string sonar05 = 14;
+optional bytes sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional bytes sonar10 = 19;
+optional string sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional bool sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar003 sonar = 24;
+}
+
+message License003 {
+optional string vin = 1;
+}

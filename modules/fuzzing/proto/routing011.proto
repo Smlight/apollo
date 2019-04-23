@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+package apollo.routing;
+
+import "modules/common/proto/header.proto";
+import "modules/common/proto/geometry.proto";
+import "modules/common/proto/error_code.proto";
+import "modules/map/proto/map_parking_space.proto";
+
+message LaneWaypoint011 {
+optional string id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment011 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest011 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint011 waypoint = 2;
+repeated LaneSegment011 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement011 {
+optional string distance = 1;
+}
+
+message Passage011 {
+enum ChangeLaneType011 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment011 segment = 1;
+optional uint32 can_exit = 2;
+optional ChangeLaneType011 change_lane_type = 3;
+}
+
+message RoadSegment011 {
+optional string id = 1;
+repeated Passage011 passage = 2;
+}
+
+message RoutingResponse011 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment011 road = 2;
+optional Measurement011 measurement = 3;
+optional RoutingRequest011 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
