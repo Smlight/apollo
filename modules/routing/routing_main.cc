@@ -21,9 +21,9 @@
 #include "modules/fuzzing/proto/fuzzing.pb.h"
 #include "modules/localization/proto/localization.pb.h"
 #include "modules/perception/proto/perception_obstacle.pb.h"
-#include "modules/planning/mainboard/module_argument.h"
-#include "modules/planning/mainboard/module_controller.h"
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
+#include "modules/routing/mainboard/module_argument.h"
+#include "modules/routing/mainboard/module_controller.h"
 #include "modules/routing/proto/routing.pb.h"
 
 using apollo::canbus::Chassis;
@@ -33,9 +33,10 @@ using apollo::cyber::common::GetProtoFromBinaryFile;
 using apollo::cyber::common::SetProtoToASCIIFile;
 using apollo::localization::LocalizationEstimate;
 using apollo::perception::PerceptionObstacles;
-using apollo::planning::ModuleArgument;
-using apollo::planning::ModuleController;
 using apollo::prediction::PredictionObstacles;
+using apollo::routing::ModuleArgument;
+using apollo::routing::ModuleController;
+using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
 
 int main(int argc, char** argv) {
@@ -60,7 +61,12 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
   RoutingRequest routing_request;
   GetProtoFromASCIIFile("modules/routing/routing.ascii", &routing_request);
-  routing_request_writer->Write(routing_request);
+
+  Rate rate(1.0);
+  while (apollo::cyber::OK()) {
+    routing_request_writer->Write(routing_request);
+    rate.Sleep();
+  }
 
   apollo::cyber::WaitForShutdown();
   controller.Clear();

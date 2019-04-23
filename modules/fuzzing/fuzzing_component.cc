@@ -108,12 +108,6 @@ bool FuzzingComponent::Init() {
 bool FuzzingComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
-  FuzzMessage* fuzz_message_p = new FuzzMessage();
-  fuzz_message_p->set_msg(std::string(1024, 'e'));
-  //   chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_message_p)));
-  traffic_light_writer_->Write(
-      static_cast<std::shared_ptr<TrafficLightDetection>>(
-          reinterpret_cast<TrafficLightDetection*>(fuzz_message_p)));
   return true;
 }
 
