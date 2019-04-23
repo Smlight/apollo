@@ -1,0 +1,51 @@
+syntax = "proto2";
+
+package apollo.localization;
+
+import "modules/common/proto/header.proto";
+import "modules/localization/proto/pose.proto";
+import "modules/common/proto/geometry.proto";
+import "modules/common/proto/pnc_point.proto";
+import "modules/localization/proto/localization_status.proto";
+
+message Uncertainty028 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate028 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty028 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus028 {
+enum MeasureState028 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState028 fusion_status = 2;
+optional MeasureState028 gnss_status = 3 [deprecated = true];
+optional MeasureState028 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}

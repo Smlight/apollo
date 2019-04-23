@@ -1,0 +1,66 @@
+syntax = "proto2";
+
+package apollo.perception;
+
+import "modules/common/proto/header.proto";
+
+message TrafficLightBox013 {
+optional float x = 1;
+optional double y = 2;
+optional double width = 3;
+optional int64 height = 4;
+optional TrafficLight013.Color013 color = 5;
+optional uint64 selected = 6;
+optional bytes camera_name = 7;
+}
+
+message TrafficLightDebug013 {
+optional TrafficLightBox013 cropbox = 1;
+repeated TrafficLightBox013 box = 2;
+optional string signal_num = 3;
+optional uint32 valid_pos = 4;
+optional bytes ts_diff_pos = 5;
+optional double ts_diff_sys = 6;
+optional uint32 project_error = 7;
+optional bytes distance_to_stop_line = 8;
+optional int32 camera_id = 9 [deprecated = true];
+repeated TrafficLightBox013 crop_roi = 10;
+repeated TrafficLightBox013 projected_roi = 11;
+repeated TrafficLightBox013 rectified_roi = 12;
+repeated TrafficLightBox013 debug_roi = 13;
+}
+
+message TrafficLight013 {
+enum Color013 {
+UNKNOWN = 0;
+RED = 1;
+YELLOW = 2;
+GREEN = 3;
+BLACK = 4;
+};
+optional Color013 color = 1;
+
+optional string id = 2;
+
+optional double confidence = 3;
+
+optional double tracking_time = 4;
+
+optional float blink = 5;
+
+optional double remaining_time = 6;
+}
+
+message TrafficLightDetection013 {
+optional apollo.common.Header header = 2;
+repeated TrafficLight013 traffic_light = 1;
+optional TrafficLightDebug013 traffic_light_debug = 3;
+optional double contain_lights = 4;
+enum CameraID013 {
+CAMERA_FRONT_LONG = 0;
+CAMERA_FRONT_NARROW = 1;
+CAMERA_FRONT_SHORT = 2;
+CAMERA_FRONT_WIDE = 3;
+};
+optional CameraID013 camera_id = 5;
+}
