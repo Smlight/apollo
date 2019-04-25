@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/mutator.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
 
 #include <algorithm>
 #include <set>
@@ -21,11 +21,11 @@
 #include <utility>
 #include <vector>
 
-#include "port/gtest.h"
-#include "src/binary_format.h"
-#include "src/mutator_test_proto2.pb.h"
-#include "src/mutator_test_proto3.pb.h"
-#include "src/text_format.h"
+#include "modules/fuzzing/libprotobuf-mutator/port/gtest.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/binary_format.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator_test_proto2.pb.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator_test_proto3.pb.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/text_format.h"
 
 namespace protobuf_mutator {
 

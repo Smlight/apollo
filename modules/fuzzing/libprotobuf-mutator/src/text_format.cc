@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/text_format.h"
-#include "port/protobuf.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/text_format.h"
+#include "modules/fuzzing/libprotobuf-mutator/port/protobuf.h"
 
 namespace protobuf_mutator {
 

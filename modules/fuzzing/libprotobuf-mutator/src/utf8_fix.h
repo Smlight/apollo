@@ -17,7 +17,7 @@
 
 #include <string>
 
-#include "src/random.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/random.h"
 
 namespace protobuf_mutator {
 

@@ -17,7 +17,7 @@
 
 #include <string>
 
-#include "port/protobuf.h"
+#include "modules/fuzzing/libprotobuf-mutator/port/protobuf.h"
 
 namespace protobuf_mutator {
 

@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/weighted_reservoir_sampler.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/weighted_reservoir_sampler.h"
 
 #include <tuple>
 #include <vector>
 
-#include "port/gtest.h"
+#include "modules/fuzzing/libprotobuf-mutator/port/gtest.h"
 
 using testing::TestWithParam;
 using testing::ValuesIn;

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/mutator.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
 
 #include <algorithm>
 #include <map>
@@ -20,9 +20,9 @@
 #include <string>
 #include <vector>
 
-#include "src/field_instance.h"
-#include "src/utf8_fix.h"
-#include "src/weighted_reservoir_sampler.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/field_instance.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/utf8_fix.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/weighted_reservoir_sampler.h"
 
 namespace protobuf_mutator {
 

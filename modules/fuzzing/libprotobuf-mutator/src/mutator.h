@@ -25,8 +25,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "port/protobuf.h"
-#include "src/random.h"
+#include "modules/fuzzing/libprotobuf-mutator/port/protobuf.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/random.h"
 
 namespace protobuf_mutator {
 
