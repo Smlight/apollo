@@ -22,9 +22,10 @@
 #include "modules/localization/proto/localization.pb.h"
 #include "modules/perception/proto/perception_obstacle.pb.h"
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
+#include "modules/routing/proto/routing.pb.h"
+
 #include "modules/routing/mainboard/module_argument.h"
 #include "modules/routing/mainboard/module_controller.h"
-#include "modules/routing/proto/routing.pb.h"
 
 #include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
 #include "modules/fuzzing/proto/routing_fuzzed.pb.h"
@@ -99,7 +100,7 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   srand(time(NULL));
-  Mutator mutator(new RandomEngine(1));
+  Mutator mutator(new RandomEngine(rand()));
 
   for (int i = 0; i < 30; i++) {
     GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vec[i]);
