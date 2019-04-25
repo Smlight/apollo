@@ -98,18 +98,18 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   srand(time(NULL));
-  Mutator mutator(rand());
+  Mutator mutator(1);
 
   for (int i = 0; i < 30; i++) {
-    GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vev[i]);
+    GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vec[i]);
   }
 
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
-    mutator.Mutate(routing_vev[idx], 4096);
+    mutator.Mutate(routing_vec[idx], 4096);
     routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
-          reinterpret_cast<RoutingRequest*>(routing_vev[idx]));
+          reinterpret_cast<RoutingRequest*>(routing_vec[idx]));
     rate.Sleep();
   }
 
