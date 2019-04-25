@@ -42,6 +42,7 @@ using apollo::routing::ModuleController;
 using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
 using protobuf_mutator::Mutator;
+using protobuf_mutator::RandomEngine;
 using std::vector;
 
 int main(int argc, char** argv) {
@@ -98,7 +99,7 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   srand(time(NULL));
-  Mutator mutator(1);
+  Mutator mutator(RandomEngine<1>);
 
   for (int i = 0; i < 30; i++) {
     GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vec[i]);
@@ -109,7 +110,7 @@ int main(int argc, char** argv) {
     int idx = rand() % 30;
     mutator.Mutate(routing_vec[idx], 4096);
     routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
-          reinterpret_cast<RoutingRequest*>(routing_vec[idx]));
+        reinterpret_cast<RoutingRequest*>(routing_vec[idx])));
     rate.Sleep();
   }
 
