@@ -55,7 +55,8 @@ cc_proto_library(
 proto_library(
     name = "fuzzing_perception_proto_lib",
     srcs = [
-        "perception_fuzzed.proto",
+        "perception_obstacle_fuzzed.proto",
+        "traffic_light_detection_fuzzed.proto",
     ],
     deps = [
         "//modules/common/proto:error_code_proto_lib",
@@ -123,7 +124,7 @@ cc_proto_library(
 proto_library(
     name = "fuzzing_prediction_proto_lib",
     srcs = [
-        "prediction_fuzzed.proto",
+        "prediction_obstacle_fuzzed.proto",
     ],
     deps = [
         "//modules/common/proto:error_code_proto_lib",
