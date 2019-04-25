@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
   module_args.SetDAGConfList({"/apollo/modules/routing/dag/routing.dag"});
 
   // initialize cyber
-  apollo::cyber::Init("routing");
+  apollo::cyber::Init("routing_main");
 
   // start module
   ModuleController controller(module_args);
