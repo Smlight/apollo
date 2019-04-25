@@ -25,7 +25,7 @@
 #include "modules/routing/mainboard/module_controller.h"
 #include "modules/routing/proto/routing.pb.h"
 
-#include "modules/fuzzing/libprotobuf-mutator/mutator.h"
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
 #include "modules/fuzzing/proto/routing.pb.h"
 
 using apollo::canbus::Chassis;
@@ -105,6 +105,7 @@ int main(int argc, char** argv) {
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
+    mutator.Mutate(routing_vev[idx], 4096);
     routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
           reinterpret_cast<RoutingRequest*>(routing_vev[idx]));
     rate.Sleep();
