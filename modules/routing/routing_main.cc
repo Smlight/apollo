@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <random>
+#include <vector>
 
 #include "gflags/gflags.h"
 
@@ -41,6 +42,7 @@ using apollo::routing::ModuleController;
 using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
 using protobuf_mutator::Mutator;
+using std::vector;
 
 int main(int argc, char** argv) {
   // parse the argument
@@ -96,7 +98,7 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   srand(time(NULL));
-  Mutator mutator(time(NULL));
+  Mutator mutator(rand());
 
   for (int i = 0; i < 30; i++) {
     GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vev[i]);
