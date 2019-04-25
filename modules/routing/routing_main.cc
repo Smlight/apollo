@@ -26,7 +26,7 @@
 #include "modules/routing/proto/routing.pb.h"
 
 #include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
-#include "modules/fuzzing/proto/routing.pb.h"
+#include "modules/fuzzing/proto/routing_fuzzed.pb.h"
 
 using apollo::canbus::Chassis;
 using apollo::cyber::Rate;
