@@ -26,6 +26,7 @@ cc_binary(
         "//modules/routing/proto:routing_proto",
         "//modules/prediction/proto:prediction_proto",
         "//modules/fuzzing/proto:fuzzing_routing_proto",
+        "//modules/fuzzing/libprotobuf-mutator:protobuf_mutator_lib"
     ],
 )
 
