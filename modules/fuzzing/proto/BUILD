@@ -44,7 +44,6 @@ proto_library(
     ],
 )
 
-
 cc_proto_library(
     name = "fuzzing_perception_proto",
     deps = [
