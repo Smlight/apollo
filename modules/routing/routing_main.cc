@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   srand(time(NULL));
-  Mutator mutator(RandomEngine(1));
+  Mutator mutator(new RandomEngine(1));
 
   for (int i = 0; i < 30; i++) {
     GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vec[i]);
