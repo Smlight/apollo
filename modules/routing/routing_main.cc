@@ -59,37 +59,37 @@ int main(int argc, char** argv) {
     return -1;
   }
 
-  vector<::google::protobuf::Message> routing_vec;
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest001());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest002());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest003());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest004());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest005());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest006());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest007());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest008());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest009());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest010());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest011());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest012());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest013());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest014());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest015());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest016());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest017());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest018());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest019());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest020());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest021());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest022());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest023());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest024());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest025());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest026());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest027());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest028());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest029());
-  routing_vec.push_back(apollo::fuzzing::RoutingRequest030());
+  vector<::google::protobuf::Message*> routing_vec;
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest001());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest002());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest003());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest004());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest005());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest006());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest007());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest008());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest009());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest010());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest011());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest012());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest013());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest014());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest015());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest016());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest017());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest018());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest019());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest020());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest021());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest022());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest023());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest024());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest025());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest026());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest027());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest028());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest029());
+  routing_vec.push_back(new apollo::fuzzing::RoutingRequest030());
 
   auto fuzzer_node = apollo::cyber::CreateNode("fuzzer");
   auto routing_request_writer =
@@ -99,13 +99,14 @@ int main(int argc, char** argv) {
   Mutator mutator(time(NULL));
 
   for (int i = 0; i < 30; i++) {
-    GetProtoFromASCIIFile("modules/routing/routing.ascii", &routing_vev[i]);
+    GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vev[i]);
   }
 
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
-    routing_request_writer->Write(routing_vev[idx]);
+    routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
+          reinterpret_cast<RoutingRequest*>(routing_vev[idx]));
     rate.Sleep();
   }
 
