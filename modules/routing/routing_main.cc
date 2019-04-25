@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
-    routing_request_writer->Write(routing_request);
+    routing_request_writer->Write(routing_vev[idx]);
     rate.Sleep();
   }
 
