@@ -6,13 +6,13 @@ cc_library(
     name = "protobuf_mutator_lib",
     srcs = [
         "src/mutator.cc",
-        "src/text-format.cc",
+        "src/text_format.cc",
         "src/utf8_fix.cc",
     ],
     hdrs = [
         "src/mutator.h",
         "src/random.h",
-        "src/text-format.h",
+        "src/text_format.h",
         "src/utf8_fix.h",
         "src/weighted_reservoir_sampler.h",
         "src/field_instance.h",
