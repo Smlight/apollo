@@ -1,0 +1,1240 @@
+syntax = "proto2";
+
+package apollo.localization;
+
+import "modules/common/proto/header.proto";
+import "modules/localization/proto/pose.proto";
+import "modules/common/proto/geometry.proto";
+import "modules/common/proto/pnc_point.proto";
+import "modules/localization/proto/localization_status.proto";
+
+message Uncertainty001 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate001 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty001 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus001 {
+enum MeasureState001 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState001 fusion_status = 2;
+optional MeasureState001 gnss_status = 3 [deprecated = true];
+optional MeasureState001 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty002 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate002 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty002 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus002 {
+enum MeasureState002 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState002 fusion_status = 2;
+optional MeasureState002 gnss_status = 3 [deprecated = true];
+optional MeasureState002 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty003 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate003 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty003 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus003 {
+enum MeasureState003 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState003 fusion_status = 2;
+optional MeasureState003 gnss_status = 3 [deprecated = true];
+optional MeasureState003 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty004 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate004 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty004 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus004 {
+enum MeasureState004 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState004 fusion_status = 2;
+optional MeasureState004 gnss_status = 3 [deprecated = true];
+optional MeasureState004 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty005 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate005 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty005 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus005 {
+enum MeasureState005 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState005 fusion_status = 2;
+optional MeasureState005 gnss_status = 3 [deprecated = true];
+optional MeasureState005 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty006 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate006 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty006 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus006 {
+enum MeasureState006 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState006 fusion_status = 2;
+optional MeasureState006 gnss_status = 3 [deprecated = true];
+optional MeasureState006 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty007 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate007 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty007 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus007 {
+enum MeasureState007 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState007 fusion_status = 2;
+optional MeasureState007 gnss_status = 3 [deprecated = true];
+optional MeasureState007 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty008 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate008 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty008 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus008 {
+enum MeasureState008 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState008 fusion_status = 2;
+optional MeasureState008 gnss_status = 3 [deprecated = true];
+optional MeasureState008 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty009 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate009 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty009 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus009 {
+enum MeasureState009 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState009 fusion_status = 2;
+optional MeasureState009 gnss_status = 3 [deprecated = true];
+optional MeasureState009 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty010 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate010 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty010 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus010 {
+enum MeasureState010 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState010 fusion_status = 2;
+optional MeasureState010 gnss_status = 3 [deprecated = true];
+optional MeasureState010 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty011 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate011 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty011 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus011 {
+enum MeasureState011 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState011 fusion_status = 2;
+optional MeasureState011 gnss_status = 3 [deprecated = true];
+optional MeasureState011 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty012 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate012 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty012 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus012 {
+enum MeasureState012 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState012 fusion_status = 2;
+optional MeasureState012 gnss_status = 3 [deprecated = true];
+optional MeasureState012 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty013 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate013 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty013 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus013 {
+enum MeasureState013 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState013 fusion_status = 2;
+optional MeasureState013 gnss_status = 3 [deprecated = true];
+optional MeasureState013 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty014 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate014 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty014 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus014 {
+enum MeasureState014 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState014 fusion_status = 2;
+optional MeasureState014 gnss_status = 3 [deprecated = true];
+optional MeasureState014 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty015 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate015 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty015 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus015 {
+enum MeasureState015 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState015 fusion_status = 2;
+optional MeasureState015 gnss_status = 3 [deprecated = true];
+optional MeasureState015 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty016 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate016 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty016 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus016 {
+enum MeasureState016 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState016 fusion_status = 2;
+optional MeasureState016 gnss_status = 3 [deprecated = true];
+optional MeasureState016 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty017 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate017 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty017 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus017 {
+enum MeasureState017 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState017 fusion_status = 2;
+optional MeasureState017 gnss_status = 3 [deprecated = true];
+optional MeasureState017 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty018 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate018 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty018 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus018 {
+enum MeasureState018 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState018 fusion_status = 2;
+optional MeasureState018 gnss_status = 3 [deprecated = true];
+optional MeasureState018 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty019 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate019 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty019 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus019 {
+enum MeasureState019 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState019 fusion_status = 2;
+optional MeasureState019 gnss_status = 3 [deprecated = true];
+optional MeasureState019 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty020 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate020 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty020 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus020 {
+enum MeasureState020 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState020 fusion_status = 2;
+optional MeasureState020 gnss_status = 3 [deprecated = true];
+optional MeasureState020 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty021 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate021 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty021 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus021 {
+enum MeasureState021 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState021 fusion_status = 2;
+optional MeasureState021 gnss_status = 3 [deprecated = true];
+optional MeasureState021 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty022 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate022 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty022 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus022 {
+enum MeasureState022 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState022 fusion_status = 2;
+optional MeasureState022 gnss_status = 3 [deprecated = true];
+optional MeasureState022 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty023 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate023 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty023 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus023 {
+enum MeasureState023 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState023 fusion_status = 2;
+optional MeasureState023 gnss_status = 3 [deprecated = true];
+optional MeasureState023 lidar_status = 4 [deprecated = true];
+optional double measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty024 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate024 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty024 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus024 {
+enum MeasureState024 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState024 fusion_status = 2;
+optional MeasureState024 gnss_status = 3 [deprecated = true];
+optional MeasureState024 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty025 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate025 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty025 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus025 {
+enum MeasureState025 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState025 fusion_status = 2;
+optional MeasureState025 gnss_status = 3 [deprecated = true];
+optional MeasureState025 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty026 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate026 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty026 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus026 {
+enum MeasureState026 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState026 fusion_status = 2;
+optional MeasureState026 gnss_status = 3 [deprecated = true];
+optional MeasureState026 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty027 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate027 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty027 uncertainty = 3;
+
+optional bytes measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus027 {
+enum MeasureState027 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState027 fusion_status = 2;
+optional MeasureState027 gnss_status = 3 [deprecated = true];
+optional MeasureState027 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty028 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate028 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty028 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus028 {
+enum MeasureState028 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState028 fusion_status = 2;
+optional MeasureState028 gnss_status = 3 [deprecated = true];
+optional MeasureState028 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}
+message Uncertainty029 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate029 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty029 uncertainty = 3;
+
+optional double measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus029 {
+enum MeasureState029 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState029 fusion_status = 2;
+optional MeasureState029 gnss_status = 3 [deprecated = true];
+optional MeasureState029 lidar_status = 4 [deprecated = true];
+optional string measurement_time = 5;
+optional string state_message = 6;
+}
+message Uncertainty030 {
+optional apollo.common.Point3D position_std_dev = 1;
+
+optional apollo.common.Point3D orientation_std_dev = 2;
+
+optional apollo.common.Point3D linear_velocity_std_dev = 3;
+
+optional apollo.common.Point3D linear_acceleration_std_dev = 4;
+
+optional apollo.common.Point3D angular_velocity_std_dev = 5;
+
+}
+
+message LocalizationEstimate030 {
+optional apollo.common.Header header = 1;
+optional apollo.localization.Pose pose = 2;
+optional Uncertainty030 uncertainty = 3;
+
+optional string measurement_time = 4;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 5;
+
+optional MsfStatus msf_status = 6;
+optional MsfSensorMsgStatus sensor_status = 7;
+}
+
+message LocalizationStatus030 {
+enum MeasureState030 {
+OK = 0;
+WARNNING = 1;
+ERROR = 2;
+CRITICAL_ERROR = 3;
+FATAL_ERROR = 4;
+}
+optional apollo.common.Header header = 1;
+optional MeasureState030 fusion_status = 2;
+optional MeasureState030 gnss_status = 3 [deprecated = true];
+optional MeasureState030 lidar_status = 4 [deprecated = true];
+optional bytes measurement_time = 5;
+optional bytes state_message = 6;
+}

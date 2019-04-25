@@ -1,0 +1,4959 @@
+syntax = "proto2";
+
+package apollo.chassis;
+
+import "modules/common/proto/header.proto";
+import "modules/common/proto/vehicle_signal.proto";
+import "modules/common/proto/drive_state.proto";
+import "modules/common/proto/geometry.proto";
+
+message Chassis001 {
+enum DrivingMode001 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode001 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition001 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bytes engine_started = 3;
+optional float engine_rpm = 4;
+optional string speed_mps = 5;
+optional double odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional string steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional int32 low_beam_signal = 15 [deprecated = true];
+optional string left_turn_signal = 16 [deprecated = true];
+optional double right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode001 driving_mode = 21;
+optional ErrorCode001 error_code = 22;
+optional GearPosition001 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS001 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed001 wheel_speed = 30;
+
+optional Surround001 surround = 31;
+
+optional License001 license = 32;
+}
+
+message ChassisGPS001 {
+optional double latitude = 1;
+optional double longitude = 2;
+optional int64 gps_valid = 3;
+
+optional uint64 year = 4;
+optional int64 month = 5;
+optional int64 day = 6;
+optional float hours = 7;
+optional bytes minutes = 8;
+optional string seconds = 9;
+optional bytes compass_direction = 10;
+optional double pdop = 11;
+optional int64 is_gps_fault = 12;
+optional int64 is_inferred = 13;
+
+optional double altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional string vdop = 17;
+optional GpsQuality001 quality = 18;
+optional int64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality001 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed001 {
+enum WheelSpeedType001 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional uint32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType001 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional bytes is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType001 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType001 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType001 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar001 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround001 {
+optional bool cross_traffic_alert_left = 1;
+optional bytes cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional int64 blind_spot_left_alert_enabled = 4;
+optional uint32 cross_traffic_alert_right = 5;
+optional int64 cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional uint64 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional bytes sonar01 = 10;
+optional double sonar02 = 11;
+optional string sonar03 = 12;
+optional bytes sonar04 = 13;
+optional string sonar05 = 14;
+optional string sonar06 = 15;
+optional bytes sonar07 = 16;
+optional double sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional int32 sonar_enabled = 21;
+optional uint64 sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar001 sonar = 24;
+}
+
+message License001 {
+optional bytes vin = 1;
+}
+message Chassis002 {
+enum DrivingMode002 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode002 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition002 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint64 engine_started = 3;
+optional float engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional float odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional double steering_percentage = 11;
+optional string steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional bytes high_beam_signal = 14 [deprecated = true];
+optional int32 low_beam_signal = 15 [deprecated = true];
+optional uint32 left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode002 driving_mode = 21;
+optional ErrorCode002 error_code = 22;
+optional GearPosition002 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional float chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS002 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed002 wheel_speed = 30;
+
+optional Surround002 surround = 31;
+
+optional License002 license = 32;
+}
+
+message ChassisGPS002 {
+optional bytes latitude = 1;
+optional double longitude = 2;
+optional string gps_valid = 3;
+
+optional uint32 year = 4;
+optional double month = 5;
+optional string day = 6;
+optional double hours = 7;
+optional uint64 minutes = 8;
+optional uint64 seconds = 9;
+optional double compass_direction = 10;
+optional bytes pdop = 11;
+optional int64 is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional string altitude = 14;
+optional double heading = 15;
+optional double hdop = 16;
+optional double vdop = 17;
+optional GpsQuality002 quality = 18;
+optional double num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality002 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed002 {
+enum WheelSpeedType002 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional uint32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType002 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType002 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType002 wheel_direction_fr = 8;
+optional double wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType002 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar002 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround002 {
+optional int32 cross_traffic_alert_left = 1;
+optional bytes cross_traffic_alert_left_enabled = 2;
+optional float blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional int64 cross_traffic_alert_right = 5;
+optional int32 cross_traffic_alert_right_enabled = 6;
+optional uint64 blind_spot_right_alert = 7;
+optional uint64 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional string sonar03 = 12;
+optional double sonar04 = 13;
+optional bytes sonar05 = 14;
+optional bytes sonar06 = 15;
+optional double sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional string sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar002 sonar = 24;
+}
+
+message License002 {
+optional bytes vin = 1;
+}
+message Chassis003 {
+enum DrivingMode003 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode003 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition003 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bytes engine_started = 3;
+optional double engine_rpm = 4;
+optional string speed_mps = 5;
+optional bytes odometer_m = 6;
+optional float fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional string steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional string parking_brake = 13;
+
+optional int64 high_beam_signal = 14 [deprecated = true];
+optional uint64 low_beam_signal = 15 [deprecated = true];
+optional bytes left_turn_signal = 16 [deprecated = true];
+optional string right_turn_signal = 17 [deprecated = true];
+optional double horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional float disengage_status = 20 [deprecated = true];
+optional DrivingMode003 driving_mode = 21;
+optional ErrorCode003 error_code = 22;
+optional GearPosition003 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional string chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS003 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed003 wheel_speed = 30;
+
+optional Surround003 surround = 31;
+
+optional License003 license = 32;
+}
+
+message ChassisGPS003 {
+optional double latitude = 1;
+optional string longitude = 2;
+optional bytes gps_valid = 3;
+
+optional bytes year = 4;
+optional int32 month = 5;
+optional bytes day = 6;
+optional string hours = 7;
+optional int32 minutes = 8;
+optional uint32 seconds = 9;
+optional string compass_direction = 10;
+optional bytes pdop = 11;
+optional int32 is_gps_fault = 12;
+optional string is_inferred = 13;
+
+optional string altitude = 14;
+optional string heading = 15;
+optional bytes hdop = 16;
+optional double vdop = 17;
+optional GpsQuality003 quality = 18;
+optional float num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality003 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed003 {
+enum WheelSpeedType003 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional bytes is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType003 wheel_direction_rr = 2;
+optional string wheel_spd_rr = 3;
+optional uint64 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType003 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType003 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType003 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar003 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround003 {
+optional uint64 cross_traffic_alert_left = 1;
+optional uint64 cross_traffic_alert_left_enabled = 2;
+optional string blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional uint64 cross_traffic_alert_right = 5;
+optional string cross_traffic_alert_right_enabled = 6;
+optional double blind_spot_right_alert = 7;
+optional uint64 blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional string sonar01 = 10;
+optional string sonar02 = 11;
+optional string sonar03 = 12;
+optional bytes sonar04 = 13;
+optional string sonar05 = 14;
+optional double sonar06 = 15;
+optional string sonar07 = 16;
+optional double sonar08 = 17;
+optional bytes sonar09 = 18;
+optional double sonar10 = 19;
+optional string sonar11 = 20;
+optional float sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar003 sonar = 24;
+}
+
+message License003 {
+optional string vin = 1;
+}
+message Chassis004 {
+enum DrivingMode004 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode004 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition004 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int64 engine_started = 3;
+optional double engine_rpm = 4;
+optional float speed_mps = 5;
+optional double odometer_m = 6;
+optional double fuel_range_m = 7;
+optional double throttle_percentage = 8;
+optional double brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional int64 high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional bytes left_turn_signal = 16 [deprecated = true];
+optional int32 right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional uint32 wiper = 19;
+optional int64 disengage_status = 20 [deprecated = true];
+optional DrivingMode004 driving_mode = 21;
+optional ErrorCode004 error_code = 22;
+optional GearPosition004 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional double chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS004 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed004 wheel_speed = 30;
+
+optional Surround004 surround = 31;
+
+optional License004 license = 32;
+}
+
+message ChassisGPS004 {
+optional bytes latitude = 1;
+optional double longitude = 2;
+optional bytes gps_valid = 3;
+
+optional int32 year = 4;
+optional string month = 5;
+optional uint32 day = 6;
+optional string hours = 7;
+optional uint32 minutes = 8;
+optional uint32 seconds = 9;
+optional string compass_direction = 10;
+optional bytes pdop = 11;
+optional bytes is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional bytes altitude = 14;
+optional string heading = 15;
+optional bytes hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality004 quality = 18;
+optional uint64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality004 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed004 {
+enum WheelSpeedType004 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional string is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType004 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional float is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType004 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType004 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType004 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar004 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround004 {
+optional int64 cross_traffic_alert_left = 1;
+optional string cross_traffic_alert_left_enabled = 2;
+optional string blind_spot_left_alert = 3;
+optional string blind_spot_left_alert_enabled = 4;
+optional string cross_traffic_alert_right = 5;
+optional uint64 cross_traffic_alert_right_enabled = 6;
+optional bool blind_spot_right_alert = 7;
+optional uint64 blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional bytes sonar01 = 10;
+optional double sonar02 = 11;
+optional bytes sonar03 = 12;
+optional bytes sonar04 = 13;
+optional bytes sonar05 = 14;
+optional bytes sonar06 = 15;
+optional bytes sonar07 = 16;
+optional double sonar08 = 17;
+optional double sonar09 = 18;
+optional bytes sonar10 = 19;
+optional double sonar11 = 20;
+optional string sonar_enabled = 21;
+optional uint32 sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar004 sonar = 24;
+}
+
+message License004 {
+optional string vin = 1;
+}
+message Chassis005 {
+enum DrivingMode005 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode005 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition005 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional string engine_started = 3;
+optional double engine_rpm = 4;
+optional float speed_mps = 5;
+optional string odometer_m = 6;
+optional int32 fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional double brake_percentage = 9;
+optional string steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional string high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional int64 left_turn_signal = 16 [deprecated = true];
+optional string right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional int64 wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode005 driving_mode = 21;
+optional ErrorCode005 error_code = 22;
+optional GearPosition005 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS005 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed005 wheel_speed = 30;
+
+optional Surround005 surround = 31;
+
+optional License005 license = 32;
+}
+
+message ChassisGPS005 {
+optional bytes latitude = 1;
+optional bytes longitude = 2;
+optional bytes gps_valid = 3;
+
+optional uint32 year = 4;
+optional uint32 month = 5;
+optional uint64 day = 6;
+optional double hours = 7;
+optional int32 minutes = 8;
+optional uint32 seconds = 9;
+optional double compass_direction = 10;
+optional string pdop = 11;
+optional uint64 is_gps_fault = 12;
+optional float is_inferred = 13;
+
+optional string altitude = 14;
+optional string heading = 15;
+optional string hdop = 16;
+optional double vdop = 17;
+optional GpsQuality005 quality = 18;
+optional bytes num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality005 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed005 {
+enum WheelSpeedType005 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional uint64 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType005 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional uint64 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType005 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional float is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType005 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType005 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar005 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround005 {
+optional bytes cross_traffic_alert_left = 1;
+optional float cross_traffic_alert_left_enabled = 2;
+optional int32 blind_spot_left_alert = 3;
+optional float blind_spot_left_alert_enabled = 4;
+optional string cross_traffic_alert_right = 5;
+optional bytes cross_traffic_alert_right_enabled = 6;
+optional bool blind_spot_right_alert = 7;
+optional string blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional string sonar01 = 10;
+optional string sonar02 = 11;
+optional bytes sonar03 = 12;
+optional bytes sonar04 = 13;
+optional double sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional bytes sonar09 = 18;
+optional double sonar10 = 19;
+optional double sonar11 = 20;
+optional string sonar_enabled = 21;
+optional uint32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar005 sonar = 24;
+}
+
+message License005 {
+optional bytes vin = 1;
+}
+message Chassis006 {
+enum DrivingMode006 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode006 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition006 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional double engine_started = 3;
+optional bytes engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional float odometer_m = 6;
+optional float fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional double brake_percentage = 9;
+optional string steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional int64 high_beam_signal = 14 [deprecated = true];
+optional int64 low_beam_signal = 15 [deprecated = true];
+optional uint32 left_turn_signal = 16 [deprecated = true];
+optional int32 right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional uint32 wiper = 19;
+optional bool disengage_status = 20 [deprecated = true];
+optional DrivingMode006 driving_mode = 21;
+optional ErrorCode006 error_code = 22;
+optional GearPosition006 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional double chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS006 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed006 wheel_speed = 30;
+
+optional Surround006 surround = 31;
+
+optional License006 license = 32;
+}
+
+message ChassisGPS006 {
+optional double latitude = 1;
+optional string longitude = 2;
+optional double gps_valid = 3;
+
+optional float year = 4;
+optional float month = 5;
+optional int32 day = 6;
+optional uint64 hours = 7;
+optional uint32 minutes = 8;
+optional double seconds = 9;
+optional bytes compass_direction = 10;
+optional string pdop = 11;
+optional uint32 is_gps_fault = 12;
+optional double is_inferred = 13;
+
+optional double altitude = 14;
+optional bytes heading = 15;
+optional string hdop = 16;
+optional double vdop = 17;
+optional GpsQuality006 quality = 18;
+optional int32 num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality006 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed006 {
+enum WheelSpeedType006 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional string is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType006 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType006 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType006 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType006 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar006 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround006 {
+optional bytes cross_traffic_alert_left = 1;
+optional string cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional float blind_spot_left_alert_enabled = 4;
+optional bool cross_traffic_alert_right = 5;
+optional int32 cross_traffic_alert_right_enabled = 6;
+optional float blind_spot_right_alert = 7;
+optional float blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional bytes sonar01 = 10;
+optional string sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional bytes sonar05 = 14;
+optional double sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional double sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional float sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar006 sonar = 24;
+}
+
+message License006 {
+optional bytes vin = 1;
+}
+message Chassis007 {
+enum DrivingMode007 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode007 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition007 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional string engine_started = 3;
+optional float engine_rpm = 4;
+optional string speed_mps = 5;
+optional bytes odometer_m = 6;
+optional float fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional double steering_percentage = 11;
+optional string steering_torque_nm = 12;
+
+optional string parking_brake = 13;
+
+optional float high_beam_signal = 14 [deprecated = true];
+optional uint64 low_beam_signal = 15 [deprecated = true];
+optional string left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional string horn = 18 [deprecated = true];
+
+optional int32 wiper = 19;
+optional bytes disengage_status = 20 [deprecated = true];
+optional DrivingMode007 driving_mode = 21;
+optional ErrorCode007 error_code = 22;
+optional GearPosition007 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional string chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS007 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed007 wheel_speed = 30;
+
+optional Surround007 surround = 31;
+
+optional License007 license = 32;
+}
+
+message ChassisGPS007 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional bytes year = 4;
+optional bytes month = 5;
+optional int32 day = 6;
+optional int32 hours = 7;
+optional uint32 minutes = 8;
+optional float seconds = 9;
+optional double compass_direction = 10;
+optional bytes pdop = 11;
+optional bytes is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional bytes altitude = 14;
+optional string heading = 15;
+optional string hdop = 16;
+optional double vdop = 17;
+optional GpsQuality007 quality = 18;
+optional int64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality007 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed007 {
+enum WheelSpeedType007 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional bool is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType007 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional int32 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType007 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType007 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional int64 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType007 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar007 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround007 {
+optional uint32 cross_traffic_alert_left = 1;
+optional bool cross_traffic_alert_left_enabled = 2;
+optional double blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional double cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional bytes blind_spot_right_alert = 7;
+optional uint32 blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional string sonar01 = 10;
+optional bytes sonar02 = 11;
+optional bytes sonar03 = 12;
+optional double sonar04 = 13;
+optional bytes sonar05 = 14;
+optional double sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional bytes sonar10 = 19;
+optional bytes sonar11 = 20;
+optional uint32 sonar_enabled = 21;
+optional float sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar007 sonar = 24;
+}
+
+message License007 {
+optional string vin = 1;
+}
+message Chassis008 {
+enum DrivingMode008 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode008 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition008 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional double engine_started = 3;
+optional bytes engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional double odometer_m = 6;
+optional int64 fuel_range_m = 7;
+optional double throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional float steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional bool parking_brake = 13;
+
+optional float high_beam_signal = 14 [deprecated = true];
+optional float low_beam_signal = 15 [deprecated = true];
+optional string left_turn_signal = 16 [deprecated = true];
+optional uint64 right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional int64 disengage_status = 20 [deprecated = true];
+optional DrivingMode008 driving_mode = 21;
+optional ErrorCode008 error_code = 22;
+optional GearPosition008 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS008 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed008 wheel_speed = 30;
+
+optional Surround008 surround = 31;
+
+optional License008 license = 32;
+}
+
+message ChassisGPS008 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional uint64 year = 4;
+optional double month = 5;
+optional double day = 6;
+optional int32 hours = 7;
+optional uint64 minutes = 8;
+optional float seconds = 9;
+optional bytes compass_direction = 10;
+optional string pdop = 11;
+optional string is_gps_fault = 12;
+optional int64 is_inferred = 13;
+
+optional string altitude = 14;
+optional string heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality008 quality = 18;
+optional uint32 num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality008 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed008 {
+enum WheelSpeedType008 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional string is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType008 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional bool is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType008 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional int64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType008 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional float is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType008 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar008 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround008 {
+optional string cross_traffic_alert_left = 1;
+optional uint32 cross_traffic_alert_left_enabled = 2;
+optional bytes blind_spot_left_alert = 3;
+optional bool blind_spot_left_alert_enabled = 4;
+optional string cross_traffic_alert_right = 5;
+optional bytes cross_traffic_alert_right_enabled = 6;
+optional int64 blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional double sonar01 = 10;
+optional string sonar02 = 11;
+optional double sonar03 = 12;
+optional bytes sonar04 = 13;
+optional bytes sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional double sonar08 = 17;
+optional string sonar09 = 18;
+optional bytes sonar10 = 19;
+optional bytes sonar11 = 20;
+optional uint32 sonar_enabled = 21;
+optional float sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar008 sonar = 24;
+}
+
+message License008 {
+optional bytes vin = 1;
+}
+message Chassis009 {
+enum DrivingMode009 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode009 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition009 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional float engine_started = 3;
+optional bytes engine_rpm = 4;
+optional string speed_mps = 5;
+optional float odometer_m = 6;
+optional uint64 fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional float steering_percentage = 11;
+optional string steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional int32 high_beam_signal = 14 [deprecated = true];
+optional string low_beam_signal = 15 [deprecated = true];
+optional bool left_turn_signal = 16 [deprecated = true];
+optional float right_turn_signal = 17 [deprecated = true];
+optional uint64 horn = 18 [deprecated = true];
+
+optional float wiper = 19;
+optional bool disengage_status = 20 [deprecated = true];
+optional DrivingMode009 driving_mode = 21;
+optional ErrorCode009 error_code = 22;
+optional GearPosition009 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional double chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS009 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed009 wheel_speed = 30;
+
+optional Surround009 surround = 31;
+
+optional License009 license = 32;
+}
+
+message ChassisGPS009 {
+optional string latitude = 1;
+optional double longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional string year = 4;
+optional uint64 month = 5;
+optional int64 day = 6;
+optional float hours = 7;
+optional int64 minutes = 8;
+optional double seconds = 9;
+optional string compass_direction = 10;
+optional string pdop = 11;
+optional int64 is_gps_fault = 12;
+optional uint64 is_inferred = 13;
+
+optional double altitude = 14;
+optional string heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality009 quality = 18;
+optional double num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality009 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed009 {
+enum WheelSpeedType009 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType009 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType009 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional bytes is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType009 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType009 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar009 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround009 {
+optional bytes cross_traffic_alert_left = 1;
+optional float cross_traffic_alert_left_enabled = 2;
+optional float blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional int64 cross_traffic_alert_right = 5;
+optional string cross_traffic_alert_right_enabled = 6;
+optional int64 blind_spot_right_alert = 7;
+optional uint32 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional bytes sonar01 = 10;
+optional string sonar02 = 11;
+optional bytes sonar03 = 12;
+optional bytes sonar04 = 13;
+optional string sonar05 = 14;
+optional bytes sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional double sonar09 = 18;
+optional bytes sonar10 = 19;
+optional double sonar11 = 20;
+optional uint32 sonar_enabled = 21;
+optional uint32 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar009 sonar = 24;
+}
+
+message License009 {
+optional bytes vin = 1;
+}
+message Chassis010 {
+enum DrivingMode010 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode010 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition010 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional string engine_started = 3;
+optional bytes engine_rpm = 4;
+optional string speed_mps = 5;
+optional string odometer_m = 6;
+optional uint32 fuel_range_m = 7;
+optional double throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional double steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional int32 high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional uint64 left_turn_signal = 16 [deprecated = true];
+optional uint32 right_turn_signal = 17 [deprecated = true];
+optional uint32 horn = 18 [deprecated = true];
+
+optional int32 wiper = 19;
+optional bytes disengage_status = 20 [deprecated = true];
+optional DrivingMode010 driving_mode = 21;
+optional ErrorCode010 error_code = 22;
+optional GearPosition010 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS010 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed010 wheel_speed = 30;
+
+optional Surround010 surround = 31;
+
+optional License010 license = 32;
+}
+
+message ChassisGPS010 {
+optional string latitude = 1;
+optional bytes longitude = 2;
+optional bytes gps_valid = 3;
+
+optional int32 year = 4;
+optional string month = 5;
+optional double day = 6;
+optional uint64 hours = 7;
+optional float minutes = 8;
+optional bytes seconds = 9;
+optional string compass_direction = 10;
+optional bytes pdop = 11;
+optional uint32 is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional string altitude = 14;
+optional double heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality010 quality = 18;
+optional int32 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality010 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed010 {
+enum WheelSpeedType010 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType010 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional float is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType010 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional double is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType010 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional double is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType010 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar010 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround010 {
+optional double cross_traffic_alert_left = 1;
+optional float cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional uint64 blind_spot_left_alert_enabled = 4;
+optional bytes cross_traffic_alert_right = 5;
+optional int32 cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional string sonar01 = 10;
+optional bytes sonar02 = 11;
+optional string sonar03 = 12;
+optional bytes sonar04 = 13;
+optional bytes sonar05 = 14;
+optional string sonar06 = 15;
+optional bytes sonar07 = 16;
+optional string sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional string sonar11 = 20;
+optional bytes sonar_enabled = 21;
+optional int64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar010 sonar = 24;
+}
+
+message License010 {
+optional string vin = 1;
+}
+message Chassis011 {
+enum DrivingMode011 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode011 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition011 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bytes engine_started = 3;
+optional double engine_rpm = 4;
+optional string speed_mps = 5;
+optional float odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional float steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional int64 high_beam_signal = 14 [deprecated = true];
+optional int64 low_beam_signal = 15 [deprecated = true];
+optional bool left_turn_signal = 16 [deprecated = true];
+optional float right_turn_signal = 17 [deprecated = true];
+optional bool horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional bool disengage_status = 20 [deprecated = true];
+optional DrivingMode011 driving_mode = 21;
+optional ErrorCode011 error_code = 22;
+optional GearPosition011 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS011 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed011 wheel_speed = 30;
+
+optional Surround011 surround = 31;
+
+optional License011 license = 32;
+}
+
+message ChassisGPS011 {
+optional double latitude = 1;
+optional double longitude = 2;
+optional int64 gps_valid = 3;
+
+optional int32 year = 4;
+optional int32 month = 5;
+optional string day = 6;
+optional uint64 hours = 7;
+optional int64 minutes = 8;
+optional string seconds = 9;
+optional bytes compass_direction = 10;
+optional bytes pdop = 11;
+optional uint64 is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality011 quality = 18;
+optional uint64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality011 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed011 {
+enum WheelSpeedType011 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int64 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType011 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional int32 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType011 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType011 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType011 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar011 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround011 {
+optional int32 cross_traffic_alert_left = 1;
+optional uint64 cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional float blind_spot_left_alert_enabled = 4;
+optional float cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional bytes blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional string sonar01 = 10;
+optional double sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional bytes sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional uint64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar011 sonar = 24;
+}
+
+message License011 {
+optional string vin = 1;
+}
+message Chassis012 {
+enum DrivingMode012 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode012 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition012 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int64 engine_started = 3;
+optional double engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional float odometer_m = 6;
+optional uint64 fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional float steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional bool low_beam_signal = 15 [deprecated = true];
+optional bool left_turn_signal = 16 [deprecated = true];
+optional uint32 right_turn_signal = 17 [deprecated = true];
+optional double horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode012 driving_mode = 21;
+optional ErrorCode012 error_code = 22;
+optional GearPosition012 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional double chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS012 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed012 wheel_speed = 30;
+
+optional Surround012 surround = 31;
+
+optional License012 license = 32;
+}
+
+message ChassisGPS012 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional uint64 gps_valid = 3;
+
+optional int64 year = 4;
+optional float month = 5;
+optional float day = 6;
+optional int32 hours = 7;
+optional bytes minutes = 8;
+optional int64 seconds = 9;
+optional bytes compass_direction = 10;
+optional string pdop = 11;
+optional bool is_gps_fault = 12;
+optional bool is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional double hdop = 16;
+optional string vdop = 17;
+optional GpsQuality012 quality = 18;
+optional uint64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality012 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed012 {
+enum WheelSpeedType012 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType012 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType012 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional int64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType012 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional string is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType012 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar012 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround012 {
+optional bool cross_traffic_alert_left = 1;
+optional int32 cross_traffic_alert_left_enabled = 2;
+optional int32 blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional bool cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional uint64 blind_spot_right_alert = 7;
+optional int64 blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional bytes sonar03 = 12;
+optional string sonar04 = 13;
+optional string sonar05 = 14;
+optional bytes sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional int32 sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar012 sonar = 24;
+}
+
+message License012 {
+optional bytes vin = 1;
+}
+message Chassis013 {
+enum DrivingMode013 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode013 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition013 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional float engine_started = 3;
+optional double engine_rpm = 4;
+optional string speed_mps = 5;
+optional string odometer_m = 6;
+optional double fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional double steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional bytes high_beam_signal = 14 [deprecated = true];
+optional float low_beam_signal = 15 [deprecated = true];
+optional uint64 left_turn_signal = 16 [deprecated = true];
+optional int32 right_turn_signal = 17 [deprecated = true];
+optional bytes horn = 18 [deprecated = true];
+
+optional int64 wiper = 19;
+optional string disengage_status = 20 [deprecated = true];
+optional DrivingMode013 driving_mode = 21;
+optional ErrorCode013 error_code = 22;
+optional GearPosition013 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS013 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed013 wheel_speed = 30;
+
+optional Surround013 surround = 31;
+
+optional License013 license = 32;
+}
+
+message ChassisGPS013 {
+optional bytes latitude = 1;
+optional double longitude = 2;
+optional int32 gps_valid = 3;
+
+optional string year = 4;
+optional uint32 month = 5;
+optional bytes day = 6;
+optional bytes hours = 7;
+optional bytes minutes = 8;
+optional uint32 seconds = 9;
+optional bytes compass_direction = 10;
+optional double pdop = 11;
+optional double is_gps_fault = 12;
+optional string is_inferred = 13;
+
+optional bytes altitude = 14;
+optional string heading = 15;
+optional bytes hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality013 quality = 18;
+optional string num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality013 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed013 {
+enum WheelSpeedType013 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional bool is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType013 wheel_direction_rr = 2;
+optional string wheel_spd_rr = 3;
+optional uint64 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType013 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType013 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional string is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType013 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar013 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround013 {
+optional int64 cross_traffic_alert_left = 1;
+optional bytes cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional uint64 blind_spot_left_alert_enabled = 4;
+optional bool cross_traffic_alert_right = 5;
+optional int64 cross_traffic_alert_right_enabled = 6;
+optional bool blind_spot_right_alert = 7;
+optional bool blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional string sonar01 = 10;
+optional double sonar02 = 11;
+optional bytes sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional bytes sonar06 = 15;
+optional double sonar07 = 16;
+optional double sonar08 = 17;
+optional string sonar09 = 18;
+optional double sonar10 = 19;
+optional string sonar11 = 20;
+optional bytes sonar_enabled = 21;
+optional bool sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar013 sonar = 24;
+}
+
+message License013 {
+optional string vin = 1;
+}
+message Chassis014 {
+enum DrivingMode014 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode014 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition014 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int64 engine_started = 3;
+optional double engine_rpm = 4;
+optional double speed_mps = 5;
+optional double odometer_m = 6;
+optional uint64 fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional uint64 parking_brake = 13;
+
+optional float high_beam_signal = 14 [deprecated = true];
+optional double low_beam_signal = 15 [deprecated = true];
+optional bytes left_turn_signal = 16 [deprecated = true];
+optional int64 right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional int64 disengage_status = 20 [deprecated = true];
+optional DrivingMode014 driving_mode = 21;
+optional ErrorCode014 error_code = 22;
+optional GearPosition014 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional bytes chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS014 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed014 wheel_speed = 30;
+
+optional Surround014 surround = 31;
+
+optional License014 license = 32;
+}
+
+message ChassisGPS014 {
+optional string latitude = 1;
+optional double longitude = 2;
+optional int32 gps_valid = 3;
+
+optional uint64 year = 4;
+optional uint64 month = 5;
+optional float day = 6;
+optional bytes hours = 7;
+optional int64 minutes = 8;
+optional bytes seconds = 9;
+optional bytes compass_direction = 10;
+optional bytes pdop = 11;
+optional uint32 is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional string altitude = 14;
+optional bytes heading = 15;
+optional double hdop = 16;
+optional string vdop = 17;
+optional GpsQuality014 quality = 18;
+optional string num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality014 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed014 {
+enum WheelSpeedType014 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType014 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional bytes is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType014 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType014 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional uint64 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType014 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar014 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround014 {
+optional string cross_traffic_alert_left = 1;
+optional int64 cross_traffic_alert_left_enabled = 2;
+optional double blind_spot_left_alert = 3;
+optional int64 blind_spot_left_alert_enabled = 4;
+optional int32 cross_traffic_alert_right = 5;
+optional double cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional int64 blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional string sonar01 = 10;
+optional string sonar02 = 11;
+optional bytes sonar03 = 12;
+optional double sonar04 = 13;
+optional double sonar05 = 14;
+optional bytes sonar06 = 15;
+optional bytes sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional double sonar10 = 19;
+optional double sonar11 = 20;
+optional string sonar_enabled = 21;
+optional uint64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar014 sonar = 24;
+}
+
+message License014 {
+optional string vin = 1;
+}
+message Chassis015 {
+enum DrivingMode015 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode015 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition015 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int64 engine_started = 3;
+optional string engine_rpm = 4;
+optional float speed_mps = 5;
+optional double odometer_m = 6;
+optional int32 fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional bytes high_beam_signal = 14 [deprecated = true];
+optional int64 low_beam_signal = 15 [deprecated = true];
+optional int64 left_turn_signal = 16 [deprecated = true];
+optional double right_turn_signal = 17 [deprecated = true];
+optional uint64 horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode015 driving_mode = 21;
+optional ErrorCode015 error_code = 22;
+optional GearPosition015 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional double chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS015 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed015 wheel_speed = 30;
+
+optional Surround015 surround = 31;
+
+optional License015 license = 32;
+}
+
+message ChassisGPS015 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional int32 gps_valid = 3;
+
+optional float year = 4;
+optional double month = 5;
+optional int32 day = 6;
+optional uint32 hours = 7;
+optional float minutes = 8;
+optional bytes seconds = 9;
+optional bytes compass_direction = 10;
+optional double pdop = 11;
+optional uint64 is_gps_fault = 12;
+optional int64 is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional double vdop = 17;
+optional GpsQuality015 quality = 18;
+optional string num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality015 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed015 {
+enum WheelSpeedType015 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional uint32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType015 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType015 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional int32 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType015 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional string is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType015 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar015 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround015 {
+optional bool cross_traffic_alert_left = 1;
+optional bool cross_traffic_alert_left_enabled = 2;
+optional int64 blind_spot_left_alert = 3;
+optional string blind_spot_left_alert_enabled = 4;
+optional uint32 cross_traffic_alert_right = 5;
+optional uint32 cross_traffic_alert_right_enabled = 6;
+optional int64 blind_spot_right_alert = 7;
+optional float blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional string sonar01 = 10;
+optional double sonar02 = 11;
+optional bytes sonar03 = 12;
+optional string sonar04 = 13;
+optional string sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional double sonar_enabled = 21;
+optional float sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar015 sonar = 24;
+}
+
+message License015 {
+optional bytes vin = 1;
+}
+message Chassis016 {
+enum DrivingMode016 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode016 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition016 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint32 engine_started = 3;
+optional double engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional double odometer_m = 6;
+optional int32 fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional bool high_beam_signal = 14 [deprecated = true];
+optional double low_beam_signal = 15 [deprecated = true];
+optional float left_turn_signal = 16 [deprecated = true];
+optional int64 right_turn_signal = 17 [deprecated = true];
+optional bool horn = 18 [deprecated = true];
+
+optional bool wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode016 driving_mode = 21;
+optional ErrorCode016 error_code = 22;
+optional GearPosition016 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS016 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed016 wheel_speed = 30;
+
+optional Surround016 surround = 31;
+
+optional License016 license = 32;
+}
+
+message ChassisGPS016 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional float gps_valid = 3;
+
+optional double year = 4;
+optional bytes month = 5;
+optional string day = 6;
+optional float hours = 7;
+optional bytes minutes = 8;
+optional int64 seconds = 9;
+optional string compass_direction = 10;
+optional double pdop = 11;
+optional string is_gps_fault = 12;
+optional double is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional string hdop = 16;
+optional string vdop = 17;
+optional GpsQuality016 quality = 18;
+optional uint64 num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality016 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed016 {
+enum WheelSpeedType016 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType016 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional bytes is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType016 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType016 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional int32 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType016 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar016 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround016 {
+optional uint64 cross_traffic_alert_left = 1;
+optional uint64 cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional float blind_spot_left_alert_enabled = 4;
+optional int32 cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional int64 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional double sonar06 = 15;
+optional bytes sonar07 = 16;
+optional double sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional double sonar11 = 20;
+optional int32 sonar_enabled = 21;
+optional int64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar016 sonar = 24;
+}
+
+message License016 {
+optional string vin = 1;
+}
+message Chassis017 {
+enum DrivingMode017 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode017 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition017 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int64 engine_started = 3;
+optional float engine_rpm = 4;
+optional float speed_mps = 5;
+optional bytes odometer_m = 6;
+optional string fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional double steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional int64 low_beam_signal = 15 [deprecated = true];
+optional double left_turn_signal = 16 [deprecated = true];
+optional uint64 right_turn_signal = 17 [deprecated = true];
+optional double horn = 18 [deprecated = true];
+
+optional int32 wiper = 19;
+optional int64 disengage_status = 20 [deprecated = true];
+optional DrivingMode017 driving_mode = 21;
+optional ErrorCode017 error_code = 22;
+optional GearPosition017 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional bytes chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS017 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed017 wheel_speed = 30;
+
+optional Surround017 surround = 31;
+
+optional License017 license = 32;
+}
+
+message ChassisGPS017 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional string gps_valid = 3;
+
+optional uint32 year = 4;
+optional uint64 month = 5;
+optional float day = 6;
+optional int32 hours = 7;
+optional string minutes = 8;
+optional int32 seconds = 9;
+optional string compass_direction = 10;
+optional bytes pdop = 11;
+optional int32 is_gps_fault = 12;
+optional string is_inferred = 13;
+
+optional bytes altitude = 14;
+optional double heading = 15;
+optional string hdop = 16;
+optional string vdop = 17;
+optional GpsQuality017 quality = 18;
+optional double num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality017 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed017 {
+enum WheelSpeedType017 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType017 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType017 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional float is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType017 wheel_direction_fr = 8;
+optional double wheel_spd_fr = 9;
+optional uint64 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType017 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar017 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround017 {
+optional string cross_traffic_alert_left = 1;
+optional double cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional int64 blind_spot_left_alert_enabled = 4;
+optional int32 cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional bytes blind_spot_right_alert = 7;
+optional int32 blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional double sonar01 = 10;
+optional double sonar02 = 11;
+optional string sonar03 = 12;
+optional double sonar04 = 13;
+optional string sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional string sonar_enabled = 21;
+optional bool sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar017 sonar = 24;
+}
+
+message License017 {
+optional bytes vin = 1;
+}
+message Chassis018 {
+enum DrivingMode018 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode018 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition018 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional double engine_started = 3;
+optional bytes engine_rpm = 4;
+optional string speed_mps = 5;
+optional string odometer_m = 6;
+optional uint32 fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional float parking_brake = 13;
+
+optional bool high_beam_signal = 14 [deprecated = true];
+optional bool low_beam_signal = 15 [deprecated = true];
+optional float left_turn_signal = 16 [deprecated = true];
+optional double right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional float disengage_status = 20 [deprecated = true];
+optional DrivingMode018 driving_mode = 21;
+optional ErrorCode018 error_code = 22;
+optional GearPosition018 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional float chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS018 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed018 wheel_speed = 30;
+
+optional Surround018 surround = 31;
+
+optional License018 license = 32;
+}
+
+message ChassisGPS018 {
+optional bytes latitude = 1;
+optional bytes longitude = 2;
+optional float gps_valid = 3;
+
+optional bytes year = 4;
+optional string month = 5;
+optional bytes day = 6;
+optional bytes hours = 7;
+optional float minutes = 8;
+optional bytes seconds = 9;
+optional bytes compass_direction = 10;
+optional bytes pdop = 11;
+optional bool is_gps_fault = 12;
+optional double is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional double hdop = 16;
+optional string vdop = 17;
+optional GpsQuality018 quality = 18;
+optional uint64 num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality018 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed018 {
+enum WheelSpeedType018 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType018 wheel_direction_rr = 2;
+optional string wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType018 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional float is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType018 wheel_direction_fr = 8;
+optional double wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType018 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar018 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround018 {
+optional int64 cross_traffic_alert_left = 1;
+optional bytes cross_traffic_alert_left_enabled = 2;
+optional bytes blind_spot_left_alert = 3;
+optional uint32 blind_spot_left_alert_enabled = 4;
+optional int32 cross_traffic_alert_right = 5;
+optional uint64 cross_traffic_alert_right_enabled = 6;
+optional bool blind_spot_right_alert = 7;
+optional uint32 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional double sonar01 = 10;
+optional double sonar02 = 11;
+optional string sonar03 = 12;
+optional double sonar04 = 13;
+optional bytes sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional bytes sonar09 = 18;
+optional bytes sonar10 = 19;
+optional bytes sonar11 = 20;
+optional double sonar_enabled = 21;
+optional double sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar018 sonar = 24;
+}
+
+message License018 {
+optional bytes vin = 1;
+}
+message Chassis019 {
+enum DrivingMode019 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode019 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition019 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint64 engine_started = 3;
+optional string engine_rpm = 4;
+optional double speed_mps = 5;
+optional double odometer_m = 6;
+optional int64 fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional string steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional uint32 parking_brake = 13;
+
+optional bool high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional double left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional uint32 horn = 18 [deprecated = true];
+
+optional uint32 wiper = 19;
+optional bool disengage_status = 20 [deprecated = true];
+optional DrivingMode019 driving_mode = 21;
+optional ErrorCode019 error_code = 22;
+optional GearPosition019 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional string chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS019 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed019 wheel_speed = 30;
+
+optional Surround019 surround = 31;
+
+optional License019 license = 32;
+}
+
+message ChassisGPS019 {
+optional double latitude = 1;
+optional string longitude = 2;
+optional bool gps_valid = 3;
+
+optional uint64 year = 4;
+optional int64 month = 5;
+optional string day = 6;
+optional bytes hours = 7;
+optional uint64 minutes = 8;
+optional uint64 seconds = 9;
+optional bytes compass_direction = 10;
+optional double pdop = 11;
+optional bytes is_gps_fault = 12;
+optional int64 is_inferred = 13;
+
+optional string altitude = 14;
+optional string heading = 15;
+optional double hdop = 16;
+optional double vdop = 17;
+optional GpsQuality019 quality = 18;
+optional float num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality019 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed019 {
+enum WheelSpeedType019 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType019 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType019 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional float is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType019 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional int64 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType019 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar019 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround019 {
+optional int64 cross_traffic_alert_left = 1;
+optional double cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional uint64 blind_spot_left_alert_enabled = 4;
+optional bytes cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional float blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional double sonar01 = 10;
+optional string sonar02 = 11;
+optional double sonar03 = 12;
+optional double sonar04 = 13;
+optional string sonar05 = 14;
+optional bytes sonar06 = 15;
+optional string sonar07 = 16;
+optional double sonar08 = 17;
+optional double sonar09 = 18;
+optional bytes sonar10 = 19;
+optional string sonar11 = 20;
+optional uint32 sonar_enabled = 21;
+optional int64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar019 sonar = 24;
+}
+
+message License019 {
+optional bytes vin = 1;
+}
+message Chassis020 {
+enum DrivingMode020 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode020 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition020 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional string engine_started = 3;
+optional double engine_rpm = 4;
+optional float speed_mps = 5;
+optional double odometer_m = 6;
+optional int32 fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional string steering_percentage = 11;
+optional string steering_torque_nm = 12;
+
+optional double parking_brake = 13;
+
+optional float high_beam_signal = 14 [deprecated = true];
+optional bool low_beam_signal = 15 [deprecated = true];
+optional string left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional string horn = 18 [deprecated = true];
+
+optional int64 wiper = 19;
+optional bytes disengage_status = 20 [deprecated = true];
+optional DrivingMode020 driving_mode = 21;
+optional ErrorCode020 error_code = 22;
+optional GearPosition020 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS020 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed020 wheel_speed = 30;
+
+optional Surround020 surround = 31;
+
+optional License020 license = 32;
+}
+
+message ChassisGPS020 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional string gps_valid = 3;
+
+optional int64 year = 4;
+optional uint64 month = 5;
+optional bytes day = 6;
+optional int32 hours = 7;
+optional bytes minutes = 8;
+optional string seconds = 9;
+optional double compass_direction = 10;
+optional double pdop = 11;
+optional uint32 is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional double hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality020 quality = 18;
+optional float num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality020 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed020 {
+enum WheelSpeedType020 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType020 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType020 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional int64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType020 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType020 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar020 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround020 {
+optional float cross_traffic_alert_left = 1;
+optional uint32 cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional int32 blind_spot_left_alert_enabled = 4;
+optional float cross_traffic_alert_right = 5;
+optional string cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional bytes sonar03 = 12;
+optional bytes sonar04 = 13;
+optional bytes sonar05 = 14;
+optional bytes sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional int32 sonar_enabled = 21;
+optional bytes sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar020 sonar = 24;
+}
+
+message License020 {
+optional string vin = 1;
+}
+message Chassis021 {
+enum DrivingMode021 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode021 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition021 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional float engine_started = 3;
+optional float engine_rpm = 4;
+optional double speed_mps = 5;
+optional string odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional double steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional bytes high_beam_signal = 14 [deprecated = true];
+optional int32 low_beam_signal = 15 [deprecated = true];
+optional string left_turn_signal = 16 [deprecated = true];
+optional double right_turn_signal = 17 [deprecated = true];
+optional string horn = 18 [deprecated = true];
+
+optional bool wiper = 19;
+optional bytes disengage_status = 20 [deprecated = true];
+optional DrivingMode021 driving_mode = 21;
+optional ErrorCode021 error_code = 22;
+optional GearPosition021 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS021 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed021 wheel_speed = 30;
+
+optional Surround021 surround = 31;
+
+optional License021 license = 32;
+}
+
+message ChassisGPS021 {
+optional string latitude = 1;
+optional double longitude = 2;
+optional float gps_valid = 3;
+
+optional string year = 4;
+optional int32 month = 5;
+optional bytes day = 6;
+optional uint32 hours = 7;
+optional string minutes = 8;
+optional int32 seconds = 9;
+optional string compass_direction = 10;
+optional double pdop = 11;
+optional bytes is_gps_fault = 12;
+optional int32 is_inferred = 13;
+
+optional double altitude = 14;
+optional string heading = 15;
+optional double hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality021 quality = 18;
+optional double num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality021 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed021 {
+enum WheelSpeedType021 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int64 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType021 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType021 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional double is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType021 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional string is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType021 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar021 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround021 {
+optional double cross_traffic_alert_left = 1;
+optional float cross_traffic_alert_left_enabled = 2;
+optional bytes blind_spot_left_alert = 3;
+optional uint32 blind_spot_left_alert_enabled = 4;
+optional int32 cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional bytes blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional string sonar01 = 10;
+optional bytes sonar02 = 11;
+optional double sonar03 = 12;
+optional double sonar04 = 13;
+optional bytes sonar05 = 14;
+optional double sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional bytes sonar10 = 19;
+optional string sonar11 = 20;
+optional int64 sonar_enabled = 21;
+optional int64 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar021 sonar = 24;
+}
+
+message License021 {
+optional bytes vin = 1;
+}
+message Chassis022 {
+enum DrivingMode022 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode022 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition022 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bool engine_started = 3;
+optional string engine_rpm = 4;
+optional double speed_mps = 5;
+optional bytes odometer_m = 6;
+optional int64 fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional double steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional string parking_brake = 13;
+
+optional int32 high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional int32 left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional int64 disengage_status = 20 [deprecated = true];
+optional DrivingMode022 driving_mode = 21;
+optional ErrorCode022 error_code = 22;
+optional GearPosition022 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS022 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed022 wheel_speed = 30;
+
+optional Surround022 surround = 31;
+
+optional License022 license = 32;
+}
+
+message ChassisGPS022 {
+optional double latitude = 1;
+optional string longitude = 2;
+optional int32 gps_valid = 3;
+
+optional double year = 4;
+optional bytes month = 5;
+optional float day = 6;
+optional float hours = 7;
+optional uint32 minutes = 8;
+optional uint32 seconds = 9;
+optional string compass_direction = 10;
+optional bytes pdop = 11;
+optional uint64 is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional bytes altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality022 quality = 18;
+optional int32 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality022 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed022 {
+enum WheelSpeedType022 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType022 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional uint64 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType022 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional bytes is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType022 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional float is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType022 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar022 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround022 {
+optional bytes cross_traffic_alert_left = 1;
+optional uint32 cross_traffic_alert_left_enabled = 2;
+optional uint32 blind_spot_left_alert = 3;
+optional uint32 blind_spot_left_alert_enabled = 4;
+optional bool cross_traffic_alert_right = 5;
+optional int64 cross_traffic_alert_right_enabled = 6;
+optional uint64 blind_spot_right_alert = 7;
+optional uint64 blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional bytes sonar01 = 10;
+optional string sonar02 = 11;
+optional bytes sonar03 = 12;
+optional double sonar04 = 13;
+optional string sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional string sonar08 = 17;
+optional string sonar09 = 18;
+optional double sonar10 = 19;
+optional double sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional uint32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar022 sonar = 24;
+}
+
+message License022 {
+optional string vin = 1;
+}
+message Chassis023 {
+enum DrivingMode023 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode023 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition023 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint64 engine_started = 3;
+optional string engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional string odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional int32 parking_brake = 13;
+
+optional double high_beam_signal = 14 [deprecated = true];
+optional bytes low_beam_signal = 15 [deprecated = true];
+optional uint32 left_turn_signal = 16 [deprecated = true];
+optional bool right_turn_signal = 17 [deprecated = true];
+optional int64 horn = 18 [deprecated = true];
+
+optional string wiper = 19;
+optional uint32 disengage_status = 20 [deprecated = true];
+optional DrivingMode023 driving_mode = 21;
+optional ErrorCode023 error_code = 22;
+optional GearPosition023 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional float chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS023 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed023 wheel_speed = 30;
+
+optional Surround023 surround = 31;
+
+optional License023 license = 32;
+}
+
+message ChassisGPS023 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional uint64 year = 4;
+optional string month = 5;
+optional float day = 6;
+optional string hours = 7;
+optional float minutes = 8;
+optional double seconds = 9;
+optional string compass_direction = 10;
+optional double pdop = 11;
+optional float is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional string altitude = 14;
+optional bytes heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality023 quality = 18;
+optional string num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality023 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed023 {
+enum WheelSpeedType023 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType023 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional uint32 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType023 wheel_direction_rl = 5;
+optional string wheel_spd_rl = 6;
+optional float is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType023 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType023 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar023 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround023 {
+optional bool cross_traffic_alert_left = 1;
+optional int32 cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional uint64 blind_spot_left_alert_enabled = 4;
+optional double cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional string sonar01 = 10;
+optional double sonar02 = 11;
+optional string sonar03 = 12;
+optional bytes sonar04 = 13;
+optional double sonar05 = 14;
+optional double sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional double sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional string sonar_enabled = 21;
+optional uint64 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar023 sonar = 24;
+}
+
+message License023 {
+optional string vin = 1;
+}
+message Chassis024 {
+enum DrivingMode024 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode024 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition024 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint64 engine_started = 3;
+optional float engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional float odometer_m = 6;
+optional double fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional float steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional int32 high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional bytes left_turn_signal = 16 [deprecated = true];
+optional bytes right_turn_signal = 17 [deprecated = true];
+optional bytes horn = 18 [deprecated = true];
+
+optional int32 wiper = 19;
+optional int32 disengage_status = 20 [deprecated = true];
+optional DrivingMode024 driving_mode = 21;
+optional ErrorCode024 error_code = 22;
+optional GearPosition024 gear_location = 23;
+
+optional bytes steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS024 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed024 wheel_speed = 30;
+
+optional Surround024 surround = 31;
+
+optional License024 license = 32;
+}
+
+message ChassisGPS024 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional int32 year = 4;
+optional bytes month = 5;
+optional string day = 6;
+optional float hours = 7;
+optional float minutes = 8;
+optional int64 seconds = 9;
+optional string compass_direction = 10;
+optional string pdop = 11;
+optional bytes is_gps_fault = 12;
+optional string is_inferred = 13;
+
+optional string altitude = 14;
+optional bytes heading = 15;
+optional string hdop = 16;
+optional string vdop = 17;
+optional GpsQuality024 quality = 18;
+optional int32 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality024 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed024 {
+enum WheelSpeedType024 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int64 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType024 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional uint64 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType024 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional bool is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType024 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional int32 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType024 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar024 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround024 {
+optional int64 cross_traffic_alert_left = 1;
+optional int64 cross_traffic_alert_left_enabled = 2;
+optional uint32 blind_spot_left_alert = 3;
+optional float blind_spot_left_alert_enabled = 4;
+optional string cross_traffic_alert_right = 5;
+optional uint64 cross_traffic_alert_right_enabled = 6;
+optional int32 blind_spot_right_alert = 7;
+optional int64 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional bytes sonar01 = 10;
+optional string sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional bytes sonar05 = 14;
+optional bytes sonar06 = 15;
+optional bytes sonar07 = 16;
+optional bytes sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional double sonar11 = 20;
+optional double sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar024 sonar = 24;
+}
+
+message License024 {
+optional string vin = 1;
+}
+message Chassis025 {
+enum DrivingMode025 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode025 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition025 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional float engine_started = 3;
+optional double engine_rpm = 4;
+optional float speed_mps = 5;
+optional double odometer_m = 6;
+optional float fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional string brake_percentage = 9;
+optional float steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional string high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional double left_turn_signal = 16 [deprecated = true];
+optional double right_turn_signal = 17 [deprecated = true];
+optional double horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional float disengage_status = 20 [deprecated = true];
+optional DrivingMode025 driving_mode = 21;
+optional ErrorCode025 error_code = 22;
+optional GearPosition025 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional bytes chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS025 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed025 wheel_speed = 30;
+
+optional Surround025 surround = 31;
+
+optional License025 license = 32;
+}
+
+message ChassisGPS025 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional uint32 gps_valid = 3;
+
+optional string year = 4;
+optional float month = 5;
+optional string day = 6;
+optional int64 hours = 7;
+optional uint32 minutes = 8;
+optional float seconds = 9;
+optional double compass_direction = 10;
+optional string pdop = 11;
+optional bytes is_gps_fault = 12;
+optional uint64 is_inferred = 13;
+
+optional double altitude = 14;
+optional bytes heading = 15;
+optional bytes hdop = 16;
+optional string vdop = 17;
+optional GpsQuality025 quality = 18;
+optional uint64 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality025 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed025 {
+enum WheelSpeedType025 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional double is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType025 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional float is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType025 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional uint32 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType025 wheel_direction_fr = 8;
+optional bytes wheel_spd_fr = 9;
+optional bytes is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType025 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar025 {
+optional double range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround025 {
+optional uint32 cross_traffic_alert_left = 1;
+optional string cross_traffic_alert_left_enabled = 2;
+optional float blind_spot_left_alert = 3;
+optional double blind_spot_left_alert_enabled = 4;
+optional int64 cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional int64 blind_spot_right_alert = 7;
+optional bytes blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional double sonar06 = 15;
+optional bytes sonar07 = 16;
+optional string sonar08 = 17;
+optional bytes sonar09 = 18;
+optional double sonar10 = 19;
+optional double sonar11 = 20;
+optional bool sonar_enabled = 21;
+optional bytes sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar025 sonar = 24;
+}
+
+message License025 {
+optional bytes vin = 1;
+}
+message Chassis026 {
+enum DrivingMode026 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode026 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition026 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional uint32 engine_started = 3;
+optional double engine_rpm = 4;
+optional string speed_mps = 5;
+optional string odometer_m = 6;
+optional int32 fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional double steering_torque_nm = 12;
+
+optional bytes parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional bytes low_beam_signal = 15 [deprecated = true];
+optional int64 left_turn_signal = 16 [deprecated = true];
+optional int64 right_turn_signal = 17 [deprecated = true];
+optional float horn = 18 [deprecated = true];
+
+optional bool wiper = 19;
+optional uint64 disengage_status = 20 [deprecated = true];
+optional DrivingMode026 driving_mode = 21;
+optional ErrorCode026 error_code = 22;
+optional GearPosition026 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional int64 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS026 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed026 wheel_speed = 30;
+
+optional Surround026 surround = 31;
+
+optional License026 license = 32;
+}
+
+message ChassisGPS026 {
+optional double latitude = 1;
+optional double longitude = 2;
+optional double gps_valid = 3;
+
+optional uint32 year = 4;
+optional float month = 5;
+optional bytes day = 6;
+optional float hours = 7;
+optional float minutes = 8;
+optional int64 seconds = 9;
+optional double compass_direction = 10;
+optional double pdop = 11;
+optional double is_gps_fault = 12;
+optional uint64 is_inferred = 13;
+
+optional string altitude = 14;
+optional double heading = 15;
+optional string hdop = 16;
+optional double vdop = 17;
+optional GpsQuality026 quality = 18;
+optional bytes num_satellites = 19;
+optional string gps_speed = 20;
+enum GpsQuality026 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed026 {
+enum WheelSpeedType026 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int64 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType026 wheel_direction_rr = 2;
+optional string wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType026 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType026 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional uint64 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType026 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar026 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround026 {
+optional bool cross_traffic_alert_left = 1;
+optional double cross_traffic_alert_left_enabled = 2;
+optional float blind_spot_left_alert = 3;
+optional uint64 blind_spot_left_alert_enabled = 4;
+optional uint64 cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional bool blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional string sonar01 = 10;
+optional double sonar02 = 11;
+optional double sonar03 = 12;
+optional bytes sonar04 = 13;
+optional string sonar05 = 14;
+optional string sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional bytes sonar10 = 19;
+optional string sonar11 = 20;
+optional uint32 sonar_enabled = 21;
+optional bool sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar026 sonar = 24;
+}
+
+message License026 {
+optional string vin = 1;
+}
+message Chassis027 {
+enum DrivingMode027 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode027 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition027 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bytes engine_started = 3;
+optional string engine_rpm = 4;
+optional bytes speed_mps = 5;
+optional string odometer_m = 6;
+optional uint64 fuel_range_m = 7;
+optional string throttle_percentage = 8;
+optional double brake_percentage = 9;
+optional bytes steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional float parking_brake = 13;
+
+optional double high_beam_signal = 14 [deprecated = true];
+optional uint32 low_beam_signal = 15 [deprecated = true];
+optional int64 left_turn_signal = 16 [deprecated = true];
+optional string right_turn_signal = 17 [deprecated = true];
+optional uint32 horn = 18 [deprecated = true];
+
+optional uint32 wiper = 19;
+optional float disengage_status = 20 [deprecated = true];
+optional DrivingMode027 driving_mode = 21;
+optional ErrorCode027 error_code = 22;
+optional GearPosition027 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional bytes chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS027 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed027 wheel_speed = 30;
+
+optional Surround027 surround = 31;
+
+optional License027 license = 32;
+}
+
+message ChassisGPS027 {
+optional bytes latitude = 1;
+optional string longitude = 2;
+optional uint64 gps_valid = 3;
+
+optional int32 year = 4;
+optional string month = 5;
+optional string day = 6;
+optional bytes hours = 7;
+optional bytes minutes = 8;
+optional float seconds = 9;
+optional bytes compass_direction = 10;
+optional bytes pdop = 11;
+optional double is_gps_fault = 12;
+optional int32 is_inferred = 13;
+
+optional bytes altitude = 14;
+optional string heading = 15;
+optional bytes hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality027 quality = 18;
+optional int32 num_satellites = 19;
+optional bytes gps_speed = 20;
+enum GpsQuality027 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed027 {
+enum WheelSpeedType027 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional float is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType027 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional uint32 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType027 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional bytes is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType027 wheel_direction_fr = 8;
+optional double wheel_spd_fr = 9;
+optional bool is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType027 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar027 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround027 {
+optional int64 cross_traffic_alert_left = 1;
+optional double cross_traffic_alert_left_enabled = 2;
+optional bool blind_spot_left_alert = 3;
+optional double blind_spot_left_alert_enabled = 4;
+optional double cross_traffic_alert_right = 5;
+optional uint64 cross_traffic_alert_right_enabled = 6;
+optional bytes blind_spot_right_alert = 7;
+optional float blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional bytes sonar01 = 10;
+optional double sonar02 = 11;
+optional string sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional bytes sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional double sonar09 = 18;
+optional double sonar10 = 19;
+optional string sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional bool sonar_fault = 22;
+repeated string sonar_range = 23;
+repeated Sonar027 sonar = 24;
+}
+
+message License027 {
+optional string vin = 1;
+}
+message Chassis028 {
+enum DrivingMode028 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode028 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition028 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional int32 engine_started = 3;
+optional float engine_rpm = 4;
+optional float speed_mps = 5;
+optional float odometer_m = 6;
+optional uint32 fuel_range_m = 7;
+optional float throttle_percentage = 8;
+optional double brake_percentage = 9;
+optional string steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional bool parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional string low_beam_signal = 15 [deprecated = true];
+optional float left_turn_signal = 16 [deprecated = true];
+optional int32 right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional uint32 wiper = 19;
+optional int32 disengage_status = 20 [deprecated = true];
+optional DrivingMode028 driving_mode = 21;
+optional ErrorCode028 error_code = 22;
+optional GearPosition028 gear_location = 23;
+
+optional string steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS028 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed028 wheel_speed = 30;
+
+optional Surround028 surround = 31;
+
+optional License028 license = 32;
+}
+
+message ChassisGPS028 {
+optional string latitude = 1;
+optional string longitude = 2;
+optional uint64 gps_valid = 3;
+
+optional bytes year = 4;
+optional double month = 5;
+optional float day = 6;
+optional double hours = 7;
+optional int32 minutes = 8;
+optional double seconds = 9;
+optional double compass_direction = 10;
+optional bytes pdop = 11;
+optional uint64 is_gps_fault = 12;
+optional bytes is_inferred = 13;
+
+optional string altitude = 14;
+optional bytes heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality028 quality = 18;
+optional double num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality028 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed028 {
+enum WheelSpeedType028 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType028 wheel_direction_rr = 2;
+optional bytes wheel_spd_rr = 3;
+optional string is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType028 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional int32 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType028 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional uint32 is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType028 wheel_direction_fl = 11;
+optional double wheel_spd_fl = 12;
+}
+
+message Sonar028 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround028 {
+optional int64 cross_traffic_alert_left = 1;
+optional uint32 cross_traffic_alert_left_enabled = 2;
+optional float blind_spot_left_alert = 3;
+optional string blind_spot_left_alert_enabled = 4;
+optional float cross_traffic_alert_right = 5;
+optional bool cross_traffic_alert_right_enabled = 6;
+optional double blind_spot_right_alert = 7;
+optional double blind_spot_right_alert_enabled = 8;
+optional double sonar00 = 9;
+optional double sonar01 = 10;
+optional string sonar02 = 11;
+optional string sonar03 = 12;
+optional string sonar04 = 13;
+optional string sonar05 = 14;
+optional double sonar06 = 15;
+optional double sonar07 = 16;
+optional double sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional bytes sonar11 = 20;
+optional bool sonar_enabled = 21;
+optional uint32 sonar_fault = 22;
+repeated double sonar_range = 23;
+repeated Sonar028 sonar = 24;
+}
+
+message License028 {
+optional string vin = 1;
+}
+message Chassis029 {
+enum DrivingMode029 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode029 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition029 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional string engine_started = 3;
+optional bytes engine_rpm = 4;
+optional float speed_mps = 5;
+optional double odometer_m = 6;
+optional double fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional float brake_percentage = 9;
+optional float steering_percentage = 11;
+optional float steering_torque_nm = 12;
+
+optional int64 parking_brake = 13;
+
+optional int64 high_beam_signal = 14 [deprecated = true];
+optional uint64 low_beam_signal = 15 [deprecated = true];
+optional uint64 left_turn_signal = 16 [deprecated = true];
+optional string right_turn_signal = 17 [deprecated = true];
+optional int32 horn = 18 [deprecated = true];
+
+optional uint64 wiper = 19;
+optional bool disengage_status = 20 [deprecated = true];
+optional DrivingMode029 driving_mode = 21;
+optional ErrorCode029 error_code = 22;
+optional GearPosition029 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional float chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS029 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed029 wheel_speed = 30;
+
+optional Surround029 surround = 31;
+
+optional License029 license = 32;
+}
+
+message ChassisGPS029 {
+optional string latitude = 1;
+optional bytes longitude = 2;
+optional int64 gps_valid = 3;
+
+optional uint64 year = 4;
+optional double month = 5;
+optional bytes day = 6;
+optional double hours = 7;
+optional int32 minutes = 8;
+optional uint32 seconds = 9;
+optional double compass_direction = 10;
+optional string pdop = 11;
+optional string is_gps_fault = 12;
+optional uint32 is_inferred = 13;
+
+optional double altitude = 14;
+optional double heading = 15;
+optional bytes hdop = 16;
+optional string vdop = 17;
+optional GpsQuality029 quality = 18;
+optional uint32 num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality029 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed029 {
+enum WheelSpeedType029 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional bool is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType029 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional int32 is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType029 wheel_direction_rl = 5;
+optional bytes wheel_spd_rl = 6;
+optional uint64 is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType029 wheel_direction_fr = 8;
+optional double wheel_spd_fr = 9;
+optional string is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType029 wheel_direction_fl = 11;
+optional string wheel_spd_fl = 12;
+}
+
+message Sonar029 {
+optional bytes range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround029 {
+optional string cross_traffic_alert_left = 1;
+optional uint32 cross_traffic_alert_left_enabled = 2;
+optional uint32 blind_spot_left_alert = 3;
+optional bool blind_spot_left_alert_enabled = 4;
+optional uint64 cross_traffic_alert_right = 5;
+optional int64 cross_traffic_alert_right_enabled = 6;
+optional uint32 blind_spot_right_alert = 7;
+optional string blind_spot_right_alert_enabled = 8;
+optional string sonar00 = 9;
+optional double sonar01 = 10;
+optional bytes sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional bytes sonar05 = 14;
+optional string sonar06 = 15;
+optional double sonar07 = 16;
+optional bytes sonar08 = 17;
+optional string sonar09 = 18;
+optional string sonar10 = 19;
+optional double sonar11 = 20;
+optional uint64 sonar_enabled = 21;
+optional int32 sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar029 sonar = 24;
+}
+
+message License029 {
+optional string vin = 1;
+}
+message Chassis030 {
+enum DrivingMode030 {
+COMPLETE_MANUAL = 0;
+COMPLETE_AUTO_DRIVE = 1;
+AUTO_STEER_ONLY = 2;
+AUTO_SPEED_ONLY = 3;
+
+EMERGENCY_MODE = 4;
+}
+
+enum ErrorCode030 {
+NO_ERROR = 0;
+
+CMD_NOT_IN_PERIOD = 1;
+
+CHASSIS_ERROR = 2;
+
+MANUAL_INTERVENTION = 3;
+
+CHASSIS_CAN_NOT_IN_PERIOD = 4;
+
+UNKNOWN_ERROR = 5;
+}
+
+enum GearPosition030 {
+GEAR_NEUTRAL = 0;
+GEAR_DRIVE = 1;
+GEAR_REVERSE = 2;
+GEAR_PARKING = 3;
+GEAR_LOW = 4;
+GEAR_INVALID = 5;
+GEAR_NONE = 6;
+}
+
+optional bool engine_started = 3;
+optional string engine_rpm = 4;
+optional double speed_mps = 5;
+optional bytes odometer_m = 6;
+optional bytes fuel_range_m = 7;
+optional bytes throttle_percentage = 8;
+optional bytes brake_percentage = 9;
+optional double steering_percentage = 11;
+optional bytes steering_torque_nm = 12;
+
+optional double parking_brake = 13;
+
+optional uint32 high_beam_signal = 14 [deprecated = true];
+optional uint64 low_beam_signal = 15 [deprecated = true];
+optional bool left_turn_signal = 16 [deprecated = true];
+optional uint64 right_turn_signal = 17 [deprecated = true];
+optional bool horn = 18 [deprecated = true];
+
+optional bytes wiper = 19;
+optional int32 disengage_status = 20 [deprecated = true];
+optional DrivingMode030 driving_mode = 21;
+optional ErrorCode030 error_code = 22;
+optional GearPosition030 gear_location = 23;
+
+optional double steering_timestamp = 24;
+
+optional apollo.common.Header header = 25;
+
+optional uint32 chassis_error_mask = 26;
+
+optional apollo.common.VehicleSignal signal = 27;
+
+optional ChassisGPS030 chassis_gps = 28;
+
+optional apollo.common.EngageAdvice engage_advice = 29;
+
+optional WheelSpeed030 wheel_speed = 30;
+
+optional Surround030 surround = 31;
+
+optional License030 license = 32;
+}
+
+message ChassisGPS030 {
+optional double latitude = 1;
+optional bytes longitude = 2;
+optional int64 gps_valid = 3;
+
+optional float year = 4;
+optional uint32 month = 5;
+optional int64 day = 6;
+optional int32 hours = 7;
+optional uint64 minutes = 8;
+optional bytes seconds = 9;
+optional bytes compass_direction = 10;
+optional bytes pdop = 11;
+optional float is_gps_fault = 12;
+optional int64 is_inferred = 13;
+
+optional string altitude = 14;
+optional string heading = 15;
+optional string hdop = 16;
+optional bytes vdop = 17;
+optional GpsQuality030 quality = 18;
+optional double num_satellites = 19;
+optional double gps_speed = 20;
+enum GpsQuality030 {
+FIX_NO = 0;
+FIX_2D = 1;
+FIX_3D = 2;
+FIX_INVALID = 3;
+}
+}
+
+message WheelSpeed030 {
+enum WheelSpeedType030 {
+FORWARD = 0;
+BACKWARD = 1;
+STANDSTILL = 2;
+INVALID = 3;
+}
+optional int32 is_wheel_spd_rr_valid = 1;
+optional WheelSpeedType030 wheel_direction_rr = 2;
+optional double wheel_spd_rr = 3;
+optional double is_wheel_spd_rl_valid = 4;
+optional WheelSpeedType030 wheel_direction_rl = 5;
+optional double wheel_spd_rl = 6;
+optional string is_wheel_spd_fr_valid = 7;
+optional WheelSpeedType030 wheel_direction_fr = 8;
+optional string wheel_spd_fr = 9;
+optional float is_wheel_spd_fl_valid = 10;
+optional WheelSpeedType030 wheel_direction_fl = 11;
+optional bytes wheel_spd_fl = 12;
+}
+
+message Sonar030 {
+optional string range = 1;
+optional apollo.common.Point3D translation = 2;
+optional apollo.common.Quaternion rotation = 3;
+}
+
+message Surround030 {
+optional double cross_traffic_alert_left = 1;
+optional double cross_traffic_alert_left_enabled = 2;
+optional uint64 blind_spot_left_alert = 3;
+optional bytes blind_spot_left_alert_enabled = 4;
+optional int64 cross_traffic_alert_right = 5;
+optional float cross_traffic_alert_right_enabled = 6;
+optional string blind_spot_right_alert = 7;
+optional uint32 blind_spot_right_alert_enabled = 8;
+optional bytes sonar00 = 9;
+optional string sonar01 = 10;
+optional bytes sonar02 = 11;
+optional double sonar03 = 12;
+optional string sonar04 = 13;
+optional double sonar05 = 14;
+optional string sonar06 = 15;
+optional string sonar07 = 16;
+optional bytes sonar08 = 17;
+optional bytes sonar09 = 18;
+optional string sonar10 = 19;
+optional string sonar11 = 20;
+optional bytes sonar_enabled = 21;
+optional string sonar_fault = 22;
+repeated bytes sonar_range = 23;
+repeated Sonar030 sonar = 24;
+}
+
+message License030 {
+optional string vin = 1;
+}
