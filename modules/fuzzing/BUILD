@@ -3,6 +3,18 @@ load("//tools:cpplint.bzl", "cpplint")
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
+    name = "protobuf_mutator_lib",
+    srcs = [
+        "libprotobuf-mutator/mutator.cc",
+    ],
+    hdrs = [
+        "libprotobuf-mutator/mutator.h",
+    ],
+    deps = [
+    ]
+)
+
+cc_library(
     name = "fuzzing_component_lib",
     srcs = [
         "fuzzing_component.cc",
