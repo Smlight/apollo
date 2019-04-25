@@ -25,7 +25,6 @@ cc_binary(
         "//modules/canbus/proto:canbus_proto",
         "//modules/routing/proto:routing_proto",
         "//modules/prediction/proto:prediction_proto",
-        "//modules/fuzzing/proto:fuzzing_proto",
     ],
 )
 

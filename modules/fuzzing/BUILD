@@ -18,7 +18,6 @@ cc_library(
         "//modules/canbus/proto:canbus_proto",
         "//modules/common/proto:pnc_point_proto",
         "//modules/control/proto:control_proto",
-        "//modules/fuzzing/proto:fuzzing_proto",
         "//modules/localization/proto:gps_proto",
         "//modules/localization/proto:localization_proto",
         "//modules/map/relative_map/proto:navigation_proto",

@@ -8,8 +8,6 @@
 
 #include "modules/fuzzing/fuzzing_component.h"
 
-using apollo::fuzzing::FuzzChassis;
-
 namespace apollo {
 namespace fuzzing {
 
