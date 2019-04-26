@@ -3,9 +3,10 @@ from protofuzz import protofuzz
 import string
 import random
 
+message_fuzzers = protofuzz.from_file('/apollo/modules/fuzzing/proto/routing_fuzzed.proto')
+
 for i in range(1, 31):
     i_leading0 = str(i).rjust(3, '0')
-    message_fuzzers = protofuzz.from_file('/apollo/modules/fuzzing/proto/routing{}.proto'.format(i_leading0))
     cnt = random.randint(100, 199)
     for obj in message_fuzzers['RoutingRequest{}'.format(i_leading0)].permute():
         cnt -= 1
