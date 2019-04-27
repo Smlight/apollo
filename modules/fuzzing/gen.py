@@ -7,7 +7,7 @@ message_fuzzers = protofuzz.from_file('modules/fuzzing/proto/routing_fuzzed.prot
 
 for i in range(1, 31):
     i_leading0 = str(i).rjust(3, '0')
-    cnt = random.randint(100, 199)
+    cnt = random.randint(1, 19)
     for obj in message_fuzzers['RoutingRequest{}'.format(i_leading0)].permute():
         cnt -= 1
         if cnt == 0:
