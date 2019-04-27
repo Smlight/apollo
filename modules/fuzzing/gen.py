@@ -12,5 +12,5 @@ for i in range(1, 31):
         cnt -= 1
         if cnt == 0:
             with open('/apollo/modules/fuzzing/proto/routing{}.ascii'.format(i_leading0), 'w') as fo:
-                fo.write(obj)
+                fo.write(str(obj))
             break
