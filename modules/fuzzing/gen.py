@@ -2,9 +2,12 @@
 from protofuzz import protofuzz
 import string
 import random
+import os
 
+os.chdir('/apollo')
 message_fuzzers = protofuzz.from_file('modules/fuzzing/proto/routing_fuzzed.proto')
 
+os.chdir('/apollo')
 for i in range(1, 31):
     i_leading0 = str(i).rjust(3, '0')
     cnt = random.randint(1, 5)
