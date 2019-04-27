@@ -13,5 +13,6 @@ for i in range(1, 31):
         print(cnt)
         if cnt == 0:
             with open('modules/fuzzing/proto/routing{}.ascii'.format(i_leading0), 'w') as fo:
+                print(obj)
                 fo.write(str(obj))
             break
