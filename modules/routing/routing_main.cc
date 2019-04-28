@@ -45,6 +45,7 @@ using apollo::routing::RoutingResponse;
 using protobuf_mutator::Mutator;
 using protobuf_mutator::RandomEngine;
 using std::vector;
+using std::string;
 
 int main(int argc, char** argv) {
   // parse the argument
