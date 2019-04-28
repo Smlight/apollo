@@ -44,8 +44,8 @@ using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
 using protobuf_mutator::Mutator;
 using protobuf_mutator::RandomEngine;
-using std::vector;
 using std::string;
+using std::vector;
 
 int main(int argc, char** argv) {
   // parse the argument
@@ -107,8 +107,9 @@ int main(int argc, char** argv) {
     char buf[8];
     sprintf(buf, "%03d", i + 1);
     string i_leading0(buf);
-    GetProtoFromASCIIFile("modules/fuzzing/routing" + i_leading0 + ".ascii",
-                          routing_vec[i]);
+    GetProtoFromASCIIFile(
+        "/apollo/modules/fuzzing/routing" + i_leading0 + ".ascii",
+        routing_vec[i]);
   }
 
   Rate rate(1.0);
