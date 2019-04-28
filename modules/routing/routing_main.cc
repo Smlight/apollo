@@ -105,7 +105,8 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 30; i++) {
     char buf[8];
     sprintf(buf, "%03d", i + 1);
-    GetProtoFromASCIIFile("modules/fuzzing/routing" + buf + ".ascii",
+    string i_leading0(buf);
+    GetProtoFromASCIIFile("modules/fuzzing/routing" + i_leading0 + ".ascii",
                           routing_vec[i]);
   }
 
