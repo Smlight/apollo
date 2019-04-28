@@ -103,7 +103,10 @@ int main(int argc, char** argv) {
   Mutator mutator(new RandomEngine(rand()));
 
   for (int i = 0; i < 30; i++) {
-    GetProtoFromASCIIFile("modules/routing/routing.ascii", routing_vec[i]);
+    char buf[8];
+    sprintf(buf, "%03d", i + 1);
+    GetProtoFromASCIIFile("modules/fuzzing/routing" + buf + ".ascii",
+                          routing_vec[i]);
   }
 
   Rate rate(1.0);
