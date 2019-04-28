@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
     sprintf(buf, "%03d", i + 1);
     string i_leading0(buf);
     GetProtoFromASCIIFile(
-        "/apollo/modules/fuzzing/routing" + i_leading0 + ".ascii",
+        "/apollo/modules/fuzzing/proto/routing" + i_leading0 + ".ascii",
         routing_vec[i]);
   }
 
