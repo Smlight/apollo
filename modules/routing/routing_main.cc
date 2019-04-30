@@ -104,8 +104,6 @@ int main(int argc, char** argv) {
   GetProtoFromASCIIFile("/apollo/modules/fuzzing/proto/routing.ascii",routing_request);
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
-    int idx = rand() % 30;
-    mutator.Mutate(routing_vec[idx], 4096);
     routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
         reinterpret_cast<RoutingRequest*>(routing_request)));
     rate.Sleep();
