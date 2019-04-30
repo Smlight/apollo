@@ -101,7 +101,7 @@ int main(int argc, char** argv) {
       fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
   auto routing_request = new RoutingRequest();
-  GetProtoFromASCIIFile("/apollo/modules/fuzzing/proto/routing.ascii",routing_request);
+  GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii",routing_request);
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
