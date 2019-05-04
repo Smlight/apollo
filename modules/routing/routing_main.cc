@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
   for (int i = 0; i < 30; i++) {
     sprintf(buf, "%03d", i + 1);
     string i_leading0(buf);
-    routing_vec[i] = get_class_(i + 1);
+    routing_vec.push_back(get_class_(i + 1));
     GetProtoFromASCIIFile("/apollo/modules/fuzzing/proto/routing" + i_leading0 + ".ascii", routing_vec[i]);
   }
 
