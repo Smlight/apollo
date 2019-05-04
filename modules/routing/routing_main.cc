@@ -49,37 +49,70 @@ using std::vector;
 
 google::protobuf::Message* get_class_(int n)
 {
-  if (n==001) return new apollo::routing::RoutingRequest001();
-  else if (n==002) return new apollo::routing::RoutingRequest002();
-  else if (n==003) return new apollo::routing::RoutingRequest003();
-  else if (n==004) return new apollo::routing::RoutingRequest004();
-  else if (n==005) return new apollo::routing::RoutingRequest005();
-  else if (n==006) return new apollo::routing::RoutingRequest006();
-  else if (n==007) return new apollo::routing::RoutingRequest007();
-  else if (n==008) return new apollo::routing::RoutingRequest008();
-  else if (n==009) return new apollo::routing::RoutingRequest009();
-  else if (n==010) return new apollo::routing::RoutingRequest010();
-  else if (n==011) return new apollo::routing::RoutingRequest011();
-  else if (n==012) return new apollo::routing::RoutingRequest012();
-  else if (n==013) return new apollo::routing::RoutingRequest013();
-  else if (n==014) return new apollo::routing::RoutingRequest014();
-  else if (n==015) return new apollo::routing::RoutingRequest015();
-  else if (n==016) return new apollo::routing::RoutingRequest016();
-  else if (n==017) return new apollo::routing::RoutingRequest017();
-  else if (n==018) return new apollo::routing::RoutingRequest018();
-  else if (n==019) return new apollo::routing::RoutingRequest019();
-  else if (n==020) return new apollo::routing::RoutingRequest020();
-  else if (n==021) return new apollo::routing::RoutingRequest021();
-  else if (n==022) return new apollo::routing::RoutingRequest022();
-  else if (n==023) return new apollo::routing::RoutingRequest023();
-  else if (n==024) return new apollo::routing::RoutingRequest024();
-  else if (n==025) return new apollo::routing::RoutingRequest025();
-  else if (n==026) return new apollo::routing::RoutingRequest026();
-  else if (n==027) return new apollo::routing::RoutingRequest027();
-  else if (n==028) return new apollo::routing::RoutingRequest028();
-  else if (n==029) return new apollo::routing::RoutingRequest029();
-  else if (n==030) return new apollo::routing::RoutingRequest030();
-  return apollo::routing::RoutingRequest();
+  if (n==1) return new apollo::routing::RoutingRequest001();
+  else if (n==2) return new apollo::routing::RoutingRequest002();
+  else if (n==3) return new apollo::routing::RoutingRequest003();
+  else if (n==4) return new apollo::routing::RoutingRequest004();
+  else if (n==5) return new apollo::routing::RoutingRequest005();
+  else if (n==6) return new apollo::routing::RoutingRequest006();
+  else if (n==7) return new apollo::routing::RoutingRequest007();
+  else if (n==8) return new apollo::routing::RoutingRequest008();
+  else if (n==9) return new apollo::routing::RoutingRequest009();
+  else if (n==10) return new apollo::routing::RoutingRequest010();
+  else if (n==11) return new apollo::routing::RoutingRequest011();
+  else if (n==12) return new apollo::routing::RoutingRequest012();
+  else if (n==13) return new apollo::routing::RoutingRequest013();
+  else if (n==14) return new apollo::routing::RoutingRequest014();
+  else if (n==15) return new apollo::routing::RoutingRequest015();
+  else if (n==16) return new apollo::routing::RoutingRequest016();
+  else if (n==17) return new apollo::routing::RoutingRequest017();
+  else if (n==18) return new apollo::routing::RoutingRequest018();
+  else if (n==19) return new apollo::routing::RoutingRequest019();
+  else if (n==20) return new apollo::routing::RoutingRequest020();
+  else if (n==21) return new apollo::routing::RoutingRequest021();
+  else if (n==22) return new apollo::routing::RoutingRequest022();
+  else if (n==23) return new apollo::routing::RoutingRequest023();
+  else if (n==24) return new apollo::routing::RoutingRequest024();
+  else if (n==25) return new apollo::routing::RoutingRequest025();
+  else if (n==26) return new apollo::routing::RoutingRequest026();
+  else if (n==27) return new apollo::routing::RoutingRequest027();
+  else if (n==28) return new apollo::routing::RoutingRequest028();
+  else if (n==29) return new apollo::routing::RoutingRequest029();
+  else return new apollo::routing::RoutingRequest030();
+}
+
+google::protobuf::Message* get_class_(int n, const google::protobuf::Message &m)
+{
+  if (n==1) return new apollo::routing::RoutingRequest001(m);
+  else if (n==2) return new apollo::routing::RoutingRequest002(m);
+  else if (n==3) return new apollo::routing::RoutingRequest003(m);
+  else if (n==4) return new apollo::routing::RoutingRequest004(m);
+  else if (n==5) return new apollo::routing::RoutingRequest005(m);
+  else if (n==6) return new apollo::routing::RoutingRequest006(m);
+  else if (n==7) return new apollo::routing::RoutingRequest007(m);
+  else if (n==8) return new apollo::routing::RoutingRequest008(m);
+  else if (n==9) return new apollo::routing::RoutingRequest009(m);
+  else if (n==10) return new apollo::routing::RoutingRequest010(m);
+  else if (n==11) return new apollo::routing::RoutingRequest011(m);
+  else if (n==12) return new apollo::routing::RoutingRequest012(m);
+  else if (n==13) return new apollo::routing::RoutingRequest013(m);
+  else if (n==14) return new apollo::routing::RoutingRequest014(m);
+  else if (n==15) return new apollo::routing::RoutingRequest015(m);
+  else if (n==16) return new apollo::routing::RoutingRequest016(m);
+  else if (n==17) return new apollo::routing::RoutingRequest017(m);
+  else if (n==18) return new apollo::routing::RoutingRequest018(m);
+  else if (n==19) return new apollo::routing::RoutingRequest019(m);
+  else if (n==20) return new apollo::routing::RoutingRequest020(m);
+  else if (n==21) return new apollo::routing::RoutingRequest021(m);
+  else if (n==22) return new apollo::routing::RoutingRequest022(m);
+  else if (n==23) return new apollo::routing::RoutingRequest023(m);
+  else if (n==24) return new apollo::routing::RoutingRequest024(m);
+  else if (n==25) return new apollo::routing::RoutingRequest025(m);
+  else if (n==26) return new apollo::routing::RoutingRequest026(m);
+  else if (n==27) return new apollo::routing::RoutingRequest027(m);
+  else if (n==28) return new apollo::routing::RoutingRequest028(m);
+  else if (n==29) return new apollo::routing::RoutingRequest029(m);
+  else return new apollo::routing::RoutingRequest030(m);
 }
 
 int main(int argc, char** argv) {
@@ -118,8 +151,7 @@ int main(int argc, char** argv) {
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
     mutator.Mutate(routing_vec[idx], 4096);
-    auto now = get_class_(idx + 1);
-    *now = *routing_vec[idx];
+    auto now = get_class_(idx + 1, *routing_vec[idx]);
     routing_request_writer->Write(std::shared_ptr<RoutingRequest>(reinterpret_cast<RoutingRequest*>(now)));
     rate.Sleep();
   }
