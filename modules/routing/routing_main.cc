@@ -97,15 +97,13 @@ int main(int argc, char** argv) {
   routing_vec.push_back(new apollo::routing::RoutingRequest030());
 
   auto fuzzer_node = apollo::cyber::CreateNode("fuzzer");
-  auto routing_request_writer =
-      fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
+  auto routing_request_writer = fuzzer_node->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
 
-  auto routing_request = new RoutingRequest();
-  GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii",routing_request);
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
-    routing_request_writer->Write(static_cast<std::shared_ptr<RoutingRequest>>(
-        reinterpret_cast<RoutingRequest*>(routing_request)));
+    auto routing_request = new RoutingRequest();
+    GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii", routing_request);
+    routing_request_writer->Write(std::shared_ptr<RoutingRequest>(reinterpret_cast<RoutingRequest*>(routing_request)));
     rate.Sleep();
   }
 
