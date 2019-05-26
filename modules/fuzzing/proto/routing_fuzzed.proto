@@ -1,0 +1,1509 @@
+syntax = "proto2";
+
+package apollo.routing;
+
+import "modules/common/proto/header.proto";
+import "modules/common/proto/geometry.proto";
+import "modules/common/proto/error_code.proto";
+import "modules/map/proto/map_parking_space.proto";
+
+message LaneWaypoint001 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment001 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest001 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint001 waypoint = 2;
+repeated LaneSegment001 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional string broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement001 {
+optional string distance = 1;
+}
+
+message Passage001 {
+enum ChangeLaneType001 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment001 segment = 1;
+optional uint64 can_exit = 2;
+optional ChangeLaneType001 change_lane_type = 3;
+}
+
+message RoadSegment001 {
+optional bytes id = 1;
+repeated Passage001 passage = 2;
+}
+
+message RoutingResponse001 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment001 road = 2;
+optional Measurement001 measurement = 3;
+optional RoutingRequest001 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint002 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment002 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest002 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint002 waypoint = 2;
+repeated LaneSegment002 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bytes broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement002 {
+optional bytes distance = 1;
+}
+
+message Passage002 {
+enum ChangeLaneType002 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment002 segment = 1;
+optional string can_exit = 2;
+optional ChangeLaneType002 change_lane_type = 3;
+}
+
+message RoadSegment002 {
+optional bytes id = 1;
+repeated Passage002 passage = 2;
+}
+
+message RoutingResponse002 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment002 road = 2;
+optional Measurement002 measurement = 3;
+optional RoutingRequest002 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint003 {
+optional string id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment003 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest003 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint003 waypoint = 2;
+repeated LaneSegment003 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional uint32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement003 {
+optional double distance = 1;
+}
+
+message Passage003 {
+enum ChangeLaneType003 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment003 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType003 change_lane_type = 3;
+}
+
+message RoadSegment003 {
+optional bytes id = 1;
+repeated Passage003 passage = 2;
+}
+
+message RoutingResponse003 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment003 road = 2;
+optional Measurement003 measurement = 3;
+optional RoutingRequest003 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint004 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment004 {
+optional string id = 1;
+optional string start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest004 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint004 waypoint = 2;
+repeated LaneSegment004 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional float broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement004 {
+optional bytes distance = 1;
+}
+
+message Passage004 {
+enum ChangeLaneType004 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment004 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType004 change_lane_type = 3;
+}
+
+message RoadSegment004 {
+optional string id = 1;
+repeated Passage004 passage = 2;
+}
+
+message RoutingResponse004 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment004 road = 2;
+optional Measurement004 measurement = 3;
+optional RoutingRequest004 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint005 {
+optional bytes id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment005 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest005 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint005 waypoint = 2;
+repeated LaneSegment005 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement005 {
+optional double distance = 1;
+}
+
+message Passage005 {
+enum ChangeLaneType005 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment005 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType005 change_lane_type = 3;
+}
+
+message RoadSegment005 {
+optional string id = 1;
+repeated Passage005 passage = 2;
+}
+
+message RoutingResponse005 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment005 road = 2;
+optional Measurement005 measurement = 3;
+optional RoutingRequest005 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint006 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment006 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest006 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint006 waypoint = 2;
+repeated LaneSegment006 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional int32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement006 {
+optional string distance = 1;
+}
+
+message Passage006 {
+enum ChangeLaneType006 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment006 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType006 change_lane_type = 3;
+}
+
+message RoadSegment006 {
+optional string id = 1;
+repeated Passage006 passage = 2;
+}
+
+message RoutingResponse006 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment006 road = 2;
+optional Measurement006 measurement = 3;
+optional RoutingRequest006 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint007 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment007 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest007 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint007 waypoint = 2;
+repeated LaneSegment007 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional uint64 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement007 {
+optional double distance = 1;
+}
+
+message Passage007 {
+enum ChangeLaneType007 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment007 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType007 change_lane_type = 3;
+}
+
+message RoadSegment007 {
+optional bytes id = 1;
+repeated Passage007 passage = 2;
+}
+
+message RoutingResponse007 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment007 road = 2;
+optional Measurement007 measurement = 3;
+optional RoutingRequest007 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint008 {
+optional string id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment008 {
+optional string id = 1;
+optional string start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest008 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint008 waypoint = 2;
+repeated LaneSegment008 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bool broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement008 {
+optional double distance = 1;
+}
+
+message Passage008 {
+enum ChangeLaneType008 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment008 segment = 1;
+optional int64 can_exit = 2;
+optional ChangeLaneType008 change_lane_type = 3;
+}
+
+message RoadSegment008 {
+optional string id = 1;
+repeated Passage008 passage = 2;
+}
+
+message RoutingResponse008 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment008 road = 2;
+optional Measurement008 measurement = 3;
+optional RoutingRequest008 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint009 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment009 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest009 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint009 waypoint = 2;
+repeated LaneSegment009 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional double broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement009 {
+optional double distance = 1;
+}
+
+message Passage009 {
+enum ChangeLaneType009 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment009 segment = 1;
+optional float can_exit = 2;
+optional ChangeLaneType009 change_lane_type = 3;
+}
+
+message RoadSegment009 {
+optional string id = 1;
+repeated Passage009 passage = 2;
+}
+
+message RoutingResponse009 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment009 road = 2;
+optional Measurement009 measurement = 3;
+optional RoutingRequest009 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint010 {
+optional string id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment010 {
+optional string id = 1;
+optional bytes start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest010 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint010 waypoint = 2;
+repeated LaneSegment010 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement010 {
+optional double distance = 1;
+}
+
+message Passage010 {
+enum ChangeLaneType010 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment010 segment = 1;
+optional uint32 can_exit = 2;
+optional ChangeLaneType010 change_lane_type = 3;
+}
+
+message RoadSegment010 {
+optional string id = 1;
+repeated Passage010 passage = 2;
+}
+
+message RoutingResponse010 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment010 road = 2;
+optional Measurement010 measurement = 3;
+optional RoutingRequest010 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint011 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment011 {
+optional string id = 1;
+optional bytes start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest011 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint011 waypoint = 2;
+repeated LaneSegment011 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional float broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement011 {
+optional bytes distance = 1;
+}
+
+message Passage011 {
+enum ChangeLaneType011 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment011 segment = 1;
+optional int32 can_exit = 2;
+optional ChangeLaneType011 change_lane_type = 3;
+}
+
+message RoadSegment011 {
+optional bytes id = 1;
+repeated Passage011 passage = 2;
+}
+
+message RoutingResponse011 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment011 road = 2;
+optional Measurement011 measurement = 3;
+optional RoutingRequest011 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint012 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment012 {
+optional string id = 1;
+optional bytes start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest012 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint012 waypoint = 2;
+repeated LaneSegment012 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement012 {
+optional bytes distance = 1;
+}
+
+message Passage012 {
+enum ChangeLaneType012 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment012 segment = 1;
+optional int32 can_exit = 2;
+optional ChangeLaneType012 change_lane_type = 3;
+}
+
+message RoadSegment012 {
+optional string id = 1;
+repeated Passage012 passage = 2;
+}
+
+message RoutingResponse012 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment012 road = 2;
+optional Measurement012 measurement = 3;
+optional RoutingRequest012 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint013 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment013 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest013 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint013 waypoint = 2;
+repeated LaneSegment013 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint64 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement013 {
+optional string distance = 1;
+}
+
+message Passage013 {
+enum ChangeLaneType013 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment013 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType013 change_lane_type = 3;
+}
+
+message RoadSegment013 {
+optional string id = 1;
+repeated Passage013 passage = 2;
+}
+
+message RoutingResponse013 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment013 road = 2;
+optional Measurement013 measurement = 3;
+optional RoutingRequest013 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint014 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment014 {
+optional string id = 1;
+optional string start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest014 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint014 waypoint = 2;
+repeated LaneSegment014 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bytes broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement014 {
+optional string distance = 1;
+}
+
+message Passage014 {
+enum ChangeLaneType014 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment014 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType014 change_lane_type = 3;
+}
+
+message RoadSegment014 {
+optional bytes id = 1;
+repeated Passage014 passage = 2;
+}
+
+message RoutingResponse014 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment014 road = 2;
+optional Measurement014 measurement = 3;
+optional RoutingRequest014 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint015 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment015 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest015 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint015 waypoint = 2;
+repeated LaneSegment015 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional float broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement015 {
+optional string distance = 1;
+}
+
+message Passage015 {
+enum ChangeLaneType015 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment015 segment = 1;
+optional uint64 can_exit = 2;
+optional ChangeLaneType015 change_lane_type = 3;
+}
+
+message RoadSegment015 {
+optional bytes id = 1;
+repeated Passage015 passage = 2;
+}
+
+message RoutingResponse015 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment015 road = 2;
+optional Measurement015 measurement = 3;
+optional RoutingRequest015 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint016 {
+optional string id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment016 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest016 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint016 waypoint = 2;
+repeated LaneSegment016 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional string broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement016 {
+optional bytes distance = 1;
+}
+
+message Passage016 {
+enum ChangeLaneType016 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment016 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType016 change_lane_type = 3;
+}
+
+message RoadSegment016 {
+optional string id = 1;
+repeated Passage016 passage = 2;
+}
+
+message RoutingResponse016 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment016 road = 2;
+optional Measurement016 measurement = 3;
+optional RoutingRequest016 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint017 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment017 {
+optional bytes id = 1;
+optional bytes start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest017 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint017 waypoint = 2;
+repeated LaneSegment017 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional int32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement017 {
+optional double distance = 1;
+}
+
+message Passage017 {
+enum ChangeLaneType017 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment017 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType017 change_lane_type = 3;
+}
+
+message RoadSegment017 {
+optional string id = 1;
+repeated Passage017 passage = 2;
+}
+
+message RoutingResponse017 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment017 road = 2;
+optional Measurement017 measurement = 3;
+optional RoutingRequest017 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint018 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment018 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest018 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint018 waypoint = 2;
+repeated LaneSegment018 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bytes broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement018 {
+optional bytes distance = 1;
+}
+
+message Passage018 {
+enum ChangeLaneType018 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment018 segment = 1;
+optional float can_exit = 2;
+optional ChangeLaneType018 change_lane_type = 3;
+}
+
+message RoadSegment018 {
+optional string id = 1;
+repeated Passage018 passage = 2;
+}
+
+message RoutingResponse018 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment018 road = 2;
+optional Measurement018 measurement = 3;
+optional RoutingRequest018 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint019 {
+optional string id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment019 {
+optional string id = 1;
+optional double start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest019 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint019 waypoint = 2;
+repeated LaneSegment019 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional float broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement019 {
+optional bytes distance = 1;
+}
+
+message Passage019 {
+enum ChangeLaneType019 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment019 segment = 1;
+optional string can_exit = 2;
+optional ChangeLaneType019 change_lane_type = 3;
+}
+
+message RoadSegment019 {
+optional string id = 1;
+repeated Passage019 passage = 2;
+}
+
+message RoutingResponse019 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment019 road = 2;
+optional Measurement019 measurement = 3;
+optional RoutingRequest019 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint020 {
+optional string id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment020 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest020 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint020 waypoint = 2;
+repeated LaneSegment020 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional string broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement020 {
+optional string distance = 1;
+}
+
+message Passage020 {
+enum ChangeLaneType020 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment020 segment = 1;
+optional bool can_exit = 2;
+optional ChangeLaneType020 change_lane_type = 3;
+}
+
+message RoadSegment020 {
+optional bytes id = 1;
+repeated Passage020 passage = 2;
+}
+
+message RoutingResponse020 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment020 road = 2;
+optional Measurement020 measurement = 3;
+optional RoutingRequest020 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint021 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment021 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest021 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint021 waypoint = 2;
+repeated LaneSegment021 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional uint64 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement021 {
+optional string distance = 1;
+}
+
+message Passage021 {
+enum ChangeLaneType021 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment021 segment = 1;
+optional uint32 can_exit = 2;
+optional ChangeLaneType021 change_lane_type = 3;
+}
+
+message RoadSegment021 {
+optional string id = 1;
+repeated Passage021 passage = 2;
+}
+
+message RoutingResponse021 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment021 road = 2;
+optional Measurement021 measurement = 3;
+optional RoutingRequest021 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint022 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment022 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest022 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint022 waypoint = 2;
+repeated LaneSegment022 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional int32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement022 {
+optional bytes distance = 1;
+}
+
+message Passage022 {
+enum ChangeLaneType022 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment022 segment = 1;
+optional bool can_exit = 2;
+optional ChangeLaneType022 change_lane_type = 3;
+}
+
+message RoadSegment022 {
+optional bytes id = 1;
+repeated Passage022 passage = 2;
+}
+
+message RoutingResponse022 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment022 road = 2;
+optional Measurement022 measurement = 3;
+optional RoutingRequest022 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint023 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment023 {
+optional string id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest023 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint023 waypoint = 2;
+repeated LaneSegment023 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional int32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement023 {
+optional bytes distance = 1;
+}
+
+message Passage023 {
+enum ChangeLaneType023 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment023 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType023 change_lane_type = 3;
+}
+
+message RoadSegment023 {
+optional bytes id = 1;
+repeated Passage023 passage = 2;
+}
+
+message RoutingResponse023 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment023 road = 2;
+optional Measurement023 measurement = 3;
+optional RoutingRequest023 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint024 {
+optional string id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment024 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest024 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint024 waypoint = 2;
+repeated LaneSegment024 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional int64 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement024 {
+optional string distance = 1;
+}
+
+message Passage024 {
+enum ChangeLaneType024 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment024 segment = 1;
+optional uint64 can_exit = 2;
+optional ChangeLaneType024 change_lane_type = 3;
+}
+
+message RoadSegment024 {
+optional bytes id = 1;
+repeated Passage024 passage = 2;
+}
+
+message RoutingResponse024 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment024 road = 2;
+optional Measurement024 measurement = 3;
+optional RoutingRequest024 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint025 {
+optional string id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment025 {
+optional string id = 1;
+optional double start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest025 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint025 waypoint = 2;
+repeated LaneSegment025 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional uint64 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement025 {
+optional bytes distance = 1;
+}
+
+message Passage025 {
+enum ChangeLaneType025 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment025 segment = 1;
+optional int64 can_exit = 2;
+optional ChangeLaneType025 change_lane_type = 3;
+}
+
+message RoadSegment025 {
+optional string id = 1;
+repeated Passage025 passage = 2;
+}
+
+message RoutingResponse025 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment025 road = 2;
+optional Measurement025 measurement = 3;
+optional RoutingRequest025 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint026 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment026 {
+optional bytes id = 1;
+optional bytes start_s = 2;
+optional bytes end_s = 3;
+}
+
+message RoutingRequest026 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint026 waypoint = 2;
+repeated LaneSegment026 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bytes broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement026 {
+optional string distance = 1;
+}
+
+message Passage026 {
+enum ChangeLaneType026 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment026 segment = 1;
+optional double can_exit = 2;
+optional ChangeLaneType026 change_lane_type = 3;
+}
+
+message RoadSegment026 {
+optional bytes id = 1;
+repeated Passage026 passage = 2;
+}
+
+message RoutingResponse026 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment026 road = 2;
+optional Measurement026 measurement = 3;
+optional RoutingRequest026 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint027 {
+optional string id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment027 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest027 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint027 waypoint = 2;
+repeated LaneSegment027 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional bytes broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement027 {
+optional string distance = 1;
+}
+
+message Passage027 {
+enum ChangeLaneType027 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment027 segment = 1;
+optional uint32 can_exit = 2;
+optional ChangeLaneType027 change_lane_type = 3;
+}
+
+message RoadSegment027 {
+optional bytes id = 1;
+repeated Passage027 passage = 2;
+}
+
+message RoutingResponse027 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment027 road = 2;
+optional Measurement027 measurement = 3;
+optional RoutingRequest027 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint028 {
+optional bytes id = 1;
+optional double s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment028 {
+optional bytes id = 1;
+optional double start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest028 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint028 waypoint = 2;
+repeated LaneSegment028 blacklisted_lane = 3;
+repeated bytes blacklisted_road = 4;
+optional bool broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement028 {
+optional bytes distance = 1;
+}
+
+message Passage028 {
+enum ChangeLaneType028 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment028 segment = 1;
+optional string can_exit = 2;
+optional ChangeLaneType028 change_lane_type = 3;
+}
+
+message RoadSegment028 {
+optional string id = 1;
+repeated Passage028 passage = 2;
+}
+
+message RoutingResponse028 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment028 road = 2;
+optional Measurement028 measurement = 3;
+optional RoutingRequest028 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint029 {
+optional bytes id = 1;
+optional string s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment029 {
+optional bytes id = 1;
+optional bytes start_s = 2;
+optional double end_s = 3;
+}
+
+message RoutingRequest029 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint029 waypoint = 2;
+repeated LaneSegment029 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional double broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement029 {
+optional double distance = 1;
+}
+
+message Passage029 {
+enum ChangeLaneType029 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment029 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType029 change_lane_type = 3;
+}
+
+message RoadSegment029 {
+optional bytes id = 1;
+repeated Passage029 passage = 2;
+}
+
+message RoutingResponse029 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment029 road = 2;
+optional Measurement029 measurement = 3;
+optional RoutingRequest029 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}
+message LaneWaypoint030 {
+optional bytes id = 1;
+optional bytes s = 2;
+optional apollo.common.PointENU pose = 3;
+}
+
+message LaneSegment030 {
+optional bytes id = 1;
+optional string start_s = 2;
+optional string end_s = 3;
+}
+
+message RoutingRequest030 {
+optional apollo.common.Header header = 1;
+repeated LaneWaypoint030 waypoint = 2;
+repeated LaneSegment030 blacklisted_lane = 3;
+repeated string blacklisted_road = 4;
+optional int32 broadcast = 5;
+optional apollo.hdmap.ParkingSpace parking_space = 6;
+}
+
+message Measurement030 {
+optional string distance = 1;
+}
+
+message Passage030 {
+enum ChangeLaneType030 {
+FORWARD = 0;
+LEFT = 1;
+RIGHT = 2;
+};
+repeated LaneSegment030 segment = 1;
+optional bytes can_exit = 2;
+optional ChangeLaneType030 change_lane_type = 3;
+}
+
+message RoadSegment030 {
+optional string id = 1;
+repeated Passage030 passage = 2;
+}
+
+message RoutingResponse030 {
+optional apollo.common.Header header = 1;
+repeated RoadSegment030 road = 2;
+optional Measurement030 measurement = 3;
+optional RoutingRequest030 routing_request = 4;
+
+optional bytes map_version = 5;
+optional apollo.common.StatusPb status = 6;
+}

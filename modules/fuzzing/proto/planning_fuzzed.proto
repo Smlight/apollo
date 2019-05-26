@@ -1,0 +1,2713 @@
+syntax = "proto2";
+
+package apollo.planning;
+
+import "modules/canbus/proto/chassis.proto";
+import "modules/common/proto/drive_state.proto";
+import "modules/common/proto/geometry.proto";
+import "modules/common/proto/header.proto";
+import "modules/common/proto/pnc_point.proto";
+import "modules/map/proto/map_id.proto";
+import "modules/planning/proto/decision.proto";
+import "modules/planning/proto/planning_internal.proto";
+
+message ADCSignals001 {
+enum SignalType001 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType001 signal = 1;
+}
+
+message EStop001 {
+optional double is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats001 {
+optional string name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats001 {
+optional bytes total_time_ms = 1;
+repeated TaskStats001 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo001 {
+optional float is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory001 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop001 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional bytes is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats001 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus001 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus001 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion001 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion001 critical_region = 20;
+
+enum TrajectoryType001 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType001 trajectory_type = 21;
+
+optional RSSInfo001 rss_info = 100;
+}
+message ADCSignals002 {
+enum SignalType002 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType002 signal = 1;
+}
+
+message EStop002 {
+optional int32 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats002 {
+optional bytes name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats002 {
+optional double total_time_ms = 1;
+repeated TaskStats002 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo002 {
+optional bool is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory002 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop002 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional float is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats002 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus002 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus002 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion002 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion002 critical_region = 20;
+
+enum TrajectoryType002 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType002 trajectory_type = 21;
+
+optional RSSInfo002 rss_info = 100;
+}
+message ADCSignals003 {
+enum SignalType003 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType003 signal = 1;
+}
+
+message EStop003 {
+optional int64 is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats003 {
+optional bytes name = 1;
+optional string time_ms = 2;
+}
+
+message LatencyStats003 {
+optional bytes total_time_ms = 1;
+repeated TaskStats003 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo003 {
+optional uint32 is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory003 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop003 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint64 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats003 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus003 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus003 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion003 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion003 critical_region = 20;
+
+enum TrajectoryType003 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType003 trajectory_type = 21;
+
+optional RSSInfo003 rss_info = 100;
+}
+message ADCSignals004 {
+enum SignalType004 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType004 signal = 1;
+}
+
+message EStop004 {
+optional string is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats004 {
+optional bytes name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats004 {
+optional string total_time_ms = 1;
+repeated TaskStats004 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo004 {
+optional uint64 is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory004 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop004 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint64 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats004 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus004 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus004 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion004 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion004 critical_region = 20;
+
+enum TrajectoryType004 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType004 trajectory_type = 21;
+
+optional RSSInfo004 rss_info = 100;
+}
+message ADCSignals005 {
+enum SignalType005 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType005 signal = 1;
+}
+
+message EStop005 {
+optional double is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats005 {
+optional string name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats005 {
+optional double total_time_ms = 1;
+repeated TaskStats005 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo005 {
+optional double is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory005 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop005 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional float is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats005 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus005 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus005 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion005 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion005 critical_region = 20;
+
+enum TrajectoryType005 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType005 trajectory_type = 21;
+
+optional RSSInfo005 rss_info = 100;
+}
+message ADCSignals006 {
+enum SignalType006 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType006 signal = 1;
+}
+
+message EStop006 {
+optional double is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats006 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats006 {
+optional string total_time_ms = 1;
+repeated TaskStats006 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo006 {
+optional float is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory006 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop006 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional double is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats006 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus006 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus006 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion006 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion006 critical_region = 20;
+
+enum TrajectoryType006 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType006 trajectory_type = 21;
+
+optional RSSInfo006 rss_info = 100;
+}
+message ADCSignals007 {
+enum SignalType007 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType007 signal = 1;
+}
+
+message EStop007 {
+optional int32 is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats007 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats007 {
+optional bytes total_time_ms = 1;
+repeated TaskStats007 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo007 {
+optional bool is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory007 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop007 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional bytes is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats007 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus007 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus007 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion007 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion007 critical_region = 20;
+
+enum TrajectoryType007 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType007 trajectory_type = 21;
+
+optional RSSInfo007 rss_info = 100;
+}
+message ADCSignals008 {
+enum SignalType008 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType008 signal = 1;
+}
+
+message EStop008 {
+optional uint32 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats008 {
+optional string name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats008 {
+optional double total_time_ms = 1;
+repeated TaskStats008 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo008 {
+optional bool is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional double acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory008 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop008 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional bytes is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats008 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus008 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus008 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion008 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion008 critical_region = 20;
+
+enum TrajectoryType008 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType008 trajectory_type = 21;
+
+optional RSSInfo008 rss_info = 100;
+}
+message ADCSignals009 {
+enum SignalType009 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType009 signal = 1;
+}
+
+message EStop009 {
+optional uint32 is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats009 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats009 {
+optional double total_time_ms = 1;
+repeated TaskStats009 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo009 {
+optional bool is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional double acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory009 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop009 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional double is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats009 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus009 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus009 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion009 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion009 critical_region = 20;
+
+enum TrajectoryType009 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType009 trajectory_type = 21;
+
+optional RSSInfo009 rss_info = 100;
+}
+message ADCSignals010 {
+enum SignalType010 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType010 signal = 1;
+}
+
+message EStop010 {
+optional uint64 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats010 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats010 {
+optional double total_time_ms = 1;
+repeated TaskStats010 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo010 {
+optional uint64 is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory010 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop010 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int64 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats010 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus010 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus010 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion010 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion010 critical_region = 20;
+
+enum TrajectoryType010 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType010 trajectory_type = 21;
+
+optional RSSInfo010 rss_info = 100;
+}
+message ADCSignals011 {
+enum SignalType011 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType011 signal = 1;
+}
+
+message EStop011 {
+optional float is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats011 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats011 {
+optional bytes total_time_ms = 1;
+repeated TaskStats011 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo011 {
+optional uint64 is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory011 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop011 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int32 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats011 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus011 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus011 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion011 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion011 critical_region = 20;
+
+enum TrajectoryType011 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType011 trajectory_type = 21;
+
+optional RSSInfo011 rss_info = 100;
+}
+message ADCSignals012 {
+enum SignalType012 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType012 signal = 1;
+}
+
+message EStop012 {
+optional string is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats012 {
+optional string name = 1;
+optional string time_ms = 2;
+}
+
+message LatencyStats012 {
+optional double total_time_ms = 1;
+repeated TaskStats012 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo012 {
+optional uint64 is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional double acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory012 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop012 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats012 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus012 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus012 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion012 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion012 critical_region = 20;
+
+enum TrajectoryType012 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType012 trajectory_type = 21;
+
+optional RSSInfo012 rss_info = 100;
+}
+message ADCSignals013 {
+enum SignalType013 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType013 signal = 1;
+}
+
+message EStop013 {
+optional bool is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats013 {
+optional bytes name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats013 {
+optional double total_time_ms = 1;
+repeated TaskStats013 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo013 {
+optional string is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory013 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop013 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional double is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats013 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus013 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus013 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion013 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion013 critical_region = 20;
+
+enum TrajectoryType013 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType013 trajectory_type = 21;
+
+optional RSSInfo013 rss_info = 100;
+}
+message ADCSignals014 {
+enum SignalType014 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType014 signal = 1;
+}
+
+message EStop014 {
+optional int64 is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats014 {
+optional string name = 1;
+optional string time_ms = 2;
+}
+
+message LatencyStats014 {
+optional double total_time_ms = 1;
+repeated TaskStats014 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo014 {
+optional bool is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory014 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop014 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int32 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats014 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus014 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus014 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion014 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion014 critical_region = 20;
+
+enum TrajectoryType014 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType014 trajectory_type = 21;
+
+optional RSSInfo014 rss_info = 100;
+}
+message ADCSignals015 {
+enum SignalType015 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType015 signal = 1;
+}
+
+message EStop015 {
+optional double is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats015 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats015 {
+optional double total_time_ms = 1;
+repeated TaskStats015 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo015 {
+optional int32 is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory015 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop015 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats015 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus015 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus015 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion015 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion015 critical_region = 20;
+
+enum TrajectoryType015 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType015 trajectory_type = 21;
+
+optional RSSInfo015 rss_info = 100;
+}
+message ADCSignals016 {
+enum SignalType016 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType016 signal = 1;
+}
+
+message EStop016 {
+optional uint64 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats016 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats016 {
+optional double total_time_ms = 1;
+repeated TaskStats016 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo016 {
+optional double is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory016 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop016 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats016 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus016 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus016 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion016 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion016 critical_region = 20;
+
+enum TrajectoryType016 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType016 trajectory_type = 21;
+
+optional RSSInfo016 rss_info = 100;
+}
+message ADCSignals017 {
+enum SignalType017 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType017 signal = 1;
+}
+
+message EStop017 {
+optional uint64 is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats017 {
+optional string name = 1;
+optional string time_ms = 2;
+}
+
+message LatencyStats017 {
+optional double total_time_ms = 1;
+repeated TaskStats017 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo017 {
+optional bytes is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory017 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop017 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional bool is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats017 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus017 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus017 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion017 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion017 critical_region = 20;
+
+enum TrajectoryType017 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType017 trajectory_type = 21;
+
+optional RSSInfo017 rss_info = 100;
+}
+message ADCSignals018 {
+enum SignalType018 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType018 signal = 1;
+}
+
+message EStop018 {
+optional uint32 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats018 {
+optional bytes name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats018 {
+optional string total_time_ms = 1;
+repeated TaskStats018 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo018 {
+optional int64 is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory018 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop018 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int64 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats018 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus018 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus018 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion018 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion018 critical_region = 20;
+
+enum TrajectoryType018 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType018 trajectory_type = 21;
+
+optional RSSInfo018 rss_info = 100;
+}
+message ADCSignals019 {
+enum SignalType019 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType019 signal = 1;
+}
+
+message EStop019 {
+optional float is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats019 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats019 {
+optional string total_time_ms = 1;
+repeated TaskStats019 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo019 {
+optional uint64 is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory019 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop019 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional bool is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats019 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus019 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus019 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion019 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion019 critical_region = 20;
+
+enum TrajectoryType019 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType019 trajectory_type = 21;
+
+optional RSSInfo019 rss_info = 100;
+}
+message ADCSignals020 {
+enum SignalType020 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType020 signal = 1;
+}
+
+message EStop020 {
+optional float is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats020 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats020 {
+optional string total_time_ms = 1;
+repeated TaskStats020 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo020 {
+optional string is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory020 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop020 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional float is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats020 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus020 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus020 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion020 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion020 critical_region = 20;
+
+enum TrajectoryType020 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType020 trajectory_type = 21;
+
+optional RSSInfo020 rss_info = 100;
+}
+message ADCSignals021 {
+enum SignalType021 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType021 signal = 1;
+}
+
+message EStop021 {
+optional float is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats021 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats021 {
+optional string total_time_ms = 1;
+repeated TaskStats021 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo021 {
+optional int64 is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional double acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory021 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop021 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats021 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus021 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus021 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion021 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion021 critical_region = 20;
+
+enum TrajectoryType021 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType021 trajectory_type = 21;
+
+optional RSSInfo021 rss_info = 100;
+}
+message ADCSignals022 {
+enum SignalType022 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType022 signal = 1;
+}
+
+message EStop022 {
+optional int64 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats022 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats022 {
+optional double total_time_ms = 1;
+repeated TaskStats022 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo022 {
+optional bool is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory022 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop022 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int64 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats022 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus022 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus022 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion022 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion022 critical_region = 20;
+
+enum TrajectoryType022 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType022 trajectory_type = 21;
+
+optional RSSInfo022 rss_info = 100;
+}
+message ADCSignals023 {
+enum SignalType023 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType023 signal = 1;
+}
+
+message EStop023 {
+optional string is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats023 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats023 {
+optional string total_time_ms = 1;
+repeated TaskStats023 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo023 {
+optional string is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional double acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory023 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop023 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional double is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats023 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus023 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus023 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion023 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion023 critical_region = 20;
+
+enum TrajectoryType023 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType023 trajectory_type = 21;
+
+optional RSSInfo023 rss_info = 100;
+}
+message ADCSignals024 {
+enum SignalType024 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType024 signal = 1;
+}
+
+message EStop024 {
+optional string is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats024 {
+optional string name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats024 {
+optional bytes total_time_ms = 1;
+repeated TaskStats024 task_stats = 2;
+optional string init_frame_time_ms = 3;
+}
+
+message RSSInfo024 {
+optional bool is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory024 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop024 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int64 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats024 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus024 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus024 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion024 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion024 critical_region = 20;
+
+enum TrajectoryType024 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType024 trajectory_type = 21;
+
+optional RSSInfo024 rss_info = 100;
+}
+message ADCSignals025 {
+enum SignalType025 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType025 signal = 1;
+}
+
+message EStop025 {
+optional string is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats025 {
+optional string name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats025 {
+optional double total_time_ms = 1;
+repeated TaskStats025 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo025 {
+optional int64 is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory025 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop025 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional int64 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats025 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus025 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus025 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion025 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion025 critical_region = 20;
+
+enum TrajectoryType025 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType025 trajectory_type = 21;
+
+optional RSSInfo025 rss_info = 100;
+}
+message ADCSignals026 {
+enum SignalType026 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType026 signal = 1;
+}
+
+message EStop026 {
+optional uint64 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats026 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats026 {
+optional string total_time_ms = 1;
+repeated TaskStats026 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo026 {
+optional int32 is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional double rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional double acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory026 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop026 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint64 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats026 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus026 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus026 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion026 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion026 critical_region = 20;
+
+enum TrajectoryType026 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType026 trajectory_type = 21;
+
+optional RSSInfo026 rss_info = 100;
+}
+message ADCSignals027 {
+enum SignalType027 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType027 signal = 1;
+}
+
+message EStop027 {
+optional float is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats027 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats027 {
+optional double total_time_ms = 1;
+repeated TaskStats027 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo027 {
+optional int32 is_rss_safe = 1;
+optional bytes cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional bytes acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional bytes acc_lat_left_range_minimum = 6;
+optional string acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory027 {
+optional apollo.common.Header header = 1;
+
+optional string total_path_length = 2;
+optional string total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop027 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint64 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats027 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus027 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus027 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion027 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion027 critical_region = 20;
+
+enum TrajectoryType027 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType027 trajectory_type = 21;
+
+optional RSSInfo027 rss_info = 100;
+}
+message ADCSignals028 {
+enum SignalType028 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType028 signal = 1;
+}
+
+message EStop028 {
+optional bytes is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats028 {
+optional string name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats028 {
+optional bytes total_time_ms = 1;
+repeated TaskStats028 task_stats = 2;
+optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo028 {
+optional double is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional string rss_safe_dist_lon = 3;
+optional string acc_lon_range_minimum = 4;
+optional bytes acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional bytes acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory028 {
+optional apollo.common.Header header = 1;
+
+optional bytes total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop028 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional string is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats028 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus028 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus028 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion028 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion028 critical_region = 20;
+
+enum TrajectoryType028 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType028 trajectory_type = 21;
+
+optional RSSInfo028 rss_info = 100;
+}
+message ADCSignals029 {
+enum SignalType029 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType029 signal = 1;
+}
+
+message EStop029 {
+optional bytes is_estop = 1;
+optional string reason = 2;
+}
+
+message TaskStats029 {
+optional bytes name = 1;
+optional double time_ms = 2;
+}
+
+message LatencyStats029 {
+optional double total_time_ms = 1;
+repeated TaskStats029 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo029 {
+optional float is_rss_safe = 1;
+optional double cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional string acc_lon_range_maximum = 5;
+optional string acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional bytes acc_lat_right_range_minimum = 8;
+optional bytes acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory029 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional double total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop029 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional string replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats029 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus029 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus029 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion029 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion029 critical_region = 20;
+
+enum TrajectoryType029 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType029 trajectory_type = 21;
+
+optional RSSInfo029 rss_info = 100;
+}
+message ADCSignals030 {
+enum SignalType030 {
+LEFT_TURN = 1;
+RIGHT_TURN = 2;
+LOW_BEAM_LIGHT = 3;
+HIGH_BEAM_LIGHT = 4;
+FOG_LIGHT = 5;
+EMERGENCY_LIGHT = 6;
+}
+repeated SignalType030 signal = 1;
+}
+
+message EStop030 {
+optional int32 is_estop = 1;
+optional bytes reason = 2;
+}
+
+message TaskStats030 {
+optional bytes name = 1;
+optional bytes time_ms = 2;
+}
+
+message LatencyStats030 {
+optional string total_time_ms = 1;
+repeated TaskStats030 task_stats = 2;
+optional bytes init_frame_time_ms = 3;
+}
+
+message RSSInfo030 {
+optional double is_rss_safe = 1;
+optional string cur_dist_lon = 2;
+optional bytes rss_safe_dist_lon = 3;
+optional double acc_lon_range_minimum = 4;
+optional double acc_lon_range_maximum = 5;
+optional double acc_lat_left_range_minimum = 6;
+optional double acc_lat_left_range_maximum = 7;
+optional string acc_lat_right_range_minimum = 8;
+optional string acc_lat_right_range_maximum = 9;
+}
+
+message ADCTrajectory030 {
+optional apollo.common.Header header = 1;
+
+optional double total_path_length = 2;
+optional bytes total_path_time = 3;
+
+repeated apollo.common.TrajectoryPoint trajectory_point = 12;
+
+optional EStop030 estop = 6;
+
+repeated apollo.common.PathPoint path_point = 13;
+
+optional uint32 is_replan = 9;
+optional bytes replan_reason = 22;
+
+optional apollo.canbus.Chassis.GearPosition gear = 10;
+
+optional apollo.planning.DecisionResult decision = 14;
+
+optional LatencyStats030 latency_stats = 15;
+
+optional apollo.common.Header routing_header = 16;
+optional apollo.planning_internal.Debug debug = 8;
+
+enum RightOfWayStatus030 {
+UNPROTECTED = 0;
+PROTECTED = 1;
+}
+optional RightOfWayStatus030 right_of_way_status = 17;
+
+repeated apollo.hdmap.Id lane_id = 18;
+
+optional apollo.common.EngageAdvice engage_advice = 19;
+
+message CriticalRegion030 {
+repeated apollo.common.Polygon region = 1;
+}
+
+optional CriticalRegion030 critical_region = 20;
+
+enum TrajectoryType030 {
+UNKNOWN = 0;
+NORMAL = 1;
+PATH_FALLBACK = 2;
+SPEED_FALLBACK = 3;
+}
+optional TrajectoryType030 trajectory_type = 21;
+
+optional RSSInfo030 rss_info = 100;
+}

@@ -1,0 +1,576 @@
+syntax = "proto2";
+
+package apollo.localization;
+
+import "modules/common/proto/geometry.proto";
+
+message Pose001 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose002 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose003 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose004 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose005 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose006 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose007 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose008 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose009 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose010 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose011 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose012 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose013 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose014 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose015 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose016 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose017 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose018 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose019 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose020 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose021 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose022 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose023 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose024 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional string heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose025 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose026 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose027 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose028 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional double heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose029 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}
+message Pose030 {
+optional apollo.common.PointENU position = 1;
+
+optional apollo.common.Quaternion orientation = 2;
+
+optional apollo.common.Point3D linear_velocity = 3;
+
+optional apollo.common.Point3D linear_acceleration = 4;
+
+optional apollo.common.Point3D angular_velocity = 5;
+
+optional bytes heading = 6;
+
+optional apollo.common.Point3D linear_acceleration_vrf = 7;
+
+optional apollo.common.Point3D angular_velocity_vrf = 8;
+
+optional apollo.common.Point3D euler_angles = 9;
+}

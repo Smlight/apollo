@@ -74,6 +74,7 @@ int main(int argc, char **argv) {
     string line;
     vector<vector<string>> all;  // all lines separated into 3 parts
     int line_num = 0;
+    int content_start_line = 0;
     stack<pair<string, int>> st;
     while (getline(input, line)) {
       trim(line);
@@ -83,6 +84,7 @@ int main(int argc, char **argv) {
       ss >> a >> b;
       getline(ss, c);
       if (a == "message" || a == "enum") {
+        if (content_start_line == 0) content_start_line = line_num;
         st.push(std::make_pair(b, line_num));
       } else {
         // nothing to do rightnow
@@ -110,12 +112,13 @@ int main(int argc, char **argv) {
       all.push_back({a, b, c});
     }
     input.close();
+    ofstream output(relative + w + "_fuzzed" + ".proto");
     for (int i = 1; i <= TOTALT; ++i) {
       char buf[32];
       sprintf(buf, "%03d", i);
       string i_leading0(buf);
       string new_all;
-      for (int j = 1; j <= line_num; ++j) {
+      for (int j = (i == 1) ? 1 : content_start_line; j <= line_num; ++j) {
         auto &line = all[j - 1];
         string &a = line[0];
         string b = line[1];
@@ -150,10 +153,9 @@ int main(int argc, char **argv) {
         new_all += new_line;
         new_all += "\n";
       }
-      ofstream output(relative + w + i_leading0 + ".proto");
       output << new_all;
-      output.close();
     }
+    output.close();
   }
   return 0;
 }
