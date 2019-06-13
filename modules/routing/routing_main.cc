@@ -116,7 +116,11 @@ int main(int argc, char** argv) {
   Rate rate(1.0);
   while (apollo::cyber::OK()) {
     int idx = rand() % 30;
+    std::cout << "BBBBBBBBBBBBBBBefore:" << std::endl;
+    std::cout << routing_vec[idx]->DebugString() << std::endl;
     mutator.Mutate(routing_vec[idx], 4096);
+    std::cout << "AAAAAAAAAAAAAAAAfter:" << std::endl;
+    std::cout << routing_vec[idx]->DebugString() << std::endl;
     auto now = routing_vec[idx]->New();
     routing_request_writer->Write(std::shared_ptr<RoutingRequest>(reinterpret_cast<RoutingRequest*>(now)));
     rate.Sleep();
