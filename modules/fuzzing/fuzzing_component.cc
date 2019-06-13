@@ -7,7 +7,14 @@
 
 #include "modules/fuzzing/fuzzing_component.h"
 
+using apollo::cyber::common::GetProtoFromASCIIFile;
+using apollo::cyber::common::GetProtoFromBinaryFile;
 using apollo::fuzzing::FuzzMessage;
+using apollo::routing::RoutingRequest;
+using protobuf_mutator::Mutator;
+using protobuf_mutator::RandomEngine;
+using std::string;
+using std::vector;
 
 namespace apollo {
 namespace fuzzing {
@@ -65,8 +72,8 @@ void FuzzingComponent::InitReaders() {
   routing_request_reader_ = fuzzer_node_->CreateReader<RoutingRequest>(
       FLAGS_routing_request_topic,
       [this](const std::shared_ptr<RoutingRequest>& routing_request) {
-        AINFO << "Received routing_request data:\n"
-              << routing_request->DebugString();
+        // AINFO << "Received routing_request data:\n"
+        //       << routing_request->DebugString();
       });
   routing_response_reader_ = fuzzer_node_->CreateReader<RoutingResponse>(
       FLAGS_routing_response_topic,
@@ -76,10 +83,7 @@ void FuzzingComponent::InitReaders() {
       });
 }
 
-bool FuzzingComponent::Init() {
-  fuzzer_node_ = apollo::cyber::CreateNode("fuzzer");
-
-  InitReaders();
+void FuzzingComponent::InitWriters() {
   chassis_writer_ = fuzzer_node_->CreateWriter<Chassis>(FLAGS_chassis_topic);
   localization_writer_ = fuzzer_node_->CreateWriter<LocalizationEstimate>(
       FLAGS_localization_topic);
@@ -100,6 +104,20 @@ bool FuzzingComponent::Init() {
       fuzzer_node_->CreateWriter<RoutingRequest>(FLAGS_routing_request_topic);
   routing_response_writer_ =
       fuzzer_node_->CreateWriter<RoutingResponse>(FLAGS_routing_response_topic);
+}
+
+bool FuzzingComponent::Init() {
+  fuzzer_node_ = apollo::cyber::CreateNode("fuzzer");
+
+  InitReaders();
+  InitWriters();
+  
+  RoutingRequest* routing_request_p = new RoutingRequest();
+  GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii",
+                        routing_request_p);
+  message_p_ = (google::protobuf::Message*)routing_request_p;
+//   srand(time(NULL));
+  mutator_p_ = new Mutator(new RandomEngine(1));
 
   return true;
 }
@@ -107,12 +125,10 @@ bool FuzzingComponent::Init() {
 bool FuzzingComponent::Proc(
     const std::shared_ptr<localization::LocalizationEstimate>&
         localization_estimate) {
-  FuzzMessage* fuzz_message_p = new FuzzMessage();
-  fuzz_message_p->set_msg(std::string(1024, 'e'));
-  //   chassis_writer_->Write(static_cast<std::shared_ptr<Chassis>>(reinterpret_cast<Chassis*>(fuzz_message_p)));
-  traffic_light_writer_->Write(
-      static_cast<std::shared_ptr<TrafficLightDetection>>(
-          reinterpret_cast<TrafficLightDetection*>(fuzz_message_p)));
+//   Mutator mutator(new RandomEngine(1));
+  mutator_p_->Mutate(message_p_, 4096);
+  routing_request_writer_->Write(std::shared_ptr<RoutingRequest>(
+      reinterpret_cast<RoutingRequest*>(message_p_)));
   return true;
 }
 

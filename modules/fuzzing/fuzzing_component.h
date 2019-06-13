@@ -30,6 +30,8 @@
 #include "modules/prediction/proto/prediction_obstacle.pb.h"
 #include "modules/routing/proto/routing.pb.h"
 
+#include "modules/fuzzing/libprotobuf-mutator/src/mutator.h"
+
 using apollo::canbus::Chassis;
 using apollo::common::time::Clock;
 using apollo::control::ControlCommand;
@@ -48,6 +50,8 @@ using apollo::relative_map::MapMsg;
 using apollo::relative_map::NavigationInfo;
 using apollo::routing::RoutingRequest;
 using apollo::routing::RoutingResponse;
+using protobuf_mutator::Mutator;
+using protobuf_mutator::RandomEngine;
 
 namespace apollo {
 namespace fuzzing {
@@ -64,6 +68,7 @@ class FuzzingComponent final
 
  private:
   void InitReaders();
+  void InitWriters();
   void CheckRerouting();
   bool CheckInput();
 
@@ -96,6 +101,9 @@ class FuzzingComponent final
   std::shared_ptr<cyber::Writer<MapMsg>> relative_map_writer_;
   std::shared_ptr<cyber::Writer<RoutingRequest>> routing_request_writer_;
   std::shared_ptr<cyber::Writer<RoutingResponse>> routing_response_writer_;
+
+  google::protobuf::Message* message_p_;
+  Mutator* mutator_p_;
 
 };
 
