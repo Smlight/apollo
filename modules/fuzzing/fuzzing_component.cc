@@ -9,6 +9,8 @@
 
 using apollo::cyber::common::GetProtoFromASCIIFile;
 using apollo::cyber::common::GetProtoFromBinaryFile;
+using apollo::cyber::common::SetProtoToASCIIFile;
+using apollo::cyber::common::SetProtoToBinaryFile;
 using apollo::fuzzing::FuzzMessage;
 using apollo::routing::RoutingRequest;
 using protobuf_mutator::Mutator;
@@ -116,6 +118,8 @@ bool FuzzingComponent::Init() {
 
   message_p_ = new RoutingRequest();
   GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii", message_p_);
+  AINFO << "Initial data:\n" << message_p_->DebugString();
+
   srand(time(NULL));
   mutator_p_ = new Mutator(new RandomEngine(rand()));
 
@@ -127,7 +131,12 @@ bool FuzzingComponent::Proc(
         localization_estimate) {
   //   Mutator mutator(new RandomEngine(1));
   mutator_p_->Mutate(message_p_, 4096);
+  //   AINFO << "message_p_ data:\n" << message_p_->DebugString();
   auto now = message_p_->New();
+  
+  SetProtoToASCIIFile(*message_p_, "/apollo/modules/routing/routing_tmp.ascii");
+  GetProtoFromASCIIFile("/apollo/modules/routing/routing_tmp.ascii", now);
+
   routing_request_writer_->Write(
       std::shared_ptr<RoutingRequest>(reinterpret_cast<RoutingRequest*>(now)));
   return true;
