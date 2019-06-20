@@ -1,0 +1,3 @@
+[submodule "protofuzz"]
+	path = protofuzz
+	url = git@github.com:Smlight/protofuzz.git
