@@ -28,6 +28,7 @@ cc_library(
         "//modules/planning/proto:traffic_rule_config_proto",
         "//modules/prediction/proto:prediction_proto",
         "//modules/fuzzing/libprotobuf-mutator:protobuf_mutator_lib",
+        "//modules/fuzzing/proto:fuzzing_routing_proto",
     ],
 )
 

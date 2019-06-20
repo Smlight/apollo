@@ -7,6 +7,8 @@
 
 #include "modules/fuzzing/fuzzing_component.h"
 
+#include "modules/fuzzing/proto/routing_fuzzed.pb.h"
+
 using apollo::cyber::common::GetProtoFromASCIIFile;
 using apollo::cyber::common::GetProtoFromBinaryFile;
 using apollo::cyber::common::SetProtoToASCIIFile;
@@ -116,8 +118,8 @@ bool FuzzingComponent::Init() {
   InitReaders();
   InitWriters();
 
-  message_p_ = new RoutingRequest();
-  GetProtoFromASCIIFile("/apollo/modules/routing/routing.ascii", message_p_);
+  message_p_ = new apollo::routing::RoutingRequest013();
+  GetProtoFromASCIIFile("modules/fuzzing/proto/routing013.ascii", message_p_);
   AINFO << "Initial data:\n" << message_p_->DebugString();
 
   srand(time(NULL));
@@ -133,9 +135,11 @@ bool FuzzingComponent::Proc(
   mutator_p_->Mutate(message_p_, 4096);
   //   AINFO << "message_p_ data:\n" << message_p_->DebugString();
   auto now = message_p_->New();
-  
-  SetProtoToASCIIFile(*message_p_, "/apollo/modules/routing/routing_tmp.ascii");
-  GetProtoFromASCIIFile("/apollo/modules/routing/routing_tmp.ascii", now);
+
+  SetProtoToASCIIFile(*message_p_,
+                      "/apollo/modules/fuzzing/proto/routing013_tmp.ascii");
+  GetProtoFromASCIIFile("/apollo/modules/fuzzing/proto/routing013_tmp.ascii",
+                        now);
 
   routing_request_writer_->Write(
       std::shared_ptr<RoutingRequest>(reinterpret_cast<RoutingRequest*>(now)));
