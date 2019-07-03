@@ -1,0 +1,46 @@
+header {
+  timestamp_sec: -1231231231231.0122
+  module_name: "application/1d-interleaved-parityfec"
+  sequence_num: 0
+  lidar_timestamp: 0
+  camera_timestamp: 0
+  radar_timestamp: 0
+  version: 0
+  status {
+    error_code: ROUTING_ERROR
+    msg: "application/1d-interleaved-parityfec"
+  }
+  frame_id: "application/1d-interleaved-parityfec"
+}
+waypoint {
+  id: "application/1d-interleaved-parityfec"
+  s: "application/1d-interleaved-parityfec"
+  pose {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+}
+blacklisted_lane {
+  id: "application/1d-interleaved-parityfec"
+  start_s: "application/1d-interleaved-parityfec"
+  end_s: 0.0
+}
+blacklisted_road: "application/1d-interleaved-parityfec"
+broadcast: 0.0
+parking_space {
+  id {
+    id: "application/1d-interleaved-parityfec"
+  }
+  polygon {
+    point {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    }
+  }
+  overlap_id {
+    id: "application/1d-interleaved-parityfec"
+  }
+  heading: 0.0
+}
